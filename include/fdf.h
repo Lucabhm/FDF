@@ -6,12 +6,14 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:07:47 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/05/17 18:08:03 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/05/31 15:59:06 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
+# include <stdio.h>
+# include <unistd.h>
 
 #endif
