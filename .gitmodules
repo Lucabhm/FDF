@@ -4,3 +4,6 @@
 [submodule "lib/ft_printf"]
 	path = lib/ft_printf
 	url = https://github.com/Lucabhm/Printf.git
+[submodule "lib/ft_get_next_line"]
+	path = lib/ft_get_next_line
+	url = https://github.com/Lucabhm/Get_Next_Line.git

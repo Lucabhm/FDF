@@ -2,7 +2,7 @@ NAME = fdf
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 VPATH = src/
-SRCS = src/fdf.c
+SRCS = fdf.c
 OBJS = $(SRCS:.c=.o)
 OBJDIR = objs/
 OBJS_PATH = $(addprefix $(OBJDIR), $(OBJS))
