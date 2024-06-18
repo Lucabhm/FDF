@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:08:07 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/06/17 23:14:01 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/06/18 23:13:37 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,48 @@ int	main(int argc, char **argv)
 {
 	t_data		data;
 	mlx_image_t	*img;
-	mlx_image_t	*img2;
+	uint32_t	color;
+	int			i;
+	int			y;
 
+	i = 50;
+	y = 50;
 	// parsing(argc, argv, &data);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	// mlx_set_setting(MLX_DECORATED, true);
 	data.window = mlx_init(500, 500, "fdf", true);
 	img = mlx_new_image(data.window, 250, 250);
-	img2 = mlx_new_image(data.window, 50, 50);
 	memset(img->pixels, 255, img->width * img->height * sizeof(int32_t));
-	memset(img2->pixels, 0, img2->width * img2->height * sizeof(int32_t));
+	color = get_color(255, 0, 255, 255);
+	while (i < 100)
+	{
+		mlx_put_pixel(img, i, y, color);
+		i++;
+	}
+	while (y < 100)
+	{
+		mlx_put_pixel(img, i, y, color);
+		y++;
+	}
+	while (i > 50)
+	{
+		mlx_put_pixel(img, i, y, color);
+		i--;
+	}
+	while (y > 50)
+	{
+		mlx_put_pixel(img, i, y, color);
+		y--;
+	}
 	mlx_image_to_window(data.window, img, 0, 0);
-	mlx_image_to_window(data.window, img2, 50, 50);
 	mlx_loop(data.window);
 	mlx_terminate(data.window);
 	return (0);
+}
+
+int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a)
+{
+	return (r << 24 | g << 16 | b << 8 | a);
 }
 
 void	parsing(int argc, char **argv, t_data *data)
