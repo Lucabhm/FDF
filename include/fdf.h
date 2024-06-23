@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:07:47 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/06/18 22:26:31 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:05:29 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@ typedef struct	s_data
 // fdf
 
 int		main(int argc, char **argv);
+void	print_line(char direction, int pos_x, int pos_y, mlx_image_t *img);
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
 void	parsing(int argc, char **argv, t_data *data);
 int		count_rows(char *file);
-void	check_input(char **split);
+void	check_input(char **split, t_data *data);
+char	**cpy_dp(char **arr, t_data *data);
 void	free_dp(char **arr);
+void	free_tp(char ***arr);
 void	error(char *msg, t_data *data);
 
 // error msg
@@ -45,6 +48,8 @@ void	error(char *msg, t_data *data);
 # define ERROR_0 "Wrong nbr of Arrguments!\n"
 # define ERROR_1 "Open failed!\n"
 # define ERROR_2 "Map has invalide char!\n"
+# define ERROR_3 "Close failed!\n"
+# define ERROR_4 "Allocation failed!\n"
 
 
 #endif
