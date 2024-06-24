@@ -1,27 +1,23 @@
 NAME = fdf
 CC = cc
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 VPATH = src/
-SRCS = fdf.c
+SRCS = src/fdf.c
 OBJS = $(SRCS:.c=.o)
 OBJDIR = objs/
 OBJS_PATH = $(addprefix $(OBJDIR), $(OBJS))
-LIBFT = lib/ft_libft
-PRINTF = lib/ft_printf
-GET_NEXT = lib/ft_get_next_line
+LIBFT = lib/ft_libft/
+PRINTF = lib/ft_printf/
 MLX = lib/mlx
-INLIBFT = -L $(LIBFT) -lft
-INPRINF = -L $(PRINTF) -lftprintf
-INGET_NEXT = -L $(GET_NEXT) -l_get_next_line
 INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
-
+# /usr/local/lib/
 $(NAME):		$(OBJS_PATH)
 				@cd $(LIBFT) && $(MAKE) all
 				@cd $(LIBFT) && $(MAKE) bonus
 				@cd $(PRINTF) && $(MAKE) all
 				@cd $(GET_NEXT) && $(MAKE) all
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGET_NEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME) -fsanitize=address
+				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
 
 all:			$(NAME)
 

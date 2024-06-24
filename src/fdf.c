@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 18:08:07 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/06/23 18:43:49 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:31:04 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ int	main(int argc, char **argv)
 
 void	print_line(char direction, int pos_x, int pos_y, mlx_image_t *img)
 {
-	int	i;
+	int			i;
 	uint32_t	color;
 
 	i = 0;
-	color = get_color(255, 0, 255, 255);
+	color = get_color(255, 255, 0, 255);
 	if (direction == 'N')
 	{
 		while (i < 32)
