@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_test.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/06/25 13:20:19 by lbohm            ###   ########.fr       */
+/*   Created: 2024/05/17 18:07:47 by lucabohn          #+#    #+#             */
+/*   Updated: 2024/06/25 12:10:11 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_TEST_H
+# define FDF_TEST_H
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -24,22 +24,25 @@
 # include "../lib/mlx/include/MLX42/MLX42.h"
 
 // struct
+
 typedef struct s_data
 {
-	int		**map;
+	char	***map;
 	mlx_t	*window;
 }				t_data;
 
 // fdf
 
 int		main(int argc, char **argv);
+void	print_line(char direction, int pos_x, int pos_y, mlx_image_t *img);
+int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
 void	parsing(int argc, char **argv, t_data *data);
-void	error(char *msg, t_data *data);
-int		**fill_map(char **argv);
 int		count_rows(char *file);
-int		check_input(char **split);
-int		*fill_rows(char **split);
+void	check_input(char **split, t_data *data);
+char	**cpy_dp(char **arr, t_data *data);
 void	free_dp(char **arr);
+void	free_tp(char ***arr);
+void	error(char *msg, t_data *data);
 
 // error msg
 
@@ -48,6 +51,6 @@ void	free_dp(char **arr);
 # define ERROR_2 "Map has invalide char!\n"
 # define ERROR_3 "Close failed!\n"
 # define ERROR_4 "Allocation failed!\n"
-# define ERROR_5 "File ends not with .fdf\n"
+
 
 #endif
