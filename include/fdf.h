@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/06/25 13:20:19 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:20:06 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,21 @@
 // struct
 typedef struct s_data
 {
-	int		**map;
-	mlx_t	*window;
+	int			**map;
+	mlx_t		*window;
+	mlx_image_t	*img;
 }				t_data;
+
+typedef struct s_pos
+{
+	int		x;
+	int		y;
+	int		x_2;
+	int		y_2;
+	int		delta_x;
+	int		delta_y;
+	float	slope;
+}				t_pos;
 
 // fdf
 
@@ -40,6 +52,13 @@ int		count_rows(char *file);
 int		check_input(char **split);
 int		*fill_rows(char **split);
 void	free_dp(char **arr);
+
+// draw_line
+
+void	first_step(int x, int y, int x_2, int y_2, t_data data);
+void	slope_smaller(t_pos value, t_data data);
+void	draw_pixel(int x, int y, t_data data);
+int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
 
 // error msg
 

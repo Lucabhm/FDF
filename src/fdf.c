@@ -6,31 +6,28 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:29 by lbohm             #+#    #+#             */
-/*   Updated: 2024/06/25 16:15:44 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/06/26 17:21:47 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../include/fdf.h"
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
-	int		i;
-	int		j;
+	t_data		data;
+	int			i;
+	int			j;
 
 	i = 0;
-	parsing(argc, argv, &data);
-	while (i < count_rows(argv[1]))
-	{
-		j = 1;
-		while (j <= data.map[i][0])
-		{
-			printf("map[%i][%i] = %i\n", i, j, data.map[i][j]);
-			j++;
-		}
-		i++;
-	}
+	j = 0;
+	// parsing(argc, argv, &data);
+	data.window = mlx_init(1600, 900, "fdf", true);
+	data.img = mlx_new_image(data.window, 1600, 900);
+	memset(data.img->pixels, 255, data.img->width * data.img->height * sizeof(int32_t));
+	first_step(50, 50, 100, 50, data);
+	mlx_image_to_window(data.window, data.img, 0, 0);
+	mlx_loop(data.window);
+	mlx_terminate(data.window);
 }
 
 void	parsing(int argc, char **argv, t_data *data)
