@@ -23,7 +23,7 @@ $(NAME):		$(OBJS_PATH)
 				@cd $(PRINTF) && $(MAKE) all
 				@cd $(GET_NEXT) && $(MAKE) all
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
+				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME) -fsanitize=address
 
 all:			$(NAME)
 

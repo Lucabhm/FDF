@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:29 by lbohm             #+#    #+#             */
-/*   Updated: 2024/06/26 17:21:47 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/06/28 17:31:31 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,39 @@ int	main(int argc, char **argv)
 	t_data		data;
 	int			i;
 	int			j;
+	int			rows;
 
 	i = 0;
 	j = 0;
-	// parsing(argc, argv, &data);
+	rows = count_rows(argv[1]);
+	parsing(argc, argv, &data);
 	data.window = mlx_init(1600, 900, "fdf", true);
 	data.img = mlx_new_image(data.window, 1600, 900);
 	memset(data.img->pixels, 255, data.img->width * data.img->height * sizeof(int32_t));
-	first_step(50, 50, 100, 50, data);
+	while (i <= rows)
+	{
+		j = 0;
+		while (j < data.map[0][0])
+		{
+			first_step(j * 50 + 50, i * 50 + 50, j * 50 + 100, i * 50 + 50, data);
+			j++;
+		}
+		i++;
+	}
+	j = 0;
+	i = 0;
+	printf("here\n");
+	while (j <= data.map[0][0])
+	{
+		i = 0;
+		while (i < rows)
+		{
+			first_step(j * 50 + 50, i * 50 + 50, j * 50 + 50, i * 50 + 100, data);
+			i++;
+		}
+		j++;
+	}
+	// first_step(50, 50, 100, 50, data);
 	mlx_image_to_window(data.window, data.img, 0, 0);
 	mlx_loop(data.window);
 	mlx_terminate(data.window);

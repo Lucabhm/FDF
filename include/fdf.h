@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/06/26 17:20:06 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/06/28 17:17:45 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
 # include "../lib/ft_libft/libft.h"
 # include "../lib/ft_printf/ft_printf.h"
 # include "../lib/ft_get_next_line/get_next_line.h"
@@ -37,8 +38,8 @@ typedef struct s_pos
 	int		y;
 	int		x_2;
 	int		y_2;
-	int		delta_x;
-	int		delta_y;
+	float	delta_x;
+	float	delta_y;
 	float	slope;
 }				t_pos;
 
@@ -56,9 +57,11 @@ void	free_dp(char **arr);
 // draw_line
 
 void	first_step(int x, int y, int x_2, int y_2, t_data data);
+void	slope_bigger(t_pos value, t_data data);
 void	slope_smaller(t_pos value, t_data data);
 void	draw_pixel(int x, int y, t_data data);
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
+void	isometric(int *x, int *y);
 
 // error msg
 
