@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:29 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/09 17:09:20 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/09 22:45:28 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,28 @@ int	main(int argc, char **argv)
 
 	init_data(&data);
 	parsing(argc, argv, &data);
+	add_zoom(&data);
+	data.window = mlx_init(1600, 900, "fdf", true);
+	data.img = mlx_new_image(data.window, 1600, 900);
+	memset(data.img->pixels, 255, data.img->width * data.img->height * sizeof(int32_t));
+	mlx_image_to_window(data.window, data.img, 0, 0);
+	draw_test(data.map, data);
+	mlx_loop(data.window);
+	mlx_terminate(data.window);
+	return (0);
+}
+
+void	add_zoom(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->size.dots)
+	{
+		data->dots[i].x *= 50;
+		data->dots[i].y *= 50;
+		i++;
+	}
 }
 
 void	parsing(int argc, char **argv, t_data *data)

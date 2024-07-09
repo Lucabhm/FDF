@@ -3,14 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/09 10:48:02 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/09 23:03:24 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
+
+void	draw_test(t_map *dot, t_data data)
+{
+	if (dot->up && !dot->up->draw_doup)
+	{
+		first_step(dot->x, dot->y, dot->up->x, dot->up->y, data);
+		dot->draw_doup = true;
+		draw_test(dot->up, data);
+		if (dot->up->draw_doup && dot->up->draw_leri)
+			draw_test(dot, data);
+	}
+	else if (dot->down && !dot->down->draw_doup)
+	{
+		first_step(dot->x, dot->y, dot->down->x, dot->down->y, data);
+		dot->draw_doup = true;
+		draw_test(dot->down, data);
+		if (dot->down->draw_doup && dot->down->draw_leri)
+			draw_test(dot, data);
+	}
+	else if (dot->left && !dot->left->draw_leri)
+	{
+		first_step(dot->x, dot->y, dot->left->x, dot->left->y, data);
+		dot->draw_leri = true;
+		draw_test(dot->left, data);
+		if (dot->left->draw_doup && dot->left->draw_leri)
+			draw_test(dot, data);
+	}
+	else if (dot->right && !dot->right->draw_leri)
+	{
+		first_step(dot->x, dot->y, dot->right->x, dot->right->y, data);
+		dot->draw_leri = true;
+		draw_test(dot->right, data);
+		if (dot->right->draw_doup && dot->right->draw_leri)
+			draw_test(dot, data);
+	}
+	else
+		return ;
+}
 
 void	first_step(int x, int y, int x_2, int y_2, t_data data)
 {
@@ -20,7 +58,6 @@ void	first_step(int x, int y, int x_2, int y_2, t_data data)
 	value.y = y;
 	value.x_2 = x_2;
 	value.y_2 = y_2;
-	// isometric(&value.x_2, &value.y_2);
 	printf("x = %i y = %i x_2 = %i y_2 = %i\n", value.x, value.y, value.x_2, value.y_2);
 	if (value.x_2 > x)
 		value.delta_x = value.x_2 - x;

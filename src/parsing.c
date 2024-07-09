@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:04:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/09 17:08:58 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/09 22:42:30 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ void	fill_map(char **argv, t_data *data)
 	int		i;
 	int		fd;
 	char	**split;
-	t_map	*dots;
 
 	i = 0;
 	count_size(argv[1], &data->size);
-	dots = (t_map *)malloc (data->size.dots * sizeof(t_map));
-	if (!dots)
+	data->dots = (t_map *)malloc (data->size.dots * sizeof(t_map));
+	if (!data->dots)
 		error(ERROR_4, NULL);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
@@ -40,9 +39,8 @@ void	fill_map(char **argv, t_data *data)
 		split = ft_split(get_next_line(fd), ' ');
 		while (*split)
 		{
-			fill_dot(&dots[i], *split, data->size, i + 1);
-			// printf("fill x = %i fill y = %i\n", dots[i].x, dots[i].y);
-			add_to_map(&dots[i], &data->map, data->size);
+			fill_dot(&data->dots[i], *split, data->size, i + 1);
+			add_to_map(&data->dots[i], &data->map, data->size);
 			split++;
 			i++;
 		}
@@ -92,9 +90,6 @@ void	add_to_map(t_map *dot, t_map **map, t_size size)
 					tmp = tmp->right;
 				}
 				tmp = tmp->right;
-				// printf("start down x = %i y = %i\n", start->x, start->y);
-				// printf("dot x = %i y = %i\n", dot->x, dot->y);
-				// printf("tmp x = %i y = %i\n", tmp->x, tmp->y);
 				dot->left = start;
 				dot->up = tmp;
 				tmp->down = dot;
@@ -128,9 +123,11 @@ void	fill_dot(t_map	*dot, char *z, t_size size, int i)
 	{
 		sub = ft_substr(z, 0, ft_strlen(z) - ft_strlen(str));
 		dot->z = ft_atoi(sub);
-		dot->color = ft_substr(str, 1, ft_len(str) - 1);
+		dot->color = ft_substr(str, 1, ft_strlen(str) - 1);
 		free(sub);
 	}
+	dot->draw_doup = false;
+	dot->draw_leri = false;
 	dot->up = NULL;
 	dot->down = NULL;
 	dot->left = NULL;

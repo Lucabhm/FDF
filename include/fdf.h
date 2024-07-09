@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/09 16:03:30 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/09 22:44:46 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct s_map
 	struct s_map	*down;
 	struct s_map	*left;
 	struct s_map	*right;
+	bool			draw_doup;
+	bool			draw_leri;
 }				t_map;
 
 typedef struct s_size
@@ -48,6 +50,7 @@ typedef struct s_size
 typedef struct s_data
 {
 	t_map			*map;
+	t_map			*dots;
 	t_size			size;
 	mlx_t			*window;
 	mlx_image_t		*img;
@@ -67,6 +70,7 @@ typedef struct s_pos
 // fdf
 
 int		main(int argc, char **argv);
+void	add_zoom(t_data *data);
 void	parsing(int argc, char **argv, t_data *data);
 void	error(char *msg, t_data *data);
 int		count_rows(char *file);
@@ -75,6 +79,7 @@ void	free_dp(char **arr);
 
 // draw_line
 
+void	draw_test(t_map *dot, t_data data);
 void	first_step(int x, int y, int x_2, int y_2, t_data data);
 void	slope_bigger(t_pos value, t_data data);
 void	slope_smaller(t_pos value, t_data data);
