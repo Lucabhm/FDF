@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/06/28 17:30:37 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/09 10:48:02 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	first_step(int x, int y, int x_2, int y_2, t_data data)
 	value.y = y;
 	value.x_2 = x_2;
 	value.y_2 = y_2;
-	isometric(&value.x_2, &value.y_2);
+	// isometric(&value.x_2, &value.y_2);
 	printf("x = %i y = %i x_2 = %i y_2 = %i\n", value.x, value.y, value.x_2, value.y_2);
 	if (value.x_2 > x)
 		value.delta_x = value.x_2 - x;

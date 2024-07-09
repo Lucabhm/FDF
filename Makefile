@@ -3,7 +3,8 @@ CC = cc
 # CFLAGS = -Wall -Wextra -Werror
 VPATH = src/
 SRCS = fdf.c \
-		draw_line.c
+		draw_line.c \
+		parsing.c
 OBJS = $(SRCS:.c=.o)
 OBJDIR = objs/
 OBJS_PATH = $(addprefix $(OBJDIR), $(OBJS))
