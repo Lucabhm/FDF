@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:04:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/09 16:52:16 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/09 17:08:58 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,9 @@ void	add_to_map(t_map *dot, t_map **map, t_size size)
 					tmp = tmp->right;
 				}
 				tmp = tmp->right;
-				printf("start down x = %i y = %i\n", start->x, start->y);
-				printf("dot x = %i y = %i\n", dot->x, dot->y);
-				printf("tmp x = %i y = %i\n", tmp->x, tmp->y);
+				// printf("start down x = %i y = %i\n", start->x, start->y);
+				// printf("dot x = %i y = %i\n", dot->x, dot->y);
+				// printf("tmp x = %i y = %i\n", tmp->x, tmp->y);
 				dot->left = start;
 				dot->up = tmp;
 				tmp->down = dot;
@@ -128,7 +128,7 @@ void	fill_dot(t_map	*dot, char *z, t_size size, int i)
 	{
 		sub = ft_substr(z, 0, ft_strlen(z) - ft_strlen(str));
 		dot->z = ft_atoi(sub);
-		dot->color = ft_strdup(str);
+		dot->color = ft_substr(str, 1, ft_len(str) - 1);
 		free(sub);
 	}
 	dot->up = NULL;
