@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:04:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/09 22:42:30 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:24:34 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,10 @@ void	fill_dot(t_map	*dot, char *z, t_size size, int i)
 		dot->color = ft_substr(str, 1, ft_strlen(str) - 1);
 		free(sub);
 	}
-	dot->draw_doup = false;
-	dot->draw_leri = false;
+	dot->draw_up = false;
+	dot->draw_down = false;
+	dot->draw_left = false;
+	dot->draw_right = false;
 	dot->up = NULL;
 	dot->down = NULL;
 	dot->left = NULL;

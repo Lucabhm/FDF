@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/09 22:44:46 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:31:58 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ typedef struct s_map
 	struct s_map	*down;
 	struct s_map	*left;
 	struct s_map	*right;
-	bool			draw_doup;
-	bool			draw_leri;
+	bool			draw_up;
+	bool			draw_down;
+	bool			draw_left;
+	bool			draw_right;
 }				t_map;
 
 typedef struct s_size
@@ -70,7 +72,6 @@ typedef struct s_pos
 // fdf
 
 int		main(int argc, char **argv);
-void	add_zoom(t_data *data);
 void	parsing(int argc, char **argv, t_data *data);
 void	error(char *msg, t_data *data);
 int		count_rows(char *file);
@@ -79,13 +80,13 @@ void	free_dp(char **arr);
 
 // draw_line
 
-void	draw_test(t_map *dot, t_data data);
+void	draw_loop(t_data data);
+void	draw_dot(t_map *dot, t_data data);
 void	first_step(int x, int y, int x_2, int y_2, t_data data);
 void	slope_bigger(t_pos value, t_data data);
 void	slope_smaller(t_pos value, t_data data);
 void	draw_pixel(int x, int y, t_data data);
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
-void	isometric(int *x, int *y);
 
 // parsing
 
@@ -95,6 +96,14 @@ void	add_to_map(t_map *dot, t_map **map, t_size size);
 void	fill_dot(t_map	*dot, char *z, t_size size, int i);
 void	count_size(char *file, t_size *size);
 int		count_elements(char **split);
+
+// rotate
+
+void	add_zoom(t_data *data);
+void	rotate(t_data *data);
+void	rotate_x(t_map *dot);
+void	rotate_y(t_map *dot);
+void	rotate_z(t_data *data);
 
 // error msg
 
