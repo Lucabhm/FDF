@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/10 16:31:58 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/10 18:26:07 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	add_zoom(t_data *data);
 void	rotate(t_data *data);
 void	rotate_x(t_map *dot);
 void	rotate_y(t_map *dot);
-void	rotate_z(t_data *data);
+void	rotate_z(t_map *dot);
 
 // error msg
 

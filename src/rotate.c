@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/10 17:06:50 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/10 23:19:55 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	add_zoom(t_data *data)
 	while (i < data->size.dots)
 	{
 		data->dots[i].x = (data->dots[i].x - 1) * 50;
-		data->dots[i].y = (data->dots[i].y - 1) * 50 + 50;
-		data->dots[i].z *= 50;
+		data->dots[i].y = (data->dots[i].y - 1) * 50 + 500;
+		data->dots[i].z *= 100;
 		i++;
 	}
 }
@@ -33,7 +33,7 @@ void	rotate(t_data *data)
 	i = 0;
 	while (i < data->size.dots)
 	{
-		rotate_y(&data->dots[i]);
+		rotate_z(&data->dots[i]);
 		rotate_x(&data->dots[i]);
 		i++;
 	}
@@ -46,8 +46,8 @@ void	rotate_x(t_map *dot)
 	double	sinA;
 	int		y;
 	int		z;
-
-	rad = 35.264 * 3.14 / 180.0;
+// 35.264
+	rad = 55 * 3.14 / 180.0;
 	cosA = cos(rad);
 	sinA = sin(rad);
 	y = dot->y;
@@ -61,11 +61,10 @@ void	rotate_y(t_map *dot)
 	double	rad;
 	double	cosA;
 	double	sinA;
-	t_map	result;
 	int		x;
 	int		z;
 
-	rad = -45 * 3.14 / 180.0;
+	rad = 80 * 3.14 / 180.0;
 	cosA = cos(rad);
 	sinA = sin(rad);
 	x = dot->x;
@@ -74,19 +73,19 @@ void	rotate_y(t_map *dot)
 	dot->z = -x * sinA + z * cosA;
 }
 
-void	rotate_z(t_data *data)
+void	rotate_z(t_map *dot)
 {
-	int	i;
-	int	x;
-	int	y;
+	double	rad;
+	double	cosA;
+	double	sinA;
+	int		x;
+	int		y;
 
-	i = 0;
-	while (i < data->size.dots)
-	{
-		x = data->dots[i].x;
-		y = data->dots[i].y;
-		data->dots[i].x = (x - y) * cos(0.523599);
-		data->dots[i].y = -data->dots[i].z + (x + y) * sin(0.523599);
-		i++;
-	}
+	rad = 45 * 3.14 / 180.0;
+	cosA = cos(rad);
+	sinA = sin(rad);
+	x = dot->x;
+	y = dot->y;
+	dot->x = x * cosA + y * sinA;
+	dot->y = -x * sinA + y * cosA;
 }
