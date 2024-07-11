@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/10 23:19:55 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:58:14 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	add_zoom(t_data *data)
 	while (i < data->size.dots)
 	{
 		data->dots[i].x = (data->dots[i].x - 1) * 50;
-		data->dots[i].y = (data->dots[i].y - 1) * 50 + 500;
-		data->dots[i].z *= 100;
+		data->dots[i].y = (data->dots[i].y - 1) * 50;
+		data->dots[i].z *= 50;
 		i++;
 	}
 }
@@ -42,50 +42,50 @@ void	rotate(t_data *data)
 void	rotate_x(t_map *dot)
 {
 	double	rad;
-	double	cosA;
-	double	sinA;
+	double	cosa;
+	double	sina;
 	int		y;
 	int		z;
-// 35.264
-	rad = 55 * 3.14 / 180.0;
-	cosA = cos(rad);
-	sinA = sin(rad);
+
+	rad = 45 * 3.14 / 180.0;
+	cosa = cos(rad);
+	sina = sin(rad);
 	y = dot->y;
 	z = dot->z;
-	dot->y = y * cosA - z * sinA;
-	dot->z = y * sinA + z * cosA;
+	dot->y = y * cosa - z * sina;
+	dot->z = y * sina + z * cosa;
 }
 
 void	rotate_y(t_map *dot)
 {
 	double	rad;
-	double	cosA;
-	double	sinA;
+	double	cosa;
+	double	sina;
 	int		x;
 	int		z;
 
 	rad = 80 * 3.14 / 180.0;
-	cosA = cos(rad);
-	sinA = sin(rad);
+	cosa = cos(rad);
+	sina = sin(rad);
 	x = dot->x;
 	z = dot->z;
-	dot->x = x * cosA + z * sinA;
-	dot->z = -x * sinA + z * cosA;
+	dot->x = x * cosa + z * sina;
+	dot->z = -x * sina + z * cosa;
 }
 
 void	rotate_z(t_map *dot)
 {
 	double	rad;
-	double	cosA;
-	double	sinA;
+	double	cosa;
+	double	sina;
 	int		x;
 	int		y;
 
 	rad = 45 * 3.14 / 180.0;
-	cosA = cos(rad);
-	sinA = sin(rad);
+	cosa = cos(rad);
+	sina = sin(rad);
 	x = dot->x;
 	y = dot->y;
-	dot->x = x * cosA + y * sinA;
-	dot->y = -x * sinA + y * cosA;
+	dot->x = x * cosa - y * sina + 650;
+	dot->y = x * sina + y * cosa + 450;
 }

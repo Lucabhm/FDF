@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:29 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/10 19:58:29 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:55:10 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ int	main(int argc, char **argv)
 	add_zoom(&data);
 	rotate(&data);
 	data.window = mlx_init(1600, 900, "fdf", true);
-	data.img = mlx_new_image(data.window, 1600, 900);
-	// memset(data.img->pixels, 255, data.img->width * data.img->height * sizeof(int32_t));
+	data.img_map = mlx_new_image(data.window, 1300, 900);
+	data.img_menu = mlx_new_image(data.window, 300, 900);
+	memset(data.img_menu->pixels, 180, data.img_menu->width * data.img_menu->height * sizeof(int32_t));
 	draw_loop(data);
-	mlx_image_to_window(data.window, data.img, 0, 0);
+	mlx_image_to_window(data.window, data.img_map, 300, 0);
+	mlx_image_to_window(data.window, data.img_menu, 0, 0);
 	mlx_loop(data.window);
 	mlx_terminate(data.window);
 	return (0);

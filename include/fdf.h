@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/10 18:26:07 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:50:28 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,14 @@ typedef struct s_data
 	t_map			*dots;
 	t_size			size;
 	mlx_t			*window;
-	mlx_image_t		*img;
+	mlx_image_t		*img_map;
+	mlx_image_t		*img_menu;
 }				t_data;
 
 typedef struct s_pos
 {
-	int		x;
-	int		y;
-	int		x_2;
-	int		y_2;
-	float	delta_x;
-	float	delta_y;
+	float		dx;
+	float		dy;
 	float	slope;
 }				t_pos;
 
@@ -82,11 +79,17 @@ void	free_dp(char **arr);
 
 void	draw_loop(t_data data);
 void	draw_dot(t_map *dot, t_data data);
-void	first_step(int x, int y, int x_2, int y_2, t_data data);
-void	slope_bigger(t_pos value, t_data data);
-void	slope_smaller(t_pos value, t_data data);
+// void	first_step(int x, int y, int x_2, int y_2, t_data data);
+// void	slope_bigger(t_pos value, t_data data);
+// void	slope_smaller(t_pos value, t_data data);
 void	draw_pixel(int x, int y, t_data data);
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
+
+// line_algo
+
+void	draw_line(t_map dot1, t_map dot2, t_data data);
+void	slope_s(t_map dot1, t_map dot2, t_pos info, t_data data);
+void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data data);
 
 // parsing
 
