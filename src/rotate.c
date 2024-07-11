@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/11 16:58:14 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/11 21:39:07 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	add_zoom(t_data *data)
 	i = 0;
 	while (i < data->size.dots)
 	{
-		data->dots[i].x = (data->dots[i].x - 1) * 50;
-		data->dots[i].y = (data->dots[i].y - 1) * 50;
-		data->dots[i].z *= 50;
+		data->dots[i].x = (data->dots[i].x - 1) * 30;
+		data->dots[i].y = (data->dots[i].y - 1) * 30;
+		data->dots[i].z *= 3;
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/11 15:50:28 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/11 22:06:52 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,10 @@ typedef struct s_data
 
 typedef struct s_pos
 {
-	float		dx;
-	float		dy;
-	float	slope;
+	int		dx;
+	int		dy;
+	char	*dot1_color;
+	char	*dot2_color;
 }				t_pos;
 
 // fdf
@@ -79,11 +80,9 @@ void	free_dp(char **arr);
 
 void	draw_loop(t_data data);
 void	draw_dot(t_map *dot, t_data data);
-// void	first_step(int x, int y, int x_2, int y_2, t_data data);
-// void	slope_bigger(t_pos value, t_data data);
-// void	slope_smaller(t_pos value, t_data data);
 void	draw_pixel(int x, int y, t_data data);
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
+int		htoi(char	*hexa);
 
 // line_algo
 
@@ -116,5 +115,6 @@ void	rotate_z(t_map *dot);
 # define ERROR_3 "Close failed!\n"
 # define ERROR_4 "Allocation failed!\n"
 # define ERROR_5 "File ends not with .fdf\n"
+# define ERROR_6 "Conversion from hexa to int failed\n"
 
 #endif

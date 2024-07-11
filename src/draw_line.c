@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/11 15:50:11 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/11 20:40:48 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,101 +52,41 @@ void	draw_dot(t_map *dot, t_data data)
 	}
 }
 
-// void	first_step(int x, int y, int x_2, int y_2, t_data data)
-// {
-// 	t_pos	value;
-
-// 	value.x = x;
-// 	value.y = y;
-// 	value.x_2 = x_2;
-// 	value.y_2 = y_2;
-// 	printf("x = %i y = %i x_2 = %i y_2 = %i\n", value.x, value.y, value.x_2, value.y_2);
-// 	value.delta_x = value.x_2 - x;
-// 	value.delta_y = value.y_2 - y;
-// 	printf("dx = %f dy = %f\n", value.delta_x, value.delta_y);
-// 	value.slope = value.delta_y / value.delta_x;
-// 	printf("slope = %f\n", value.slope);
-// 	if (value.slope > 1)
-// 	{
-// 		printf("bigger\n");
-// 		slope_bigger(value, data);
-// 	}
-// 	else if (value.slope < 1)
-// 	{
-// 		printf("smaller\n");
-// 		slope_smaller(value, data);
-// 	}
-// }
-
-// void	slope_bigger(t_pos value, t_data data)
-// {
-// 	float	which_y;
-// 	float	which_x;
-// 	float	x;
-// 	float	y;
-
-// 	x = value.x;
-// 	y = value.y;
-// 	// printf("deltax = %f deltay = %f\n", value.delta_x, value.delta_y);
-// 	if (value.delta_x > value.delta_y)
-// 	{
-// 		which_y = value.delta_y / value.delta_x;
-// 		which_x = value.delta_x / value.delta_x;
-// 	}
-// 	else
-// 	{
-// 		which_y = value.delta_y / value.delta_y;
-// 		which_x = value.delta_x / value.delta_y;
-// 	}
-// 	// printf("which_x = %f which_y = %f\n", which_x, which_y);
-// 	while (y <= value.y_2)
-// 	{
-// 		printf("x = %f y = %f\n", x, y);
-// 		draw_pixel(x, y, data);
-// 		x += which_x;
-// 		y += which_y;
-// 	}
-// }
-
-// void	slope_smaller(t_pos value, t_data data)
-// {
-// 	float	which_y;
-// 	float	which_x;
-// 	float	x;
-// 	float	y;
-
-// 	x = value.x;
-// 	y = value.y;
-// 	// printf("deltax = %f deltay = %f\n", value.delta_x, value.delta_y);
-// 	if (value.delta_x > value.delta_y)
-// 	{
-// 		which_y = value.delta_y / value.delta_x;
-// 		which_x = value.delta_x / value.delta_x;
-// 	}
-// 	else
-// 	{
-// 		which_y = value.delta_y / value.delta_y;
-// 		which_x = value.delta_x / value.delta_y;
-// 	}
-// 	// printf("which_x = %f which_y = %f\n", which_x, which_y);
-// 	while (x <= value.x_2)
-// 	{
-// 		// printf("x = %f y = %f\n", x, y);
-// 		draw_pixel(x, y, data);
-// 		x += which_x;
-// 		y += which_y;
-// 	}
-// }
-
 void	draw_pixel(int x, int y, t_data data)
 {
 	int32_t	color;
 
-	color = get_color(255, 0, 255, 255);
+	color = get_color(173, 216, 230, 255);
 	mlx_put_pixel(data.img_map, x, y, color);
 }
 
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+int	htoi(char	*hexa)
+{
+	int		nbr;
+	char	*base;
+	int		i;
+	int		j;
+	int		size;
+
+	base = "0123456789ABCDEF";
+	nbr = 0;
+	size = ft_strlen(hexa) - 1;
+	i = size;
+	while (hexa[i] != '#' && i >= 0)
+	{
+		j = 0;
+		while (base[j] != hexa[i])
+			j++;
+		if (j == 17)
+			error(ERROR_6, NULL);
+		nbr += j * pow(16, size - i);
+		i--;
+	}
+	free(hexa);
+	return (nbr);
 }
