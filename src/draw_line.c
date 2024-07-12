@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/11 20:40:48 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:39:38 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,24 @@ void	draw_dot(t_map *dot, t_data data)
 	}
 }
 
-void	draw_pixel(int x, int y, t_data data)
+void	draw_pixel(int x, int y, t_pos info, t_data data)
 {
-	int32_t	color;
+	t_color	c1;
+	t_color	c2;
+	int		r;
+	int		g;
+	int		b;
 
-	color = get_color(173, 216, 230, 255);
-	mlx_put_pixel(data.img_map, x, y, color);
+	c1.red = htoi(ft_substr(info.color1, 0, 2));
+	c1.green = htoi(ft_substr(info.color1, 2, 2));
+	c1.blue = htoi(ft_substr(info.color1, 4, 2));
+	c2.red = htoi(ft_substr(info.color2, 0, 2));
+	c2.green = htoi(ft_substr(info.color2, 2, 2));
+	c2.blue = htoi(ft_substr(info.color2, 4, 2));
+	r = c1.red + (c2.red - c1.red) * info.fraction;
+	g = c1.green + (c2.green - c1.green) * info.fraction;
+	b = c1.blue + (c2.blue - c1.blue) * info.fraction;
+	mlx_put_pixel(data.img_map, x, y, get_color(r, g, b, 255));
 }
 
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a)
@@ -89,4 +101,19 @@ int	htoi(char	*hexa)
 	}
 	free(hexa);
 	return (nbr);
+}
+
+void	reset_check(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->size.dots)
+	{
+		data->dots[i].draw_up = false;
+		data->dots[i].draw_down = false;
+		data->dots[i].draw_left = false;
+		data->dots[i].draw_right = false;
+		i++;
+	}
 }

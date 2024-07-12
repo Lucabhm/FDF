@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/12 09:34:09 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/12 16:41:44 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	add_zoom(t_data *data)
 	i = 0;
 	while (i < data->size.dots)
 	{
-		data->dots[i].x = (data->dots[i].x - 1) * 30;
-		data->dots[i].y = (data->dots[i].y - 1) * 30;
+		data->dots[i].x = (data->dots[i].x - 1) * data->zoom;
+		data->dots[i].y = (data->dots[i].y - 1) * data->zoom;
 		data->dots[i].z *= 5;
 		i++;
 	}
@@ -35,6 +35,8 @@ void	rotate(t_data *data)
 	{
 		rotate_z(&data->dots[i]);
 		rotate_x(&data->dots[i]);
+		data->dots[i].x += 1300 / 2 - (data->size.x_max * 10 / 2);
+		data->dots[i].y += 900 / 2 - (data->size.y_max * 30 / 2);
 		i++;
 	}
 }
@@ -86,6 +88,6 @@ void	rotate_z(t_map *dot)
 	sina = sin(rad);
 	x = dot->x;
 	y = dot->y;
-	dot->x = x * cosa - y * sina + 650;
-	dot->y = x * sina + y * cosa + 450;
+	dot->x = x * cosa - y * sina;
+	dot->y = x * sina + y * cosa;
 }

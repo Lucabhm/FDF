@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/11 22:06:52 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:42:01 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,27 @@ typedef struct s_data
 	mlx_t			*window;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_menu;
+	int				zoom;
 }				t_data;
 
 typedef struct s_pos
 {
 	int		dx;
 	int		dy;
-	char	*dot1_color;
-	char	*dot2_color;
+	int		startx;
+	int		starty;
+	char	*color1;
+	char	*color2;
+	float	fraction;
 }				t_pos;
+
+typedef struct s_color
+{
+	int	red;
+	int	green;
+	int	blue;
+	int	color;
+}				t_color;
 
 // fdf
 
@@ -80,9 +92,10 @@ void	free_dp(char **arr);
 
 void	draw_loop(t_data data);
 void	draw_dot(t_map *dot, t_data data);
-void	draw_pixel(int x, int y, t_data data);
+void	draw_pixel(int x, int y, t_pos info, t_data data);
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
 int		htoi(char	*hexa);
+void	reset_check(t_data *data);
 
 // line_algo
 
@@ -106,6 +119,13 @@ void	rotate(t_data *data);
 void	rotate_x(t_map *dot);
 void	rotate_y(t_map *dot);
 void	rotate_z(t_map *dot);
+
+
+// key_actions
+
+void	controll(void *param);
+void	key(mlx_key_data_t code, void *param);
+void	scroll(double xdelta, double ydelta, void *param);
 
 // error msg
 

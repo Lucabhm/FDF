@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:04:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/10 12:24:34 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/12 15:58:43 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_data(t_data *data)
 	data->size.dots = 0;
 	data->size.x_max = 0;
 	data->size.y_max = 0;
+	data->zoom = 31;
 }
 
 void	fill_map(char **argv, t_data *data)
@@ -102,8 +103,6 @@ void	add_to_map(t_map *dot, t_map **map, t_size size)
 void	fill_dot(t_map	*dot, char *z, t_size size, int i)
 {
 	int		y;
-	char	*str;
-	char	*sub;
 
 	y = 1;
 	while (i > size.x_max)
@@ -113,19 +112,11 @@ void	fill_dot(t_map	*dot, char *z, t_size size, int i)
 	}
 	dot->x = i;
 	dot->y = y;
-	str = ft_strnstr(z, ",", ft_strlen(z));
-	if (!str)
-	{
-		dot->z = ft_atoi(z);
-		dot->color = "#000000";
-	}
+	dot->z = ft_atoi(z);
+	if (dot->z == 0)
+		dot->color = "FDA100";
 	else
-	{
-		sub = ft_substr(z, 0, ft_strlen(z) - ft_strlen(str));
-		dot->z = ft_atoi(sub);
-		dot->color = ft_substr(str, 1, ft_strlen(str) - 1);
-		free(sub);
-	}
+		dot->color = "00C7FD";
 	dot->draw_up = false;
 	dot->draw_down = false;
 	dot->draw_left = false;

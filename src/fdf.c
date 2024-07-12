@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:29 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/11 21:42:42 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:39:16 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ int	main(int argc, char **argv)
 
 	init_data(&data);
 	parsing(argc, argv, &data);
-	add_zoom(&data);
-	rotate(&data);
 	data.window = mlx_init(1600, 900, "fdf", true);
 	data.img_map = mlx_new_image(data.window, 1300, 900);
 	data.img_menu = mlx_new_image(data.window, 300, 900);
 	memset(data.img_menu->pixels, 180, data.img_menu->width * data.img_menu->height * sizeof(int32_t));
+	add_zoom(&data);
+	rotate(&data);
 	draw_loop(data);
+	reset_check(&data);
+	// mlx_loop_hook(data.window, controll, &data);
 	mlx_image_to_window(data.window, data.img_map, 300, 0);
 	mlx_image_to_window(data.window, data.img_menu, 0, 0);
 	mlx_loop(data.window);
