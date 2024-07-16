@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/12 16:42:01 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/16 22:59:09 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ typedef struct s_size
 typedef struct s_data
 {
 	t_map			*map;
+	t_map			*default_map;
 	t_map			*dots;
 	t_size			size;
 	mlx_t			*window;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_menu;
 	int				zoom;
+	int				angle_z;
 }				t_data;
 
 typedef struct s_pos
@@ -116,9 +118,9 @@ int		count_elements(char **split);
 
 void	add_zoom(t_data *data);
 void	rotate(t_data *data);
-void	rotate_x(t_map *dot);
-void	rotate_y(t_map *dot);
-void	rotate_z(t_map *dot);
+void	rotate_x(t_map *dot, int angle);
+void	rotate_y(t_map *dot, int angle);
+void	rotate_z(t_map *dot, int angle);
 
 
 // key_actions
@@ -126,6 +128,10 @@ void	rotate_z(t_map *dot);
 void	controll(void *param);
 void	key(mlx_key_data_t code, void *param);
 void	scroll(double xdelta, double ydelta, void *param);
+
+// test
+
+void	cpy_map(t_data *data);
 
 // error msg
 

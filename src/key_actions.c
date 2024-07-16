@@ -3,54 +3,118 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/12 16:26:53 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/16 23:05:26 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-// void	controll(void *param)
-// {
-// 	t_data	*data;
+void	controll(void *param)
+{
+	t_data	*data;
 
-// 	data = param;
-// 	printf("zoom = %i\n", data->zoom);
-// 	mlx_scroll_hook(data->window, scroll, data);
-// }
+	data = param;
+	// printf("zoom = %i\n", data->zoom);
+	mlx_scroll_hook(data->window, scroll, data);
+	mlx_key_hook(data->window, key, data);
+}
 
-// void	key(mlx_key_data_t code, void *param)
-// {
-// 	t_data	*data;
+void	key(mlx_key_data_t code, void *param)
+{
+	t_data	*data;
 
-// 	data = param;
-// 	if (code.key == MLX_KEY_ESCAPE && code.action == 1)
-// 		mlx_close_window(data->window);
-// }
+	data = param;
+	if (code.key == MLX_KEY_ESCAPE && code.action == 1)
+		mlx_close_window(data->window);
+	else if (code.key == MLX_KEY_EQUAL && (code.action == 1 || code.action == 2))
+	{
+		data->zoom++;
+		reset_check(data);
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		add_zoom(data);
+		rotate(data);
+		draw_loop(*data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (code.key == MLX_KEY_MINUS && (code.action == 1 || code.action == 2))
+	{
+		data->zoom--;
+		reset_check(data);
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		add_zoom(data);
+		rotate(data);
+		draw_loop(*data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (code.key == MLX_KEY_RIGHT && (code.action == 1 || code.action == 2))
+	{
+		data->angle_z += 2;
+		printf("angle = %i\n", data->angle_z);
+		reset_check(data);
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		add_zoom(data);
+		for (int i = 0; i < data->size.dots; i++)
+		{
+			rotate_z(&data->dots[i], data->angle_z);
+			rotate_x(&data->dots[i], 45);
+			data->dots[i].x += 1300 / 2 - (data->size.x_max * 10 / 2);
+			data->dots[i].y += 900 / 2 - (data->size.y_max * 30 / 2);
+		}
+		draw_loop(*data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (code.key == MLX_KEY_LEFT && (code.action == 1 || code.action == 2))
+	{
+		data->angle_z -= 2;
+		printf("angle = %i\n", data->angle_z);
+		reset_check(data);
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		add_zoom(data);
+		for (int i = 0; i < data->size.dots; i++)
+		{
+			rotate_z(&data->dots[i], data->angle_z);
+			rotate_x(&data->dots[i], 45);
+			data->dots[i].x += 1300 / 2 - (data->size.x_max * 10 / 2);
+			data->dots[i].y += 900 / 2 - (data->size.y_max * 30 / 2);
+		}
+		draw_loop(*data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+}
 
-// void	scroll(double xdelta, double ydelta, void *param)
-// {
-// 	t_data	*data;
+void	scroll(double xdelta, double ydelta, void *param)
+{
+	t_data	*data;
 
-// 	data = param;
-// 	xdelta = 0;
-// 	if (ydelta > 0)
-// 	{
-// 		data->zoom++;
-// 		// printf("zoom = %i\n", data->zoom);
-// 		add_zoom(*data);
-// 		rotate(*data);
-// 		draw_loop(*data);
-// 		reset_check(data);
-// 	}
-// 	else if (ydelta < 0)
-// 	{
-// 		data->zoom--;
-// 		// printf("zoom = %i\n", data->zoom);
-// 		add_zoom(*data);
-// 		draw_loop(*data);
-// 		reset_check(data);
-// 	}
-// }
+	data = param;
+	xdelta = 0;
+	if (ydelta > 0)
+	{
+		data->zoom++;
+		reset_check(data);
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		add_zoom(data);
+		rotate(data);
+		draw_loop(*data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (ydelta < 0)
+	{
+		data->zoom--;
+		reset_check(data);
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		add_zoom(data);
+		rotate(data);
+		draw_loop(*data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+}

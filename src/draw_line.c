@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/12 16:39:38 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/16 22:10:26 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,11 @@ void	reset_check(t_data *data)
 	i = 0;
 	while (i < data->size.dots)
 	{
-		data->dots[i].draw_up = false;
-		data->dots[i].draw_down = false;
-		data->dots[i].draw_left = false;
-		data->dots[i].draw_right = false;
+		data->dots[i] = data->default_map[i];
+		// data->dots[i].draw_up = false;
+		// data->dots[i].draw_down = false;
+		// data->dots[i].draw_left = false;
+		// data->dots[i].draw_right = false;
 		i++;
 	}
 }

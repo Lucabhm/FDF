@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:04:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/12 15:58:43 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/16 22:59:16 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 void	init_data(t_data *data)
 {
 	data->map = NULL;
+	data->default_map = NULL;
 	data->size.dots = 0;
 	data->size.x_max = 0;
 	data->size.y_max = 0;
 	data->zoom = 31;
+	data->angle_z = 45;
 }
 
 void	fill_map(char **argv, t_data *data)
