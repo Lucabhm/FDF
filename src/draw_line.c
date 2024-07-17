@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/16 22:10:26 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/17 09:37:31 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,19 @@ void	draw_pixel(int x, int y, t_pos info, t_data data)
 	int		g;
 	int		b;
 
-	c1.red = htoi(ft_substr(info.color1, 0, 2));
-	c1.green = htoi(ft_substr(info.color1, 2, 2));
-	c1.blue = htoi(ft_substr(info.color1, 4, 2));
-	c2.red = htoi(ft_substr(info.color2, 0, 2));
-	c2.green = htoi(ft_substr(info.color2, 2, 2));
-	c2.blue = htoi(ft_substr(info.color2, 4, 2));
-	r = c1.red + (c2.red - c1.red) * info.fraction;
-	g = c1.green + (c2.green - c1.green) * info.fraction;
-	b = c1.blue + (c2.blue - c1.blue) * info.fraction;
-	mlx_put_pixel(data.img_map, x, y, get_color(r, g, b, 255));
+	if (x > 0 && x < 1300 && y > 0 && y < 900)
+	{
+		c1.red = htoi(ft_substr(info.color1, 0, 2));
+		c1.green = htoi(ft_substr(info.color1, 2, 2));
+		c1.blue = htoi(ft_substr(info.color1, 4, 2));
+		c2.red = htoi(ft_substr(info.color2, 0, 2));
+		c2.green = htoi(ft_substr(info.color2, 2, 2));
+		c2.blue = htoi(ft_substr(info.color2, 4, 2));
+		r = c1.red + (c2.red - c1.red) * info.fraction;
+		g = c1.green + (c2.green - c1.green) * info.fraction;
+		b = c1.blue + (c2.blue - c1.blue) * info.fraction;
+		mlx_put_pixel(data.img_map, x, y, get_color(r, g, b, 255));
+	}
 }
 
 int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a)
