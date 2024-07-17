@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/17 20:12:59 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/17 23:01:37 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	key(mlx_key_data_t code, void *param)
 	}
 	else if (code.key == MLX_KEY_RIGHT && (code.action == 1 || code.action == 2))
 	{
-		data->angle_z += 2;
+		data->angle_z -= 2;
 		printf("angle = %i\n", data->angle_z);
 		reset_check(data);
 		mlx_delete_image(data->window, data->img_map);
@@ -68,7 +68,7 @@ void	key(mlx_key_data_t code, void *param)
 	}
 	else if (code.key == MLX_KEY_LEFT && (code.action == 1 || code.action == 2))
 	{
-		data->angle_z -= 2;
+		data->angle_z += 2;
 		printf("angle = %i\n", data->angle_z);
 		reset_check(data);
 		mlx_delete_image(data->window, data->img_map);
