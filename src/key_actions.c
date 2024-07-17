@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/17 17:24:10 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/17 20:12:59 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	key(mlx_key_data_t code, void *param)
 		for (int i = 0; i < data->size.dots; i++)
 		{
 			rotate_z(&data->dots[i], data->angle_z, *data);
-			// rotate_x(&data->dots[i], 45);
+			rotate_x(&data->dots[i], data->angle_y, *data);
 		}
 		draw_loop(*data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
@@ -77,7 +77,39 @@ void	key(mlx_key_data_t code, void *param)
 		for (int i = 0; i < data->size.dots; i++)
 		{
 			rotate_z(&data->dots[i], data->angle_z, *data);
-			// rotate_x(&data->dots[i], 45);
+			rotate_x(&data->dots[i], data->angle_y, *data);
+		}
+		draw_loop(*data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (code.key == MLX_KEY_UP && (code.action == 1 || code.action == 2))
+	{
+		data->angle_y += 2;
+		printf("angle = %i\n", data->angle_y);
+		reset_check(data);
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		add_zoom(data);
+		for (int i = 0; i < data->size.dots; i++)
+		{
+			rotate_z(&data->dots[i], data->angle_z, *data);
+			rotate_x(&data->dots[i], data->angle_y, *data);
+		}
+		draw_loop(*data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (code.key == MLX_KEY_DOWN && (code.action == 1 || code.action == 2))
+	{
+		data->angle_y -= 2;
+		printf("angle = %i\n", data->angle_y);
+		reset_check(data);
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		add_zoom(data);
+		for (int i = 0; i < data->size.dots; i++)
+		{
+			rotate_z(&data->dots[i], data->angle_z, *data);
+			rotate_x(&data->dots[i], data->angle_y, *data);
 		}
 		draw_loop(*data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);

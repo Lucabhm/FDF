@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:29 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/16 22:42:51 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:12:06 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	parsing(int argc, char **argv, t_data *data)
 {
 	if (argc == 2)
 	{
+		printf("here\n");
 		if (!ft_strnstr(argv[1], ".fdf", ft_strlen(argv[1])))
 			error(ERROR_5, NULL);
 		fill_map(argv, data);

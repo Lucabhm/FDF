@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/17 18:15:18 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/17 20:14:23 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	rotate(t_data *data)
 	while (i < data->size.dots)
 	{
 		rotate_z(&data->dots[i], data->angle_z, *data);
-		// rotate_x(&data->dots[i], 45);
+		rotate_x(&data->dots[i], data->angle_y, *data);
 		i++;
 	}
 }
 
-void	rotate_x(t_map *dot, int angle)
+void	rotate_x(t_map *dot, int angle, t_data data)
 {
 	double	rad;
 	double	cosa;
@@ -52,10 +52,11 @@ void	rotate_x(t_map *dot, int angle)
 	rad = angle * 3.14 / 180.0;
 	cosa = cos(rad);
 	sina = sin(rad);
-	y = dot->y;
+	y = dot->y - (450 - (data.size.y_max / 2));
 	z = dot->z;
 	dot->y = y * cosa - z * sina;
 	dot->z = y * sina + z * cosa;
+	dot->y += (450 - (data.size.y_max / 2));
 }
 
 void	rotate_y(t_map *dot, int angle)
@@ -86,8 +87,10 @@ void	rotate_z(t_map *dot, int angle, t_data data)
 	rad = angle * 3.14 / 180.0;
 	cosa = cos(rad);
 	sina = sin(rad);
-	x = dot->x - (650 - (data.size.x_max / 2 * data.zoom));
-	y = dot->y - 450 - ((data.size.y_max / 2 * data.zoom));
+	x = dot->x - (650 - (data.size.x_max / 2));
+	y = dot->y - (450 - (data.size.y_max / 2));
 	dot->x = x * cosa - y * sina;
 	dot->y = x * sina + y * cosa;
+	dot->x += (650 - (data.size.x_max / 2));
+	dot->y += (450 - (data.size.y_max / 2));
 }

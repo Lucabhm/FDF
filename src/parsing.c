@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:04:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/16 22:59:16 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/17 20:27:20 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_data(t_data *data)
 	data->size.y_max = 0;
 	data->zoom = 31;
 	data->angle_z = 45;
+	data->angle_y = 45;
 }
 
 void	fill_map(char **argv, t_data *data)
@@ -116,9 +117,9 @@ void	fill_dot(t_map	*dot, char *z, t_size size, int i)
 	dot->y = y;
 	dot->z = ft_atoi(z);
 	if (dot->z == 0)
-		dot->color = "FDA100";
+		dot->color = "336BFF";
 	else
-		dot->color = "00C7FD";
+		dot->color = "FF3358";
 	dot->draw_up = false;
 	dot->draw_down = false;
 	dot->draw_left = false;
