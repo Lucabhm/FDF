@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/17 20:07:48 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/18 16:19:20 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_data
 	int				zoom;
 	int				angle_z;
 	int				angle_y;
+	int				angle_x;
 }				t_data;
 
 typedef struct s_pos
@@ -120,7 +121,7 @@ int		count_elements(char **split);
 void	add_zoom(t_data *data);
 void	rotate(t_data *data);
 void	rotate_x(t_map *dot, int angle, t_data data);
-void	rotate_y(t_map *dot, int angle);
+void	rotate_y(t_map *dot, int angle, t_data data);
 void	rotate_z(t_map *dot, int angle, t_data data);
 
 
@@ -129,6 +130,7 @@ void	rotate_z(t_map *dot, int angle, t_data data);
 void	controll(void *param);
 void	key(mlx_key_data_t code, void *param);
 void	scroll(double xdelta, double ydelta, void *param);
+void	cursor(double xdelta, double ydelta, void *param);
 
 // test
 

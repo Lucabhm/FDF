@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/17 20:14:23 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/07/18 15:58:04 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	rotate(t_data *data)
 	{
 		rotate_z(&data->dots[i], data->angle_z, *data);
 		rotate_x(&data->dots[i], data->angle_y, *data);
+		rotate_y(&data->dots[i], data->angle_x, *data);
 		i++;
 	}
 }
@@ -59,7 +60,7 @@ void	rotate_x(t_map *dot, int angle, t_data data)
 	dot->y += (450 - (data.size.y_max / 2));
 }
 
-void	rotate_y(t_map *dot, int angle)
+void	rotate_y(t_map *dot, int angle, t_data data)
 {
 	double	rad;
 	double	cosa;
@@ -70,10 +71,11 @@ void	rotate_y(t_map *dot, int angle)
 	rad = angle * 3.14 / 180.0;
 	cosa = cos(rad);
 	sina = sin(rad);
-	x = dot->x;
+	x = dot->x - (650 - (data.size.x_max / 2));
 	z = dot->z;
-	dot->x = x * cosa + z * sina;
-	dot->z = -x * sina + z * cosa;
+	dot->x = x * cosa - z * sina;
+	dot->z = x * sina + z * cosa;
+	dot->x += (650 - (data.size.x_max / 2));
 }
 
 void	rotate_z(t_map *dot, int angle, t_data data)
