@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 12:04:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/18 15:56:07 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/19 12:02:30 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	init_data(t_data *data)
 	data->angle_z = 45;
 	data->angle_y = 45;
 	data->angle_x = 0;
+	data->mouse_x = 0;
+	data->mouse_y = 0;
+	data->dpi = 40;
 }
 
 void	fill_map(char **argv, t_data *data)

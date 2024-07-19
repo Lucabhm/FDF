@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:29 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/18 10:24:50 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/19 14:56:22 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	char	*str;
 
 	init_data(&data);
 	parsing(argc, argv, &data);
@@ -22,13 +23,14 @@ int	main(int argc, char **argv)
 	data.window = mlx_init(1600, 900, "fdf", true);
 	data.img_map = mlx_new_image(data.window, 1300, 900);
 	data.img_menu = mlx_new_image(data.window, 300, 900);
-	memset(data.img_menu->pixels, 180, data.img_menu->width * data.img_menu->height * sizeof(int32_t));
+	memset(data.img_menu->pixels, 128, data.img_menu->width * data.img_menu->height * sizeof(int));
+	mlx_image_to_window(data.window, data.img_map, 300, 0);
+	mlx_image_to_window(data.window, data.img_menu, 0, 0);
+	draw_menu(&data);
 	add_zoom(&data);
 	rotate(&data);
 	draw_loop(data);
 	mlx_loop_hook(data.window, controll, &data);
-	mlx_image_to_window(data.window, data.img_map, 300, 0);
-	mlx_image_to_window(data.window, data.img_menu, 0, 0);
 	mlx_loop(data.window);
 	mlx_terminate(data.window);
 	return (0);

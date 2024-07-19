@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/18 16:19:20 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/19 14:51:01 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ typedef struct s_data
 	int				angle_z;
 	int				angle_y;
 	int				angle_x;
+	int				mouse_x;
+	int				mouse_y;
+	int				dpi;
+	mlx_image_t		*str[9];
 }				t_data;
 
 typedef struct s_pos
@@ -130,7 +134,12 @@ void	rotate_z(t_map *dot, int angle, t_data data);
 void	controll(void *param);
 void	key(mlx_key_data_t code, void *param);
 void	scroll(double xdelta, double ydelta, void *param);
-void	cursor(double xdelta, double ydelta, void *param);
+void	cursor(t_data *data);
+
+// menu
+
+void	draw_menu(t_data *data);
+void	delete_img(t_data *data);
 
 // test
 

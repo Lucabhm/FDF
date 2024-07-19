@@ -8,7 +8,8 @@ SRCS = fdf.c \
 		rotate.c \
 		line_algo.c \
 		key_actions.c \
-		test.c
+		test.c \
+		menu.c
 OBJS = $(SRCS:.c=.o)
 OBJDIR = objs/
 OBJS_PATH = $(addprefix $(OBJDIR), $(OBJS))
