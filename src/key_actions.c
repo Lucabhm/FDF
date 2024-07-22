@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/19 14:57:30 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/22 15:18:41 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	key(mlx_key_data_t code, void *param)
 	else if (code.key == MLX_KEY_EQUAL && (code.action == 1 || code.action == 2))
 	{
 		data->dpi++;
-		mlx_delete_image(data->window, data->str[8]);
+		mlx_delete_image(data->window, data->menu[9]);
 		str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->dpi));
-		data->str[8] = mlx_put_string(data->window, str, 0, 160);
+		data->menu[9] = mlx_put_string(data->window, str, 0, 180);
 		free(str);
 	}
 	else if (code.key == MLX_KEY_MINUS && (code.action == 1 || code.action == 2))
@@ -43,9 +43,9 @@ void	key(mlx_key_data_t code, void *param)
 		if (data->dpi > 1)
 		{
 			data->dpi--;
-			mlx_delete_image(data->window, data->str[8]);
+			mlx_delete_image(data->window, data->menu[9]);
 			str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->dpi));
-			data->str[8] = mlx_put_string(data->window, str, 0, 160);
+			data->menu[9] = mlx_put_string(data->window, str, 0, 180);
 			free(str);
 		}
 	}

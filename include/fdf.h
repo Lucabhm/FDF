@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/19 14:51:01 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/07/22 15:14:25 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_data
 	int				mouse_x;
 	int				mouse_y;
 	int				dpi;
-	mlx_image_t		*str[9];
+	mlx_image_t		*menu[10];
 }				t_data;
 
 typedef struct s_pos
