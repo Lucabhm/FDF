@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:04:30 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 10:40:53 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/08/01 20:46:41 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	draw_menu(t_data *data)
+void	drawMenu(t_data *data)
 {
 	char	*str;
 
@@ -32,7 +32,7 @@ void	draw_menu(t_data *data)
 	free(str);
 }
 
-void	delete_img(t_data *data)
+void	deleteImg(t_data *data)
 {
 	int	i;
 

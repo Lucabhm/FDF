@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 11:37:02 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:34:38 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ typedef struct s_data
 	int				angle_z;
 	int				angle_y;
 	int				angle_x;
-	int				mouse_x;
-	int				mouse_y;
 	int				dpi;
 	mlx_image_t		*menu[10];
 }				t_data;
@@ -91,43 +89,45 @@ typedef struct s_color
 // fdf
 
 int		main(int argc, char **argv);
-void	parsing(int argc, char **argv, t_data *data);
 void	error(char *msg, t_data *data);
-int		count_rows(char *file);
-int		check_input(char **split);
-void	free_dp(char **arr);
+void	freeDp(char **arr);
 
 // draw_line
 
-void	draw_loop(t_data data);
-void	draw_dot(t_map *dot, t_data data);
-void	draw_pixel(int x, int y, t_pos info, t_data data);
-int32_t	get_color(int32_t r, int32_t g, int32_t b, int32_t a);
+void	drawLoop(t_data *data);
+void	drawDot(t_map *dot, t_data *data);
+void	drawPixel(int x, int y, t_pos info, t_data *data);
+int32_t	getColor(int32_t r, int32_t g, int32_t b, int32_t a);
 int		htoi(char	*hexa);
-void	reset_check(t_data *data);
+void	resetCheck(t_data *data);
 
 // line_algo
 
-void	draw_line(t_map dot1, t_map dot2, t_data data);
-void	slope_s(t_map dot1, t_map dot2, t_pos info, t_data data);
-void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data data);
+void	drawLine(t_map dot1, t_map dot2, t_data *data);
+void	slopeS(t_map dot1, t_map dot2, t_pos info, t_data *data);
+void	slopeB(t_map dot1, t_map dot2, t_pos info, t_data *data);
 
 // parsing
 
-t_data	*init_data(void);
-void	fill_map(char **argv, t_data *data);
-void	add_to_map(t_map *dot, t_map **map, t_size size);
-void	fill_dot(t_map	*dot, char *z, t_size size, int i);
-void	count_size(char *file, t_data *data);
-int		count_elements(char **split, t_data *data);
+void	parsing(int argc, char **argv, t_data *data);
+void	fillMap(char **argv, t_data *data);
+void	countSize(char *file, t_data *data);
+int		countElements(char **split, t_data *data);
+void	checkValue(char *value, t_data *data);
+
+// parsing2
+
+t_data	*initData(void);
+void	fillDot(t_map	*dot, char *z, t_size size, int i);
+void	addToMap(t_map *dot, t_map **map, t_size size);
 
 // rotate
 
-void	add_zoom(t_data *data);
+void	addZoom(t_data *data);
 void	rotate(t_data *data);
-void	rotate_x(t_map *dot, int angle, t_data data);
-void	rotate_y(t_map *dot, int angle, t_data data);
-void	rotate_z(t_map *dot, int angle, t_data data);
+void	rotateX(t_map *dot, t_data data);
+void	rotateY(t_map *dot, t_data data);
+void	rotateZ(t_map *dot, t_data data);
 
 
 // key_actions
@@ -139,13 +139,17 @@ void	cursor(t_data *data);
 
 // menu
 
-void	draw_menu(t_data *data);
-void	delete_img(t_data *data);
+void	drawMenu(t_data *data);
+void	deleteImg(t_data *data);
 
 // test
 
-void	cpy_map(t_data *data);
-void	free_all(t_data *data);
+void	freeAll(t_data *data);
+
+// drawMap
+
+void	drawMap(t_data *data);
+void	drawMapChanged(t_data *data);
 
 // error msg
 

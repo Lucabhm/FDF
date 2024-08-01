@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   drawMap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/01 10:57:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 12:33:12 by lbohm            ###   ########.fr       */
+/*   Created: 2024/08/01 19:57:49 by lucabohn          #+#    #+#             */
+/*   Updated: 2024/08/01 21:31:46 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-int	main(int argc, char **argv)
+void	drawMap(t_data *data)
 {
-	t_data	*data;
+	addZoom(data);
+	rotate(data);
+	drawLoop(data);
+}
 
-	data = init_data();
-	parsing(argc, argv, data);
-	data->window = mlx_init(data->size.width, data->size.height, "fdf", true);
+void	drawMapChanged(t_data *data)
+{
+	resetCheck(data);
+	mlx_delete_image(data->window, data->img_map);
 	data->img_map = mlx_new_image(data->window, 1300, 900);
-	data->img_menu = mlx_new_image(data->window, 300, 900);
-	memset(data->img_menu->pixels, 128, data->img_menu->width \
-	* data->img_menu->height * sizeof(int));
+	drawMap(data);
 	mlx_image_to_window(data->window, data->img_map, 300, 0);
-	mlx_image_to_window(data->window, data->img_menu, 0, 0);
 }

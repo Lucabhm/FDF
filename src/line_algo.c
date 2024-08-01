@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   line_algo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:24:13 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/12 13:03:51 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/08/01 21:30:48 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	draw_line(t_map dot1, t_map dot2, t_data data)
+void	drawLine(t_map dot1, t_map dot2, t_data *data)
 {
 	t_pos	info;
 
@@ -23,12 +23,12 @@ void	draw_line(t_map dot1, t_map dot2, t_data data)
 	info.color1 = dot1.color;
 	info.color2 = dot2.color;
 	if (abs(info.dy) < abs(info.dx))
-		slope_s(dot1, dot2, info, data);
+		slopeS(dot1, dot2, info, data);
 	else
-		slope_b(dot1, dot2, info, data);
+		slopeB(dot1, dot2, info, data);
 }
 
-void	slope_s(t_map dot1, t_map dot2, t_pos info, t_data data)
+void	slopeS(t_map dot1, t_map dot2, t_pos info, t_data *data)
 {
 	int	wp;
 
@@ -36,7 +36,7 @@ void	slope_s(t_map dot1, t_map dot2, t_pos info, t_data data)
 	while (dot1.x != dot2.x)
 	{
 		info.fraction = ((float)dot1.x - (float)info.startx) / (float)info.dx;
-		draw_pixel(dot1.x, dot1.y, info, data);
+		drawPixel(dot1.x, dot1.y, info, data);
 		if (info.dx > 0)
 			dot1.x++;
 		else
@@ -52,10 +52,10 @@ void	slope_s(t_map dot1, t_map dot2, t_pos info, t_data data)
 				dot1.y--;
 		}
 	}
-	draw_pixel(dot1.x, dot1.y, info, data);
+	drawPixel(dot1.x, dot1.y, info, data);
 }
 
-void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data data)
+void	slopeB(t_map dot1, t_map dot2, t_pos info, t_data *data)
 {
 	int	wp;
 
@@ -63,7 +63,7 @@ void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data data)
 	while (dot1.y != dot2.y)
 	{
 		info.fraction = ((float)dot1.y - (float)info.starty) / (float)info.dy;
-		draw_pixel(dot1.x, dot1.y, info, data);
+		drawPixel(dot1.x, dot1.y, info, data);
 		if (info.dy > 0)
 			dot1.y++;
 		else
@@ -79,5 +79,5 @@ void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data data)
 				dot1.x--;
 		}
 	}
-	draw_pixel(dot1.x, dot1.y, info, data);
+	drawPixel(dot1.x, dot1.y, info, data);
 }

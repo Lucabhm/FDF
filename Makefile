@@ -5,11 +5,13 @@ VPATH = src/
 SRCS = fdf.c \
 		draw_line.c \
 		parsing.c \
+		parsing2.c \
 		rotate.c \
 		line_algo.c \
 		key_actions.c \
 		test.c \
-		menu.c
+		menu.c \
+		drawMap.c
 OBJS = $(SRCS:.c=.o)
 OBJDIR = objs/
 OBJS_PATH = $(addprefix $(OBJDIR), $(OBJS))
@@ -20,9 +22,9 @@ MLX = lib/mlx
 INLIBFT = -L $(LIBFT) -lft
 INPRINF = -L $(PRINTF) -lftprintf
 INGETNEXT = -L $(GET_NEXT) -l_get_next_line
-INMLX = -L $(MLX)/build -lmlx42 -ldl -L /usr/local/lib/ -lglfw -pthread -lm
+INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
+# /usr/local/lib/
 
-# /opt/homebrew/Cellar/glfw/3.3.8/lib/
 $(NAME):		$(OBJS_PATH)
 				@cd $(LIBFT) && $(MAKE) all
 				@cd $(LIBFT) && $(MAKE) bonus
