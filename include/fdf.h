@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/22 15:14:25 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/08/01 11:37:02 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ typedef struct s_size
 	int	x_max;
 	int	y_max;
 	int	dots;
+	int	width;
+	int	height;
 }				t_size;
 
 typedef struct s_data
 {
 	t_map			*map;
 	t_map			*default_map;
-	t_map			*dots;
 	t_size			size;
 	mlx_t			*window;
 	mlx_image_t		*img_map;
@@ -113,12 +114,12 @@ void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data data);
 
 // parsing
 
-void	init_data(t_data *data);
+t_data	*init_data(void);
 void	fill_map(char **argv, t_data *data);
 void	add_to_map(t_map *dot, t_map **map, t_size size);
 void	fill_dot(t_map	*dot, char *z, t_size size, int i);
-void	count_size(char *file, t_size *size);
-int		count_elements(char **split);
+void	count_size(char *file, t_data *data);
+int		count_elements(char **split, t_data *data);
 
 // rotate
 
@@ -144,6 +145,7 @@ void	delete_img(t_data *data);
 // test
 
 void	cpy_map(t_data *data);
+void	free_all(t_data *data);
 
 // error msg
 
@@ -154,5 +156,6 @@ void	cpy_map(t_data *data);
 # define ERROR_4 "Allocation failed!\n"
 # define ERROR_5 "File ends not with .fdf\n"
 # define ERROR_6 "Conversion from hexa to int failed\n"
+# define ERROR_7 "Wrong Value inside map\n"
 
 #endif

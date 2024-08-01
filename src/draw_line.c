@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/17 09:37:31 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/08/01 10:42:37 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	draw_loop(t_data data)
 	int	i;
 
 	i = 0;
-	while (i < data.size.dots)
+	while (i < data.size->dots)
 	{
-		draw_dot(&data.dots[i], data);
+		draw_dot(&data.map[i], data);
 		i++;
 	}
 }
@@ -111,13 +111,9 @@ void	reset_check(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->size.dots)
+	while (i < data->size->dots)
 	{
-		data->dots[i] = data->default_map[i];
-		// data->dots[i].draw_up = false;
-		// data->dots[i].draw_down = false;
-		// data->dots[i].draw_left = false;
-		// data->dots[i].draw_right = false;
+		data->map[i] = data->default_map[i];
 		i++;
 	}
 }
