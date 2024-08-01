@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/22 15:18:41 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/08/01 10:43:49 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	key(mlx_key_data_t code, void *param)
 		mlx_delete_image(data->window, data->img_map);
 		data->img_map = mlx_new_image(data->window, 1300, 900);
 		add_zoom(data);
-		for (int i = 0; i < data->size.dots; i++)
+		for (int i = 0; i < data->size->dots; i++)
 		{
-			rotate_z(&data->dots[i], data->angle_z, *data);
-			rotate_x(&data->dots[i], data->angle_y, *data);
+			rotate_z(&data->map[i], data->angle_z, *data);
+			rotate_x(&data->map[i], data->angle_y, *data);
 		}
 		draw_loop(*data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
@@ -73,10 +73,10 @@ void	key(mlx_key_data_t code, void *param)
 		mlx_delete_image(data->window, data->img_map);
 		data->img_map = mlx_new_image(data->window, 1300, 900);
 		add_zoom(data);
-		for (int i = 0; i < data->size.dots; i++)
+		for (int i = 0; i < data->size->dots; i++)
 		{
-			rotate_z(&data->dots[i], data->angle_z, *data);
-			rotate_x(&data->dots[i], data->angle_y, *data);
+			rotate_z(&data->map[i], data->angle_z, *data);
+			rotate_x(&data->map[i], data->angle_y, *data);
 		}
 		draw_loop(*data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
@@ -89,10 +89,10 @@ void	key(mlx_key_data_t code, void *param)
 		mlx_delete_image(data->window, data->img_map);
 		data->img_map = mlx_new_image(data->window, 1300, 900);
 		add_zoom(data);
-		for (int i = 0; i < data->size.dots; i++)
+		for (int i = 0; i < data->size->dots; i++)
 		{
-			rotate_z(&data->dots[i], data->angle_z, *data);
-			rotate_x(&data->dots[i], data->angle_y, *data);
+			rotate_z(&data->map[i], data->angle_z, *data);
+			rotate_x(&data->map[i], data->angle_y, *data);
 		}
 		draw_loop(*data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
@@ -105,10 +105,10 @@ void	key(mlx_key_data_t code, void *param)
 		mlx_delete_image(data->window, data->img_map);
 		data->img_map = mlx_new_image(data->window, 1300, 900);
 		add_zoom(data);
-		for (int i = 0; i < data->size.dots; i++)
+		for (int i = 0; i < data->size->dots; i++)
 		{
-			rotate_z(&data->dots[i], data->angle_z, *data);
-			rotate_x(&data->dots[i], data->angle_y, *data);
+			rotate_z(&data->map[i], data->angle_z, *data);
+			rotate_x(&data->map[i], data->angle_y, *data);
 		}
 		draw_loop(*data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
@@ -121,10 +121,10 @@ void	key(mlx_key_data_t code, void *param)
 		mlx_delete_image(data->window, data->img_map);
 		data->img_map = mlx_new_image(data->window, 1300, 900);
 		add_zoom(data);
-		for (int i = 0; i < data->size.dots; i++)
+		for (int i = 0; i < data->size->dots; i++)
 		{
-			rotate_z(&data->dots[i], data->angle_z, *data);
-			rotate_x(&data->dots[i], data->angle_y, *data);
+			rotate_z(&data->map[i], data->angle_z, *data);
+			rotate_x(&data->map[i], data->angle_y, *data);
 		}
 		draw_loop(*data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
@@ -179,17 +179,17 @@ void	cursor(t_data *data)
 		{
 			printf("left button pressed\n");
 			printf("dx = %i\n", (x / data->dpi) - data->mouse_x);
-			printf("dy = %i\n", (y / data->dpi)  - data->mouse_y);
+			printf("dy = %i\n", (y / data->dpi) - data->mouse_y);
 			data->angle_z -= (x / data->dpi) - data->mouse_x;
 			data->angle_y -= (y / data->dpi) - data->mouse_y;
 			reset_check(data);
 			mlx_delete_image(data->window, data->img_map);
 			data->img_map = mlx_new_image(data->window, 1300, 900);
 			add_zoom(data);
-			for (int i = 0; i < data->size.dots; i++)
+			for (int i = 0; i < data->size->dots; i++)
 			{
-				rotate_z(&data->dots[i], data->angle_z, *data);
-				rotate_x(&data->dots[i], data->angle_y, *data);
+				rotate_z(&data->map[i], data->angle_z, *data);
+				rotate_x(&data->map[i], data->angle_y, *data);
 			}
 			draw_loop(*data);
 			mlx_image_to_window(data->window, data->img_map, 300, 0);

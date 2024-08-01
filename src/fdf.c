@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:07:29 by lbohm             #+#    #+#             */
-/*   Updated: 2024/07/22 15:16:48 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/08/01 11:13:26 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,45 +14,43 @@
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
-	char	*str;
+	t_data	*data;
 
-	init_data(&data);
-	parsing(argc, argv, &data);
-	cpy_map(&data);
-	data.window = mlx_init(1600, 900, "fdf", true);
-	data.img_map = mlx_new_image(data.window, 1300, 900);
-	data.img_menu = mlx_new_image(data.window, 300, 900);
-	memset(data.img_menu->pixels, 128, data.img_menu->width * data.img_menu->height * sizeof(int));
-	mlx_image_to_window(data.window, data.img_map, 300, 0);
-	mlx_image_to_window(data.window, data.img_menu, 0, 0);
-	draw_menu(&data);
-	add_zoom(&data);
-	rotate(&data);
-	draw_loop(data);
-	mlx_loop_hook(data.window, controll, &data);
-	mlx_loop(data.window);
-	mlx_terminate(data.window);
+	data = init_data();
+	parsing(argc, argv, data);
+	data->window = mlx_init(data->size->width, data->size->height, "fdf", true);
+	data->img_map = mlx_new_image(data->window, 1300, 900);
+	data->img_menu = mlx_new_image(data->window, 300, 900);
+	memset(data->img_menu->pixels, 128, data->img_menu->width \
+	* data->img_menu->height * sizeof(int));
+	mlx_image_to_window(data->window, data->img_map, 300, 0);
+	mlx_image_to_window(data->window, data->img_menu, 0, 0);
+	draw_menu(data);
+	add_zoom(data);
+	rotate(data);
+	draw_loop(*data);
+	mlx_loop_hook(data->window, controll, &data);
+	mlx_loop(data->window);
+	mlx_terminate(data->window);
+	free_all(data);
 	return (0);
 }
 
-void	parsing(int argc, char **argv, t_data *data)
-{
-	if (argc == 2)
-	{
-		printf("here\n");
-		if (!ft_strnstr(argv[1], ".fdf", ft_strlen(argv[1])))
-			error(ERROR_5, NULL);
-		fill_map(argv, data);
-	}
-	else
-		error(ERROR_0, NULL);
-}
+// void	parsing(int argc, char **argv, t_data *data)
+// {
+// 	if (argc == 2)
+// 	{
+// 		if (!ft_strnstr(argv[1], ".fdf", ft_strlen(argv[1])))
+// 			error(ERROR_5, data);
+// 		fill_map(argv, data);
+// 	}
+// 	else
+// 		error(ERROR_0, data);
+// }
 
 void	error(char *msg, t_data *data)
 {
-	if (data)
-		free(data);
+	free_all(data);
 	ft_putstr_fd(msg, 2);
 	exit (1);
 }
