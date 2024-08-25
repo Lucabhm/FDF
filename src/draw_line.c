@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 21:31:04 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:53:04 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,19 @@ void	drawDot(t_map *dot, t_data *data)
 
 void	drawPixel(int x, int y, t_pos info, t_data *data)
 {
-	t_color	c1;
-	t_color	c2;
 	int		r;
 	int		g;
 	int		b;
+	float	fraction;
 
 	if (x > 0 && x < 1300 && y > 0 && y < 900)
 	{
-		c1.red = htoi(ft_substr(info.color1, 0, 2));
-		c1.green = htoi(ft_substr(info.color1, 2, 2));
-		c1.blue = htoi(ft_substr(info.color1, 4, 2));
-		c2.red = htoi(ft_substr(info.color2, 0, 2));
-		c2.green = htoi(ft_substr(info.color2, 2, 2));
-		c2.blue = htoi(ft_substr(info.color2, 4, 2));
-		r = c1.red + (c2.red - c1.red) * info.fraction;
-		g = c1.green + (c2.green - c1.green) * info.fraction;
-		b = c1.blue + (c2.blue - c1.blue) * info.fraction;
+		fraction = ((float)x - (float)info.startx) / (float)info.dx;
+		r = info.c1.red + (info.c2.red - info.c1.red) * fraction;
+		g = info.c1.green + (info.c2.green - info.c1.green) * fraction;
+		b = info.c1.blue + (info.c2.blue - info.c1.blue) * fraction;
 		mlx_put_pixel(data->img_map, x, y, getColor(r, g, b, 255));
+		// mlx_put_pixel(data->img_map, x, y, getColor(255, 255, 0, 255));
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:24:13 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 21:30:48 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/22 19:54:04 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	drawLine(t_map dot1, t_map dot2, t_data *data)
 	t_pos	info;
 
 	info.startx = dot1.x;
-	info .starty = dot1.y;
+	info.starty = dot1.y;
 	info.dx = dot2.x - dot1.x;
 	info.dy = dot2.y - dot1.y;
-	info.color1 = dot1.color;
-	info.color2 = dot2.color;
+	info.c1 = dot1.color;
+	info.c2 = dot2.color;
 	if (abs(info.dy) < abs(info.dx))
 		slopeS(dot1, dot2, info, data);
 	else
@@ -35,7 +35,6 @@ void	slopeS(t_map dot1, t_map dot2, t_pos info, t_data *data)
 	wp = 2 * abs(info.dy) - abs(info.dx);
 	while (dot1.x != dot2.x)
 	{
-		info.fraction = ((float)dot1.x - (float)info.startx) / (float)info.dx;
 		drawPixel(dot1.x, dot1.y, info, data);
 		if (info.dx > 0)
 			dot1.x++;
@@ -62,7 +61,6 @@ void	slopeB(t_map dot1, t_map dot2, t_pos info, t_data *data)
 	wp = 2 * abs(info.dx) - abs(info.dy);
 	while (dot1.y != dot2.y)
 	{
-		info.fraction = ((float)dot1.y - (float)info.starty) / (float)info.dy;
 		drawPixel(dot1.x, dot1.y, info, data);
 		if (info.dy > 0)
 			dot1.y++;

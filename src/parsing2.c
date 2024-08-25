@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 21:35:56 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:46:14 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,17 @@ void	fillDot(t_map	*dot, char *z, t_size size, int i)
 	dot->y = y;
 	dot->z = ft_atoi(z);
 	if (dot->z == 0)
-		dot->color = "F18F08";
+	{
+		dot->color.red = htoi(ft_substr("08A2BD", 0, 2));
+		dot->color.green = htoi(ft_substr("08A2BD", 2, 2));
+		dot->color.blue = htoi(ft_substr("08A2BD", 4, 2));
+	}
 	else
-		dot->color = "00FFFF";
+	{
+		dot->color.red = htoi(ft_substr("F08811", 0, 2));
+		dot->color.green = htoi(ft_substr("F08811", 2, 2));
+		dot->color.blue = htoi(ft_substr("F08811", 4, 2));
+	}
 	dot->draw_up = false;
 	dot->draw_down = false;
 	dot->draw_left = false;

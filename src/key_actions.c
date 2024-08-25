@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 20:57:38 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/25 21:38:45 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	key(mlx_key_data_t code, void *param)
 {
 	t_data	*data;
 	char	*str;
+	static int	check = 0;
 
 	data = param;
 	if (code.key == MLX_KEY_ESCAPE && code.action == 1)
@@ -74,6 +75,34 @@ void	key(mlx_key_data_t code, void *param)
 		data->angle_z = 45;
 		data->angle_y = 45;
 		drawMapChanged(data);
+	}
+	else if (code.key == MLX_KEY_R && code.action == 1)
+	{
+		data->angle_z = 45;
+		data->angle_y = 45;
+		data->angle_x = 0;
+		data->zoom = 31;
+		data->dpi = 40;
+		mlx_delete_image(data->window, data->menu[9]);
+		str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->dpi));
+		data->menu[9] = mlx_put_string(data->window, str, 0, 180);
+		free(str);
+		drawMapChanged(data);
+	}
+	else if (code.key == MLX_KEY_P && code.action == 1)
+	{
+		resetCheck(data);
+		if (!check)
+		{
+			initOrtho(data);
+			check = 1;
+		}
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		addZoom(data);
+		rotateOrtho(data);
+		drawLoop(data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
 	}
 }
 

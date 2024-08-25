@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 21:34:38 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/23 17:59:25 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,29 @@
 
 // struct
 
+typedef struct s_color
+{
+	int	red;
+	int	green;
+	int	blue;
+}				t_color;
+
+typedef struct s_ortho
+{
+	int	l;
+	int	r;
+	int	b;
+	int	t;
+	int	n;
+	int	f;
+}				t_ortho;
+
 typedef struct s_map
 {
 	int				x;
 	int				y;
 	int				z;
-	char			*color;
+	t_color			color;
 	struct s_map	*up;
 	struct s_map	*down;
 	struct s_map	*left;
@@ -65,6 +82,7 @@ typedef struct s_data
 	int				angle_x;
 	int				dpi;
 	mlx_image_t		*menu[10];
+	t_ortho			ortho;
 }				t_data;
 
 typedef struct s_pos
@@ -73,18 +91,9 @@ typedef struct s_pos
 	int		dy;
 	int		startx;
 	int		starty;
-	char	*color1;
-	char	*color2;
-	float	fraction;
+	t_color	c1;
+	t_color	c2;
 }				t_pos;
-
-typedef struct s_color
-{
-	int	red;
-	int	green;
-	int	blue;
-	int	color;
-}				t_color;
 
 // fdf
 
@@ -123,11 +132,10 @@ void	addToMap(t_map *dot, t_map **map, t_size size);
 
 // rotate
 
-void	addZoom(t_data *data);
 void	rotate(t_data *data);
-void	rotateX(t_map *dot, t_data data);
-void	rotateY(t_map *dot, t_data data);
-void	rotateZ(t_map *dot, t_data data);
+void	rotateX(t_map *dot, t_data *data);
+void	rotateY(t_map *dot, t_data *data);
+void	rotateZ(t_map *dot, t_data *data);
 
 
 // key_actions
@@ -150,6 +158,12 @@ void	freeAll(t_data *data);
 
 void	drawMap(t_data *data);
 void	drawMapChanged(t_data *data);
+void	addZoom(t_data *data);
+
+// rotateOrtho
+
+void	rotateOrtho(t_data *data);
+void	initOrtho(t_data *data);
 
 // error msg
 

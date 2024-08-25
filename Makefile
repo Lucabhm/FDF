@@ -11,7 +11,8 @@ SRCS = fdf.c \
 		key_actions.c \
 		test.c \
 		menu.c \
-		drawMap.c
+		drawMap.c \
+		rotateOrtho.c
 OBJS = $(SRCS:.c=.o)
 OBJDIR = objs/
 OBJS_PATH = $(addprefix $(OBJDIR), $(OBJS))
