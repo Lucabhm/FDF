@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/23 17:59:25 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:59:09 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void	freeAll(t_data *data);
 void	drawMap(t_data *data);
 void	drawMapChanged(t_data *data);
 void	addZoom(t_data *data);
+void	addZoomTest(t_data *data);
 
 // rotateOrtho
 

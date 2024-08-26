@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:04:30 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/23 16:07:40 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:32:33 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	drawMenu(t_data *data)
 	int		i;
 
 	i = 0;
-	data->menu[0] = mlx_put_string(data->window, "Controls", 0, 20);
-	data->menu[1] = mlx_put_string(data->window, "Mous left: z,x axis", 0, 40);
-	data->menu[2] = mlx_put_string(data->window, "Mous wheel: zoom", 0, 60);
+	data->menu[0] = mlx_put_string(data->window, "Controls", 0, 0);
+	data->menu[1] = mlx_put_string(data->window, "Mous left: z,x axis", 0, 20);
+	data->menu[2] = mlx_put_string(data->window, "Mous wheel: zoom", 0, 40);
 	data->menu[3] = mlx_put_string(data->window, \
 	"Mouse sensitivity: +,-", 0, 60);
 	data->menu[4] = mlx_put_string(data->window, "Reset: R", 0, 80);

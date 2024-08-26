@@ -23,9 +23,9 @@ MLX = lib/mlx
 INLIBFT = -L $(LIBFT) -lft
 INPRINF = -L $(PRINTF) -lftprintf
 INGETNEXT = -L $(GET_NEXT) -l_get_next_line
-INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
-# /usr/local/lib/
+INMLX = -L $(MLX)/build -lmlx42 -ldl -L /usr/local/lib/ -lglfw -pthread -lm
 
+# /opt/homebrew/Cellar/glfw/3.3.8/lib/
 $(NAME):		$(OBJS_PATH)
 				@cd $(LIBFT) && $(MAKE) all
 				@cd $(LIBFT) && $(MAKE) bonus

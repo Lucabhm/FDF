@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/25 21:38:45 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:03:28 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void	key(mlx_key_data_t code, void *param)
 		}
 		mlx_delete_image(data->window, data->img_map);
 		data->img_map = mlx_new_image(data->window, 1300, 900);
-		addZoom(data);
+		data->zoom = 200;
+		addZoomTest(data);
 		rotateOrtho(data);
 		drawLoop(data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/22 19:53:04 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:30:52 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,14 @@ void	drawPixel(int x, int y, t_pos info, t_data *data)
 
 	if (x > 0 && x < 1300 && y > 0 && y < 900)
 	{
-		fraction = ((float)x - (float)info.startx) / (float)info.dx;
+		if (info.dx)
+			fraction = ((float)x - (float)info.startx) / (float)info.dx;
+		else
+			fraction = (float)x - (float)info.startx;
 		r = info.c1.red + (info.c2.red - info.c1.red) * fraction;
 		g = info.c1.green + (info.c2.green - info.c1.green) * fraction;
 		b = info.c1.blue + (info.c2.blue - info.c1.blue) * fraction;
 		mlx_put_pixel(data->img_map, x, y, getColor(r, g, b, 255));
-		// mlx_put_pixel(data->img_map, x, y, getColor(255, 255, 0, 255));
 	}
 }
 

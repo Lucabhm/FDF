@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawMap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 19:57:49 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/08/23 17:22:59 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:15:37 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,22 @@ void	addZoom(t_data *data)
 		data->map[i].z *= data->zoom;
 		data->map[i].x += (650 - (data->size.x_max / 2 * data->zoom));
 		data->map[i].y += (450 - (data->size.y_max / 2 * data->zoom));
+		i++;
+	}
+}
+
+void	addZoomTest(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->size.dots)
+	{
+		data->map[i].x = (data->map[i].x - 1) * data->zoom;
+		data->map[i].y = (data->map[i].y - 1) * data->zoom;
+		data->map[i].z *= data->zoom;
+		data->map[i].x += (650 - (data->size.x_max / 2 * data->zoom));
+		data->map[i].y += (450 - (data->size.y_max / 2));
 		i++;
 	}
 }

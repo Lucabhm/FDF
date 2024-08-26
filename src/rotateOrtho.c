@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotateOrtho.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 17:24:49 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/08/23 19:42:54 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:07:28 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	initOrtho(t_data *data)
 			data->ortho.f = data->map[i].z;
 		i++;
 	}
-	printf("l = %i r = %i b = %i t = %i n = %i f = %i\n", data->ortho.l, data->ortho.r, data->ortho.b, data->ortho.t, data->ortho.n, data->ortho.f);
+	// printf("l = %i r = %i b = %i t = %i n = %i f = %i\n", data->ortho.l, data->ortho.r, data->ortho.b, data->ortho.t, data->ortho.n, data->ortho.f);
 }
 
 void	rotateOrtho(t_data *data)
@@ -56,7 +56,7 @@ void	rotateOrtho(t_data *data)
 		data->map[i].x = (rl * data->map[i].x) - rl2;
 		data->map[i].y = (tb * data->map[i].y) - tb2;
 		data->map[i].z = -(fn * data->map[i].z) - fn2;
-		printf("x = %i y = %i z = %i\n", data->map[i].x, data->map[i].y, data->map[i].z);
+		// printf("x = %i y = %i z = %i\n", data->map[i].x, data->map[i].y, data->map[i].z);
 		i++;
 	}
 }
