@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/26 18:03:28 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/08/26 22:33:00 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,64 @@ void	key(mlx_key_data_t code, void *param)
 		}
 		mlx_delete_image(data->window, data->img_map);
 		data->img_map = mlx_new_image(data->window, 1300, 900);
-		data->zoom = 200;
-		addZoomTest(data);
+		addZoom(data);
+		rotateOrtho(data);
+		drawLoop(data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (code.key == MLX_KEY_T && code.action == 1)
+	{
+		resetCheck(data);
+		if (!check)
+		{
+			initOrtho(data);
+			check = 1;
+		}
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		data->angle_x = 0;
+		data->angle_y = 0;
+		addZoom(data);
+		rotateOrtho(data);
+		drawLoop(data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (code.key == MLX_KEY_F && code.action == 1)
+	{
+		resetCheck(data);
+		if (!check)
+		{
+			initOrtho(data);
+			check = 1;
+		}
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		addZoom(data);
+		data->angle_y = 90;
+		for (int i = 0; i < data->size.dots; i++)
+			rotateX(&data->map[i], data);
+		rotateOrtho(data);
+		drawLoop(data);
+		mlx_image_to_window(data->window, data->img_map, 300, 0);
+	}
+	else if (code.key == MLX_KEY_S && code.action == 1)
+	{
+		resetCheck(data);
+		if (!check)
+		{
+			initOrtho(data);
+			check = 1;
+		}
+		mlx_delete_image(data->window, data->img_map);
+		data->img_map = mlx_new_image(data->window, 1300, 900);
+		addZoom(data);
+		data->angle_x = 90;
+		data->angle_y = 90;
+		for (int i = 0; i < data->size.dots; i++)
+		{
+			rotateX(&data->map[i], data);
+			rotateY(&data->map[i], data);
+		}
 		rotateOrtho(data);
 		drawLoop(data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
