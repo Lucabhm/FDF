@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/26 22:33:00 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/08/27 21:32:00 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,14 @@ void	key(mlx_key_data_t code, void *param)
 		mlx_delete_image(data->window, data->img_map);
 		data->img_map = mlx_new_image(data->window, 1300, 900);
 		addZoom(data);
+		data->angle_z = 45;
+		data->angle_x = 30;
+		for (int i = 0; i < data->size.dots; i++)
+		{
+			rotateX(&data->map[i], data);
+			rotateY(&data->map[i], data);
+			rotateZ(&data->map[i], data);
+		}
 		rotateOrtho(data);
 		drawLoop(data);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
