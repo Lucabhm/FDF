@@ -1,6 +1,6 @@
 NAME = fdf
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 VPATH = src/
 SRCS = fdf.c \
 		draw_line.c \
@@ -26,7 +26,7 @@ INGETNEXT = -L $(GET_NEXT) -l_get_next_line
 INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
 # /usr/local/lib/
 
-$(NAME):		$(OBJS_PATH)
+$(NAME):		$(OBJS_PATH) submodules
 				@cd $(LIBFT) && $(MAKE) all
 				@cd $(LIBFT) && $(MAKE) bonus
 				@cd $(PRINTF) && $(MAKE) all
@@ -54,5 +54,8 @@ fclean:			clean
 				@cd $(GET_NEXT) && $(MAKE) fclean
 
 re: fclean all
+
+submodules:
+				git submodule update --init --recursive
 
 .PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:11:12 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 21:38:01 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/03 21:19:59 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	checkValue(char *value, t_data *data)
 	len = 0;
 	if (ft_strnstr(value, ",", ft_strlen(value)))
 		len = ft_strlen(ft_strnstr(value, ",", ft_strlen(value)));
-	while (i < ft_strlen(value) - len && value[i] != '\n')
+	while (i < (int)ft_strlen(value) - len && value[i] != '\n')
 	{
 		if (!ft_isdigit(value[i]) && value[0] != '-' && i == 0)
 		{

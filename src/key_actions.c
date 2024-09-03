@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/27 21:32:00 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/03 21:24:22 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	controll(void *param)
 	mlx_scroll_hook(data->window, scroll, data);
 	cursor(data);
 	mlx_key_hook(data->window, key, data);
+	drawMapChanged(data);
 }
 
 void	key(mlx_key_data_t code, void *param)
@@ -51,30 +52,17 @@ void	key(mlx_key_data_t code, void *param)
 		}
 	}
 	else if (code.key == MLX_KEY_RIGHT && (code.action == 1 || code.action == 2))
-	{
 		data->angle_z -= 2;
-		drawMapChanged(data);
-	}
 	else if (code.key == MLX_KEY_LEFT && (code.action == 1 || code.action == 2))
-	{
 		data->angle_z += 2;
-		drawMapChanged(data);
-	}
 	else if (code.key == MLX_KEY_UP && (code.action == 1 || code.action == 2))
-	{
 		data->angle_y += 2;
-		drawMapChanged(data);
-	}
 	else if (code.key == MLX_KEY_DOWN && (code.action == 1 || code.action == 2))
-	{
 		data->angle_y -= 2;
-		drawMapChanged(data);
-	}
 	else if (code.key == MLX_KEY_I && code.action == 1)
 	{
 		data->angle_z = 45;
 		data->angle_y = 45;
-		drawMapChanged(data);
 	}
 	else if (code.key == MLX_KEY_R && code.action == 1)
 	{
@@ -87,7 +75,6 @@ void	key(mlx_key_data_t code, void *param)
 		str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->dpi));
 		data->menu[9] = mlx_put_string(data->window, str, 0, 180);
 		free(str);
-		drawMapChanged(data);
 	}
 	else if (code.key == MLX_KEY_P && code.action == 1)
 	{
@@ -177,16 +164,12 @@ void	scroll(double xdelta, double ydelta, void *param)
 
 	data = param;
 	xdelta = 0;
-	if (ydelta > 0)
-	{
+	if (ydelta > 0 && xdelta == 0)
 		data->zoom++;
-		drawMapChanged(data);
-	}
 	else if (ydelta < 0)
 	{
 		if (data->zoom - 1 > 0)
 			data->zoom--;
-		drawMapChanged(data);
 	}
 }
 
@@ -209,7 +192,6 @@ void	cursor(t_data *data)
 		{
 			data->angle_z -= (nowX / data->dpi) - mouseX;
 			data->angle_y -= (nowY / data->dpi) - mouseY;
-			drawMapChanged(data);
 		}
 		else
 		{

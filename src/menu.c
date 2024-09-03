@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:04:30 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/26 17:32:33 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/03 21:23:02 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	drawMenu(t_data *data)
 {
 	char	*str;
-	int		i;
 
-	i = 0;
 	data->menu[0] = mlx_put_string(data->window, "Controls", 0, 0);
 	data->menu[1] = mlx_put_string(data->window, "Mous left: z,x axis", 0, 20);
 	data->menu[2] = mlx_put_string(data->window, "Mous wheel: zoom", 0, 40);
