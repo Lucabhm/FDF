@@ -26,15 +26,19 @@ INGETNEXT = -L $(GET_NEXT) -l_get_next_line
 INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
 # /usr/local/lib/
 
-$(NAME):		$(OBJS_PATH) submodules
+
+all:			$(NAME)
+
+submodules:
+				git submodule update --init --recursive
+
+$(NAME):		submodules $(OBJS_PATH)
 				@cd $(LIBFT) && $(MAKE) all
 				@cd $(LIBFT) && $(MAKE) bonus
 				@cd $(PRINTF) && $(MAKE) all
 				@cd $(GET_NEXT) && $(MAKE) all
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME) -fsanitize=address
-
-all:			$(NAME)
+				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
 
 $(OBJDIR)%.o: %.c
 				@mkdir -p $(dir $@)
@@ -54,8 +58,5 @@ fclean:			clean
 				@cd $(GET_NEXT) && $(MAKE) fclean
 
 re: fclean all
-
-submodules:
-				git submodule update --init --recursive
 
 .PHONY: all clean fclean re
