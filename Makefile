@@ -1,6 +1,6 @@
 NAME = fdf
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+# CFLAGS = -Wall -Wextra -Werror
 VPATH = src/
 SRCS = fdf.c \
 		draw_line.c \
@@ -23,9 +23,9 @@ MLX = lib/mlx
 INLIBFT = -L $(LIBFT) -lft
 INPRINF = -L $(PRINTF) -lftprintf
 INGETNEXT = -L $(GET_NEXT) -l_get_next_line
-INMLX = -L $(MLX)/build -lmlx42 -ldl -L /usr/local/lib/ -lglfw -pthread -lm
+INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
+# /usr/local/lib/
 
-# /opt/homebrew/Cellar/glfw/3.3.8/lib/
 
 all:			$(NAME)
 

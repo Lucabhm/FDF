@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/04 17:54:19 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/04 22:18:16 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_data	*init_data(void)
 	data->angle_x = 0;
 	data->dpi = 50;
 	data->moved = false;
-	data->translate = false;
+	data->projection = false;
 	return (data);
 }
 

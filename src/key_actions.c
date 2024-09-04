@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/04 16:58:49 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/04 22:17:26 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,19 @@ void	key(mlx_key_data_t code, void *param)
 	else if (code.key == MLX_KEY_I && code.action == 1)
 	{
 		data->angle_z = 45;
-		data->angle_y = 45;
-		data->translate = false;
+		data->angle_y = 35;
+		data->projection = false;
+		change_projection_img(data);
 	}
 	else if (code.key == MLX_KEY_R && code.action == 1)
 	{
 		data->angle_z = 45;
-		data->angle_y = 45;
+		data->angle_y = 35;
 		data->angle_x = 0;
 		data->zoom = 31;
 		data->dpi = 40;
 		change_mouse_img(data);
-		data->translate = false;
+		data->projection = false;
 	}
 	wasdqe(code, data);
 	key_ortho(code, data);
@@ -76,12 +77,10 @@ void	scroll(double xdelta, double ydelta, void *param)
 	xdelta = 0;
 	if (ydelta > 0 && xdelta == 0)
 	{
-		printf("bigger\n");
 		data->zoom++;
 	}
 	else if (ydelta < 0)
 	{
-		printf("smaller\n");
 		if (data->zoom - 1 > 0)
 			data->zoom--;
 	}

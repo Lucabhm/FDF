@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/04 17:47:45 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/04 22:12:51 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ typedef struct s_data
 	mlx_t			*window;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_menu;
-	mlx_image_t		*menu[10];
+	mlx_image_t		*menu[14];
 	int				zoom;
 	int				angle_z;
 	int				angle_y;
 	int				angle_x;
 	int				dpi;
-	bool			translate;
+	bool			projection;
 	bool			moved;
 }				t_data;
 
@@ -143,6 +143,7 @@ void	rotate_y(t_map *dot, t_data *data);
 void	rotate_z(t_map *dot, t_data *data);
 int		max(t_data *data, char coord);
 int		min(t_data *data, char coord);
+void	translate_to_center(t_data *data);
 
 
 // key_actions
@@ -159,6 +160,7 @@ void	wasdqe(mlx_key_data_t code, t_data *data);
 void	draw_menu(t_data *data);
 void	delete_img(t_data *data);
 void	change_mouse_img(t_data *data);
+void	change_projection_img(t_data *data);
 
 // test
 

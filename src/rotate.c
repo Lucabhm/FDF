@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/04 18:07:51 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/04 22:11:17 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,57 +24,46 @@ void	rotate(t_data *data)
 		rotate_y(&data->map[i], data);
 		i++;
 	}
+	translate_to_center(data);
 }
 
 void	rotate_x(t_map *dot, t_data *data)
 {
 	double	rad;
-	double	cosa;
-	double	sina;
 	int		y;
 	int		z;
 
 	rad = data->angle_y * 3.14 / 180.0;
-	cosa = cos(rad);
-	sina = sin(rad);
 	y = dot->y;
 	z = dot->z;
-	dot->y = y * cosa - z * sina;
-	dot->z = y * sina + z * cosa;
+	dot->y = y * cos(rad) - z * sin(rad);
+	dot->z = y * sin(rad) + z * cos(rad);
 }
 
 void	rotate_y(t_map *dot, t_data *data)
 {
 	double	rad;
-	double	cosa;
-	double	sina;
 	int		x;
 	int		z;
 
 	rad = data->angle_x * 3.14 / 180.0;
-	cosa = cos(rad);
-	sina = sin(rad);
 	x = dot->x;
 	z = dot->z;
-	dot->x = x * cosa - z * sina;
-	dot->z = x * sina + z * cosa;
+	dot->x = x * cos(rad) - z * sin(rad);
+	dot->z = x * sin(rad) + z * cos(rad);
 }
 
 void	rotate_z(t_map *dot, t_data *data)
 {
 	double	rad;
-	double	cosa;
-	double	sina;
 	int		x;
 	int		y;
 
 	rad = data->angle_z * 3.14 / 180.0;
-	cosa = cos(rad);
-	sina = sin(rad);
 	x = dot->x;
 	y = dot->y;
-	dot->x = x * cosa - y * sina;
-	dot->y = x * sina + y * cosa;
+	dot->x = x * cos(rad) - y * sin(rad);
+	dot->y = x * sin(rad) + y * cos(rad);
 }
 
 int	max(t_data *data, char coord)
@@ -119,14 +108,36 @@ int	min(t_data *data, char coord)
 		i++;
 		if (coord == 'x')
 		{
-			if (min < data->map[i].x)
+			if (min > data->map[i].x)
 				min = data->map[i].x;
 		}
 		else
 		{
-			if (min < data->map[i].y)
+			if (min > data->map[i].y)
 				min = data->map[i].y;
 		}
 	}
 	return (min);
+}
+
+void	translate_to_center(t_data *data)
+{
+	int	min_x = min(data, 'x');
+	int	max_x = max(data, 'x');
+	int	min_y = min(data, 'y');
+	int	max_y = max(data, 'y');
+
+	int	center_x = (min_x + max_x) / 2;
+	int	center_y = (min_y + max_y) / 2;
+
+	int	translation_x = data->size.center.red - center_x;
+	int	translation_y = data->size.center.green - center_y;
+
+	int	i = 0;
+	while (i < data->size.dots)
+	{
+		data->map[i].x += translation_x;
+		data->map[i].y += translation_y;
+		i++;
+	}
 }

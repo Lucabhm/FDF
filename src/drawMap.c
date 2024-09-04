@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawMap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:04:40 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/04 17:57:17 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/04 22:20:40 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_map_changed(t_data *data)
 	mlx_delete_image(data->window, data->img_map);
 	data->img_map = \
 	mlx_new_image(data->window, data->size.width - 300, data->size.height);
-	if (!data->translate)
+	if (!data->projection)
 		draw_map(data);
 	else
 		draw_map_ortho(data);
@@ -43,8 +43,6 @@ void	add_zoom(t_data *data)
 		data->map[i].x = (data->map[i].x - 1) * data->zoom;
 		data->map[i].y = (data->map[i].y - 1) * data->zoom;
 		data->map[i].z *= data->zoom;
-		// data->map[i].x += ((data->size.width - 300) - (data->size.x_max * data->zoom)) / 2 + 10;
-		// data->map[i].y += (data->size.height - (data->size.y_max * data->zoom)) / 2 + 10;
 		i++;
 	}
 }
