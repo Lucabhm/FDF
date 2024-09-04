@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:04:30 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/03 21:23:02 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:14:16 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	drawMenu(t_data *data)
+void	draw_menu(t_data *data)
 {
 	char	*str;
 
@@ -32,7 +32,7 @@ void	drawMenu(t_data *data)
 	free(str);
 }
 
-void	deleteImg(t_data *data)
+void	delete_img(t_data *data)
 {
 	int	i;
 
@@ -42,4 +42,14 @@ void	deleteImg(t_data *data)
 		mlx_delete_image(data->window, data->menu[i]);
 		i++;
 	}
+}
+
+void	change_mouse_img(t_data *data)
+{
+	char	*str;
+
+	mlx_delete_image(data->window, data->menu[9]);
+	str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->dpi));
+	data->menu[9] = mlx_put_string(data->window, str, 0, 180);
+	free(str);
 }

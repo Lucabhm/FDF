@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:11:12 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/03 21:19:59 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/04 15:34:56 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,23 @@ void	parsing(int argc, char **argv, t_data *data)
 	{
 		if (!ft_strnstr(argv[1], ".fdf", ft_strlen(argv[1])))
 			error(ERROR_5, data);
-		fillMap(argv, data);
-		data->window = mlx_init(data->size.width, data->size.height, "fdf", true);
-		data->img_map = mlx_new_image(data->window, 1300, 900);
-		data->img_menu = mlx_new_image(data->window, 300, 900);
+		fill_map(argv, data);
+		data->window = \
+		mlx_init(data->size.width, data->size.height, "fdf", true);
+		data->img_map = \
+		mlx_new_image(data->window, data->size.width - 300, data->size.height);
+		data->img_menu = mlx_new_image(data->window, 300, data->size.height);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
 		mlx_image_to_window(data->window, data->img_menu, 0, 0);
+		init_ortho(data);
+		data->size.center.red = (data->size.width - 300) / 2;
+		data->size.center.green = data->size.height / 2;
 	}
 	else
 		error(ERROR_0, data);
 }
 
-void	fillMap(char **argv, t_data *data)
+void	fill_map(char **argv, t_data *data)
 {
 	int		i;
 	int		fd;
@@ -38,7 +43,7 @@ void	fillMap(char **argv, t_data *data)
 
 	dots = NULL;
 	i = 0;
-	countSize(argv[1], data);
+	count_size(argv[1], data);
 	data->map = (t_map *)malloc (data->size.dots * sizeof(t_map));
 	data->default_map = (t_map *)malloc (data->size.dots * sizeof(t_map));
 	if (!data->map || !data->default_map)
@@ -51,16 +56,17 @@ void	fillMap(char **argv, t_data *data)
 		split = ft_split(get_next_line(fd), ' ');
 		while (*split)
 		{
-			fillDot(&data->map[i], *split, data->size, i + 1);
-			addToMap(&data->map[i], &dots, data->size);
+			fill_dot(&data->map[i], *split, data->size, i + 1);
+			add_to_map(&data->map[i], &dots, data->size);
 			data->default_map[i] = data->map[i];
 			split++;
 			i++;
 		}
 	}
+	close(fd);
 }
 
-void	countSize(char *file, t_data *data)
+void	count_size(char *file, t_data *data)
 {
 	char	*line;
 	char	**split;
@@ -78,31 +84,31 @@ void	countSize(char *file, t_data *data)
 			break ;
 		split = ft_split(line, ' ');
 		free(line);
-		dots += countElements(split, data);
+		dots += count_elements(split, data);
 		data->size.y_max++;
 		if (data->size.y_max == 1)
 			data->size.x_max = dots;
-		freeDp(split);
+		free_dp(split);
 	}
 	data->size.dots = dots;
 	if (close(fd) == -1)
 		error(ERROR_3, data);
 }
 
-int	countElements(char **split, t_data *data)
+int	count_elements(char **split, t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (split[i])
 	{
-		checkValue(split[i], data);
+		check_value(split[i], data);
 		i++;
 	}
 	return (i);
 }
 
-void	checkValue(char *value, t_data *data)
+void	check_value(char *value, t_data *data)
 {
 	int	len;
 	int	i;
@@ -114,10 +120,7 @@ void	checkValue(char *value, t_data *data)
 	while (i < (int)ft_strlen(value) - len && value[i] != '\n')
 	{
 		if (!ft_isdigit(value[i]) && value[0] != '-' && i == 0)
-		{
-			printf("value = %c\n", value[i]);
 			error(ERROR_7, data);
-		}
 		i++;
 	}
 }

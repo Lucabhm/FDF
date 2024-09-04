@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rotateOrtho.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/23 17:24:49 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/08/26 22:18:01 by lucabohn         ###   ########.fr       */
+/*   Created: 2024/09/04 12:11:54 by lbohm             #+#    #+#             */
+/*   Updated: 2024/09/04 14:37:06 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	initOrtho(t_data *data)
+void	init_ortho(t_data *data)
 {
 	int	i;
 
@@ -33,9 +33,9 @@ void	initOrtho(t_data *data)
 	}
 }
 
-void	rotateOrtho(t_data *data)
+void	rotate_ortho(t_data *data)
 {
-	int	i;
+	int		i;
 	float	rl;
 	float	rl2;
 	float	tb;
@@ -57,4 +57,43 @@ void	rotateOrtho(t_data *data)
 		data->map[i].z = -(fn * data->map[i].z) - fn2;
 		i++;
 	}
+}
+
+void	draw_map_ortho(t_data *data)
+{
+	reset_check(data);
+	mlx_delete_image(data->window, data->img_map);
+	data->img_map = mlx_new_image(data->window, data->size.width - 300, 900);
+	add_zoom(data);
+	rotate(data);
+	rotate_ortho(data);
+	draw_loop(data);
+	mlx_image_to_window(data->window, data->img_map, 300, 0);
+}
+
+void	key_ortho(mlx_key_data_t code, t_data *data)
+{
+	if (code.key == MLX_KEY_P && code.action == 1)
+	{
+		data->angle_z = 45;
+		data->angle_x = 30;
+		data->translate = true;
+	}
+	else if (code.key == MLX_KEY_T && code.action == 1)
+	{
+		data->angle_x = 0;
+		data->angle_y = 0;
+		data->translate = true;
+	}
+	else if (code.key == MLX_KEY_F && code.action == 1)
+	{
+		data->angle_y = 90;
+		data->translate = true;
+	}
+	// else if (code.key == MLX_KEY_S && code.action == 1)
+	// {
+	// 	data->angle_x = 90;
+	// 	data->angle_y = 90;
+	// 	data->translate = true;
+	// }
 }

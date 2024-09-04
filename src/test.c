@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:48:58 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/08/01 20:39:08 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:58:57 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	freeAll(t_data *data)
+void	free_all(t_data *data)
 {
 	if (data)
 	{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/23 17:46:14 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/04 17:54:19 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-t_data	*initData(void)
+t_data	*init_data(void)
 {
 	t_data	*data;
 
@@ -31,13 +31,15 @@ t_data	*initData(void)
 	data->img_menu = NULL;
 	data->zoom = 31;
 	data->angle_z = 45;
-	data->angle_y = 45;
+	data->angle_y = 35;
 	data->angle_x = 0;
-	data->dpi = 40;
+	data->dpi = 50;
+	data->moved = false;
+	data->translate = false;
 	return (data);
 }
 
-void	fillDot(t_map	*dot, char *z, t_size size, int i)
+void	fill_dot(t_map *dot, char *z, t_size size, int i)
 {
 	int	y;
 
@@ -49,19 +51,7 @@ void	fillDot(t_map	*dot, char *z, t_size size, int i)
 	}
 	dot->x = i;
 	dot->y = y;
-	dot->z = ft_atoi(z);
-	if (dot->z == 0)
-	{
-		dot->color.red = htoi(ft_substr("08A2BD", 0, 2));
-		dot->color.green = htoi(ft_substr("08A2BD", 2, 2));
-		dot->color.blue = htoi(ft_substr("08A2BD", 4, 2));
-	}
-	else
-	{
-		dot->color.red = htoi(ft_substr("F08811", 0, 2));
-		dot->color.green = htoi(ft_substr("F08811", 2, 2));
-		dot->color.blue = htoi(ft_substr("F08811", 4, 2));
-	}
+	pars_color(dot, z);
 	dot->draw_up = false;
 	dot->draw_down = false;
 	dot->draw_left = false;
@@ -72,7 +62,7 @@ void	fillDot(t_map	*dot, char *z, t_size size, int i)
 	dot->right = NULL;
 }
 
-void	addToMap(t_map *dot, t_map **map, t_size size)
+void	add_to_map(t_map *dot, t_map **map, t_size size)
 {
 	t_map	*start;
 	t_map	*tmp;
@@ -119,4 +109,37 @@ void	addToMap(t_map *dot, t_map **map, t_size size)
 			}
 		}
 	}
+}
+
+void	pars_color(t_map *dot, char *z)
+{
+	int		len;
+	char	*tmp;
+
+	len = 0;
+	if (ft_strnstr(z, ",", ft_strlen(z)))
+	{
+		len = ft_strlen(ft_strnstr(z, ",", ft_strlen(z)));
+		tmp = ft_substr(z, 0, ft_strlen(z) - len);
+		dot->z = ft_atoi(tmp);
+		free(tmp);
+		tmp = ft_substr(z, ft_strlen(z) - len + 3, ft_strlen(z));
+		pars_color_2(dot, tmp);
+		free(tmp);
+	}
+	if (!len)
+	{
+		dot->z = ft_atoi(z);
+		if (dot->z == 0)
+			pars_color_2(dot, "08A2BD");
+		else
+			pars_color_2(dot, "F08811");
+	}
+}
+
+void	pars_color_2(t_map *dot, char *color)
+{
+	dot->color.red = htoi(ft_substr(color, 0, 2));
+	dot->color.green = htoi(ft_substr(color, 2, 2));
+	dot->color.blue = htoi(ft_substr(color, 4, 2));
 }

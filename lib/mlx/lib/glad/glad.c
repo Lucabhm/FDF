@@ -471,7 +471,7 @@ PFNGLDRAWELEMENTSINSTANCEDPROC glad_glDrawElementsInstanced = NULL;
 PFNGLDRAWELEMENTSINSTANCEDBASEINSTANCEPROC glad_glDrawElementsInstancedBaseInstance = NULL;
 PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXPROC glad_glDrawElementsInstancedBaseVertex = NULL;
 PFNGLDRAWELEMENTSINSTANCEDBASEVERTEXBASEINSTANCEPROC glad_glDrawElementsInstancedBaseVertexBaseInstance = NULL;
-PFNGLDRAWPIXELSPROC glad_glDrawPixels = NULL;
+PFNGLdraw_pixelSPROC glad_gldraw_pixels = NULL;
 PFNGLDRAWRANGEELEMENTSPROC glad_glDrawRangeElements = NULL;
 PFNGLDRAWRANGEELEMENTSBASEVERTEXPROC glad_glDrawRangeElementsBaseVertex = NULL;
 PFNGLDRAWTRANSFORMFEEDBACKPROC glad_glDrawTransformFeedback = NULL;
@@ -1595,7 +1595,7 @@ static void load_GL_VERSION_1_0(GLADloadproc load) {
 	glad_glPixelMapuiv = (PFNGLPIXELMAPUIVPROC)load("glPixelMapuiv");
 	glad_glPixelMapusv = (PFNGLPIXELMAPUSVPROC)load("glPixelMapusv");
 	glad_glCopyPixels = (PFNGLCOPYPIXELSPROC)load("glCopyPixels");
-	glad_glDrawPixels = (PFNGLDRAWPIXELSPROC)load("glDrawPixels");
+	glad_gldraw_pixels = (PFNGLdraw_pixelSPROC)load("gldraw_pixels");
 	glad_glGetClipPlane = (PFNGLGETCLIPPLANEPROC)load("glGetClipPlane");
 	glad_glGetLightfv = (PFNGLGETLIGHTFVPROC)load("glGetLightfv");
 	glad_glGetLightiv = (PFNGLGETLIGHTIVPROC)load("glGetLightiv");

@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/26 17:59:09 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/04 17:47:45 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,12 @@ typedef struct s_map
 
 typedef struct s_size
 {
-	int	x_max;
-	int	y_max;
-	int	dots;
-	int	width;
-	int	height;
+	int		x_max;
+	int		y_max;
+	int		dots;
+	int		width;
+	int		height;
+	t_color	center;
 }				t_size;
 
 typedef struct s_data
@@ -73,69 +74,75 @@ typedef struct s_data
 	t_map			*map;
 	t_map			*default_map;
 	t_size			size;
+	t_ortho			ortho;
 	mlx_t			*window;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_menu;
+	mlx_image_t		*menu[10];
 	int				zoom;
 	int				angle_z;
 	int				angle_y;
 	int				angle_x;
 	int				dpi;
-	mlx_image_t		*menu[10];
-	t_ortho			ortho;
+	bool			translate;
+	bool			moved;
 }				t_data;
 
 typedef struct s_pos
 {
+	t_color	c1;
+	t_color	c2;
 	int		dx;
 	int		dy;
 	int		startx;
 	int		starty;
-	t_color	c1;
-	t_color	c2;
 }				t_pos;
 
 // fdf
 
 int		main(int argc, char **argv);
 void	error(char *msg, t_data *data);
-void	freeDp(char **arr);
+void	free_dp(char **arr);
 
 // draw_line
 
-void	drawLoop(t_data *data);
-void	drawDot(t_map *dot, t_data *data);
-void	drawPixel(int x, int y, t_pos info, t_data *data);
-int32_t	getColor(int32_t r, int32_t g, int32_t b, int32_t a);
+void	draw_loop(t_data *data);
+void	draw_dot(t_map *dot, t_data *data);
+void	draw_pixel(int x, int y, t_pos info, t_data *data);
+int		get_color(int r, int g, int b, int a);
 int		htoi(char	*hexa);
-void	resetCheck(t_data *data);
+void	reset_check(t_data *data);
 
 // line_algo
 
-void	drawLine(t_map dot1, t_map dot2, t_data *data);
-void	slopeS(t_map dot1, t_map dot2, t_pos info, t_data *data);
-void	slopeB(t_map dot1, t_map dot2, t_pos info, t_data *data);
+void	draw_line(t_map dot1, t_map dot2, t_data *data);
+void	slope_s(t_map dot1, t_map dot2, t_pos info, t_data *data);
+void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data *data);
 
 // parsing
 
 void	parsing(int argc, char **argv, t_data *data);
-void	fillMap(char **argv, t_data *data);
-void	countSize(char *file, t_data *data);
-int		countElements(char **split, t_data *data);
-void	checkValue(char *value, t_data *data);
+void	fill_map(char **argv, t_data *data);
+void	count_size(char *file, t_data *data);
+int		count_elements(char **split, t_data *data);
+void	check_value(char *value, t_data *data);
 
 // parsing2
 
-t_data	*initData(void);
-void	fillDot(t_map	*dot, char *z, t_size size, int i);
-void	addToMap(t_map *dot, t_map **map, t_size size);
+t_data	*init_data(void);
+void	fill_dot(t_map	*dot, char *z, t_size size, int i);
+void	add_to_map(t_map *dot, t_map **map, t_size size);
+void	pars_color(t_map *dot, char *z);
+void	pars_color_2(t_map *dot, char *color);
 
 // rotate
 
 void	rotate(t_data *data);
-void	rotateX(t_map *dot, t_data *data);
-void	rotateY(t_map *dot, t_data *data);
-void	rotateZ(t_map *dot, t_data *data);
+void	rotate_x(t_map *dot, t_data *data);
+void	rotate_y(t_map *dot, t_data *data);
+void	rotate_z(t_map *dot, t_data *data);
+int		max(t_data *data, char coord);
+int		min(t_data *data, char coord);
 
 
 // key_actions
@@ -144,27 +151,32 @@ void	controll(void *param);
 void	key(mlx_key_data_t code, void *param);
 void	scroll(double xdelta, double ydelta, void *param);
 void	cursor(t_data *data);
+void	resize(int width, int height, void *param);
+void	wasdqe(mlx_key_data_t code, t_data *data);
 
 // menu
 
-void	drawMenu(t_data *data);
-void	deleteImg(t_data *data);
+void	draw_menu(t_data *data);
+void	delete_img(t_data *data);
+void	change_mouse_img(t_data *data);
 
 // test
 
-void	freeAll(t_data *data);
+void	free_all(t_data *data);
 
-// drawMap
+// draw_map
 
-void	drawMap(t_data *data);
-void	drawMapChanged(t_data *data);
-void	addZoom(t_data *data);
-void	addZoomTest(t_data *data);
+void	draw_map(t_data *data);
+void	draw_map_changed(t_data *data);
+void	add_zoom(t_data *data);
+void	add_zoom_test(t_data *data);
 
-// rotateOrtho
+// rotate_ortho
 
-void	rotateOrtho(t_data *data);
-void	initOrtho(t_data *data);
+void	rotate_ortho(t_data *data);
+void	init_ortho(t_data *data);
+void	draw_map_ortho(t_data *data);
+void	key_ortho(mlx_key_data_t code, t_data *data);
 
 // error msg
 

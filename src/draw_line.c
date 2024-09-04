@@ -3,63 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/27 20:43:03 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:09:09 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fdf.h"
 
-void	drawLoop(t_data *data)
+void	draw_loop(t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->size.dots)
 	{
-		drawDot(&data->map[i], data);
+		draw_dot(&data->map[i], data);
 		i++;
 	}
 }
 
-void	drawDot(t_map *dot, t_data *data)
+void	draw_dot(t_map *dot, t_data *data)
 {
 	if (dot->up && !dot->draw_up && !dot->up->draw_down)
 	{
-		drawLine(*dot, *dot->up, data);
+		draw_line(*dot, *dot->up, data);
 		dot->draw_up = true;
 		dot->up->draw_down = true;
 	}
 	if (dot->down && !dot->draw_down && !dot->down->draw_up)
 	{
-		drawLine(*dot, *dot->down, data);
+		draw_line(*dot, *dot->down, data);
 		dot->draw_down = true;
 		dot->down->draw_up = true;
 	}
 	if (dot->left && !dot->draw_left && !dot->left->draw_right)
 	{
-		drawLine(*dot, *dot->left, data);
+		draw_line(*dot, *dot->left, data);
 		dot->draw_left = true;
 		dot->left->draw_right = true;
 	}
 	if (dot->right && !dot->draw_right && !dot->right->draw_left)
 	{
-		drawLine(*dot, *dot->right, data);
+		draw_line(*dot, *dot->right, data);
 		dot->draw_right = true;
 		dot->right->draw_left = true;
 	}
 }
 
-void	drawPixel(int x, int y, t_pos info, t_data *data)
+void	draw_pixel(int x, int y, t_pos info, t_data *data)
 {
 	int		r;
 	int		g;
 	int		b;
 	float	fraction;
 
-	if (x > 0 && x < 1300 && y > 0 && y < 900)
+	if (x > 0 && x < data->size.width - 300 && y > 0 && y < data->size.height)
 	{
 		if (info.dx)
 			fraction = ((float)x - (float)info.startx) / (float)info.dx;
@@ -68,11 +68,11 @@ void	drawPixel(int x, int y, t_pos info, t_data *data)
 		r = info.c1.red + (info.c2.red - info.c1.red) * fraction;
 		g = info.c1.green + (info.c2.green - info.c1.green) * fraction;
 		b = info.c1.blue + (info.c2.blue - info.c1.blue) * fraction;
-		mlx_put_pixel(data->img_map, x, y, getColor(r, g, b, 255));
+		mlx_put_pixel(data->img_map, x, y, get_color(r, g, b, 255));
 	}
 }
 
-int32_t	getColor(int32_t r, int32_t g, int32_t b, int32_t a)
+int	get_color(int r, int g, int b, int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
 }
@@ -103,7 +103,7 @@ int	htoi(char	*hexa)
 	return (nbr);
 }
 
-void	resetCheck(t_data *data)
+void	reset_check(t_data *data)
 {
 	int	i;
 

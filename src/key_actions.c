@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/03 21:24:22 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:58:49 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,51 +18,40 @@ void	controll(void *param)
 
 	data = param;
 	mlx_scroll_hook(data->window, scroll, data);
+	mlx_resize_hook(data->window, resize, data);
 	cursor(data);
 	mlx_key_hook(data->window, key, data);
-	drawMapChanged(data);
+	if (data->moved)
+		draw_map_changed(data);
 }
 
 void	key(mlx_key_data_t code, void *param)
 {
-	t_data	*data;
-	char	*str;
-	static int	check = 0;
+	t_data		*data;
 
 	data = param;
 	if (code.key == MLX_KEY_ESCAPE && code.action == 1)
 		mlx_close_window(data->window);
-	else if (code.key == MLX_KEY_EQUAL && (code.action == 1 || code.action == 2))
+	else if (code.key == MLX_KEY_EQUAL
+		&& (code.action == 1 || code.action == 2))
 	{
 		data->dpi++;
-		mlx_delete_image(data->window, data->menu[9]);
-		str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->dpi));
-		data->menu[9] = mlx_put_string(data->window, str, 0, 180);
-		free(str);
+		change_mouse_img(data);
 	}
-	else if (code.key == MLX_KEY_MINUS && (code.action == 1 || code.action == 2))
+	else if (code.key == MLX_KEY_MINUS
+		&& (code.action == 1 || code.action == 2))
 	{
 		if (data->dpi > 1)
 		{
 			data->dpi--;
-			mlx_delete_image(data->window, data->menu[9]);
-			str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->dpi));
-			data->menu[9] = mlx_put_string(data->window, str, 0, 180);
-			free(str);
+			change_mouse_img(data);
 		}
 	}
-	else if (code.key == MLX_KEY_RIGHT && (code.action == 1 || code.action == 2))
-		data->angle_z -= 2;
-	else if (code.key == MLX_KEY_LEFT && (code.action == 1 || code.action == 2))
-		data->angle_z += 2;
-	else if (code.key == MLX_KEY_UP && (code.action == 1 || code.action == 2))
-		data->angle_y += 2;
-	else if (code.key == MLX_KEY_DOWN && (code.action == 1 || code.action == 2))
-		data->angle_y -= 2;
 	else if (code.key == MLX_KEY_I && code.action == 1)
 	{
 		data->angle_z = 45;
 		data->angle_y = 45;
+		data->translate = false;
 	}
 	else if (code.key == MLX_KEY_R && code.action == 1)
 	{
@@ -71,91 +60,12 @@ void	key(mlx_key_data_t code, void *param)
 		data->angle_x = 0;
 		data->zoom = 31;
 		data->dpi = 40;
-		mlx_delete_image(data->window, data->menu[9]);
-		str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->dpi));
-		data->menu[9] = mlx_put_string(data->window, str, 0, 180);
-		free(str);
+		change_mouse_img(data);
+		data->translate = false;
 	}
-	else if (code.key == MLX_KEY_P && code.action == 1)
-	{
-		resetCheck(data);
-		if (!check)
-		{
-			initOrtho(data);
-			check = 1;
-		}
-		mlx_delete_image(data->window, data->img_map);
-		data->img_map = mlx_new_image(data->window, 1300, 900);
-		addZoom(data);
-		data->angle_z = 45;
-		data->angle_x = 30;
-		for (int i = 0; i < data->size.dots; i++)
-		{
-			rotateX(&data->map[i], data);
-			rotateY(&data->map[i], data);
-			rotateZ(&data->map[i], data);
-		}
-		rotateOrtho(data);
-		drawLoop(data);
-		mlx_image_to_window(data->window, data->img_map, 300, 0);
-	}
-	else if (code.key == MLX_KEY_T && code.action == 1)
-	{
-		resetCheck(data);
-		if (!check)
-		{
-			initOrtho(data);
-			check = 1;
-		}
-		mlx_delete_image(data->window, data->img_map);
-		data->img_map = mlx_new_image(data->window, 1300, 900);
-		data->angle_x = 0;
-		data->angle_y = 0;
-		addZoom(data);
-		rotateOrtho(data);
-		drawLoop(data);
-		mlx_image_to_window(data->window, data->img_map, 300, 0);
-	}
-	else if (code.key == MLX_KEY_F && code.action == 1)
-	{
-		resetCheck(data);
-		if (!check)
-		{
-			initOrtho(data);
-			check = 1;
-		}
-		mlx_delete_image(data->window, data->img_map);
-		data->img_map = mlx_new_image(data->window, 1300, 900);
-		addZoom(data);
-		data->angle_y = 90;
-		for (int i = 0; i < data->size.dots; i++)
-			rotateX(&data->map[i], data);
-		rotateOrtho(data);
-		drawLoop(data);
-		mlx_image_to_window(data->window, data->img_map, 300, 0);
-	}
-	else if (code.key == MLX_KEY_S && code.action == 1)
-	{
-		resetCheck(data);
-		if (!check)
-		{
-			initOrtho(data);
-			check = 1;
-		}
-		mlx_delete_image(data->window, data->img_map);
-		data->img_map = mlx_new_image(data->window, 1300, 900);
-		addZoom(data);
-		data->angle_x = 90;
-		data->angle_y = 90;
-		for (int i = 0; i < data->size.dots; i++)
-		{
-			rotateX(&data->map[i], data);
-			rotateY(&data->map[i], data);
-		}
-		rotateOrtho(data);
-		drawLoop(data);
-		mlx_image_to_window(data->window, data->img_map, 300, 0);
-	}
+	wasdqe(code, data);
+	key_ortho(code, data);
+	data->moved = true;
 }
 
 void	scroll(double xdelta, double ydelta, void *param)
@@ -165,38 +75,74 @@ void	scroll(double xdelta, double ydelta, void *param)
 	data = param;
 	xdelta = 0;
 	if (ydelta > 0 && xdelta == 0)
+	{
+		printf("bigger\n");
 		data->zoom++;
+	}
 	else if (ydelta < 0)
 	{
+		printf("smaller\n");
 		if (data->zoom - 1 > 0)
 			data->zoom--;
 	}
+	data->moved = true;
 }
 
 void	cursor(t_data *data)
 {
-	int	nowX;
-	int	nowY;
-	static int	mouseX = 0;
-	static int	mouseY = 0;
+	int			nowx;
+	int			nowy;
+	static int	mousex = 0;
+	static int	mousey = 0;
 
-	mlx_get_mouse_pos(data->window, &nowX, &nowY);
-	if (!mouseX && !mouseY)
+	mlx_get_mouse_pos(data->window, &nowx, &nowy);
+	if (!mousex && !mousey)
 	{
-		mouseX = nowX / data->dpi;
-		mouseY = nowY / data->dpi;
+		mousex = nowx / data->dpi;
+		mousey = nowy / data->dpi;
 	}
 	else
 	{
 		if (mlx_is_mouse_down(data->window, MLX_MOUSE_BUTTON_LEFT))
 		{
-			data->angle_z -= (nowX / data->dpi) - mouseX;
-			data->angle_y -= (nowY / data->dpi) - mouseY;
+			data->angle_z -= (nowx / data->dpi) - mousex;
+			data->moved = true;
 		}
 		else
 		{
-			mouseX = 0;
-			mouseY = 0;
+			mousex = 0;
+			mousey = 0;
 		}
 	}
+}
+
+void	resize(int width, int height, void *param)
+{
+	t_data	*data;
+
+	data = param;
+	data->size.width = width;
+	data->size.height = height;
+	data->size.center.red = (data->size.width - 300) / 2;
+	data->size.center.green = data->size.height / 2;
+	data->moved = true;
+}
+
+void	wasdqe(mlx_key_data_t code, t_data *data)
+{
+	if (code.key == MLX_KEY_W && (code.action == 1 || code.action == 2))
+		data->zoom++;
+	else if (code.key == MLX_KEY_S && (code.action == 1 || code.action == 2))
+	{
+		if (data->zoom - 1 > 0)
+			data->zoom--;
+	}
+	else if (code.key == MLX_KEY_A && (code.action == 1 || code.action == 2))
+		data->size.center.red -= 10;
+	else if (code.key == MLX_KEY_D && (code.action == 1 || code.action == 2))
+		data->size.center.red += 10;
+	else if (code.key == MLX_KEY_Q && (code.action == 1 || code.action == 2))
+		data->size.center.green -= 10;
+	else if (code.key == MLX_KEY_E && (code.action == 1 || code.action == 2))
+		data->size.center.green += 10;
 }

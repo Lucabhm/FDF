@@ -2757,9 +2757,9 @@ GLAPI PFNGLPIXELMAPUSVPROC glad_glPixelMapusv;
 typedef void (APIENTRYP PFNGLCOPYPIXELSPROC)(GLint x, GLint y, GLsizei width, GLsizei height, GLenum type);
 GLAPI PFNGLCOPYPIXELSPROC glad_glCopyPixels;
 #define glCopyPixels glad_glCopyPixels
-typedef void (APIENTRYP PFNGLDRAWPIXELSPROC)(GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels);
-GLAPI PFNGLDRAWPIXELSPROC glad_glDrawPixels;
-#define glDrawPixels glad_glDrawPixels
+typedef void (APIENTRYP PFNGLdraw_pixelSPROC)(GLsizei width, GLsizei height, GLenum format, GLenum type, const void *pixels);
+GLAPI PFNGLdraw_pixelSPROC glad_gldraw_pixels;
+#define gldraw_pixels glad_gldraw_pixels
 typedef void (APIENTRYP PFNGLGETCLIPPLANEPROC)(GLenum plane, GLdouble *equation);
 GLAPI PFNGLGETCLIPPLANEPROC glad_glGetClipPlane;
 #define glGetClipPlane glad_glGetClipPlane

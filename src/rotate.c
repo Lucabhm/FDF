@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/23 17:22:51 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:07:51 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	rotate(t_data *data)
 	i = 0;
 	while (i < data->size.dots)
 	{
-		rotateZ(&data->map[i], data);
-		rotateX(&data->map[i], data);
-		rotateY(&data->map[i], data);
+		rotate_z(&data->map[i], data);
+		rotate_x(&data->map[i], data);
+		rotate_y(&data->map[i], data);
 		i++;
 	}
 }
 
-void	rotateX(t_map *dot, t_data *data)
+void	rotate_x(t_map *dot, t_data *data)
 {
 	double	rad;
 	double	cosa;
@@ -37,14 +37,13 @@ void	rotateX(t_map *dot, t_data *data)
 	rad = data->angle_y * 3.14 / 180.0;
 	cosa = cos(rad);
 	sina = sin(rad);
-	y = dot->y - (450 - (data->size.y_max / 2));
+	y = dot->y;
 	z = dot->z;
 	dot->y = y * cosa - z * sina;
 	dot->z = y * sina + z * cosa;
-	dot->y += (450 - (data->size.y_max / 2));
 }
 
-void	rotateY(t_map *dot, t_data *data)
+void	rotate_y(t_map *dot, t_data *data)
 {
 	double	rad;
 	double	cosa;
@@ -55,14 +54,13 @@ void	rotateY(t_map *dot, t_data *data)
 	rad = data->angle_x * 3.14 / 180.0;
 	cosa = cos(rad);
 	sina = sin(rad);
-	x = dot->x - (650 - (data->size.x_max / 2));
+	x = dot->x;
 	z = dot->z;
 	dot->x = x * cosa - z * sina;
 	dot->z = x * sina + z * cosa;
-	dot->x += (650 - (data->size.x_max / 2));
 }
 
-void	rotateZ(t_map *dot, t_data *data)
+void	rotate_z(t_map *dot, t_data *data)
 {
 	double	rad;
 	double	cosa;
@@ -73,10 +71,62 @@ void	rotateZ(t_map *dot, t_data *data)
 	rad = data->angle_z * 3.14 / 180.0;
 	cosa = cos(rad);
 	sina = sin(rad);
-	x = dot->x - (650 - (data->size.x_max / 2));
-	y = dot->y - (450 - (data->size.y_max / 2));
+	x = dot->x;
+	y = dot->y;
 	dot->x = x * cosa - y * sina;
 	dot->y = x * sina + y * cosa;
-	dot->x += (650 - (data->size.x_max / 2));
-	dot->y += (450 - (data->size.y_max / 2));
+}
+
+int	max(t_data *data, char coord)
+{
+	int	i;
+	int	max;
+
+	i = 0;
+	if (coord == 'x')
+		max = data->map[i].x;
+	else
+		max = data->map[i].y;
+	while (i < data->size.dots)
+	{
+		i++;
+		if (coord == 'x')
+		{
+			if (max < data->map[i].x)
+				max = data->map[i].x;
+		}
+		else
+		{
+			if (max < data->map[i].y)
+				max = data->map[i].y;
+		}
+	}
+	return (max);
+}
+
+int	min(t_data *data, char coord)
+{
+	int	i;
+	int	min;
+
+	i = 0;
+	if (coord == 'x')
+		min = data->map[i].x;
+	else
+		min = data->map[i].y;
+	while (i < data->size.dots)
+	{
+		i++;
+		if (coord == 'x')
+		{
+			if (min < data->map[i].x)
+				min = data->map[i].x;
+		}
+		else
+		{
+			if (min < data->map[i].y)
+				min = data->map[i].y;
+		}
+	}
+	return (min);
 }

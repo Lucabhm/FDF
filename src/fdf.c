@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:57:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/08/01 20:51:14 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:06:58 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	data = initData();
+	data = init_data();
 	parsing(argc, argv, data);
-	drawMenu(data);
-	drawMap(data);
+	draw_menu(data);
+	draw_map(data);
 	mlx_loop_hook(data->window, controll, data);
 	mlx_loop(data->window);
 	mlx_terminate(data->window);
-	freeAll(data);
+	free_all(data);
 	return (0);
 }
 
 void	error(char *msg, t_data *data)
 {
-	freeAll(data);
+	free_all(data);
 	ft_putstr_fd(msg, 2);
 	exit (1);
 }
 
-void	freeDp(char **arr)
+void	free_dp(char **arr)
 {
 	int	i;
 
