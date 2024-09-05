@@ -7,9 +7,10 @@ SRCS = fdf.c \
 		parsing.c \
 		parsing2.c \
 		rotate.c \
+		rotate_2.c \
 		line_algo.c \
 		key_actions.c \
-		test.c \
+		key_actions_2.c \
 		menu.c \
 		drawMap.c \
 		rotateOrtho.c
@@ -23,9 +24,9 @@ MLX = lib/mlx
 INLIBFT = -L $(LIBFT) -lft
 INPRINF = -L $(PRINTF) -lftprintf
 INGETNEXT = -L $(GET_NEXT) -l_get_next_line
-INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
-# /usr/local/lib/
+INMLX = -L $(MLX)/build -lmlx42 -ldl -L /usr/local/lib/ -lglfw -pthread -lm
 
+# /opt/homebrew/Cellar/glfw/3.3.8/lib/
 
 all:			$(NAME)
 
@@ -38,7 +39,7 @@ $(NAME):		submodules $(OBJS_PATH)
 				@cd $(PRINTF) && $(MAKE) all
 				@cd $(GET_NEXT) && $(MAKE) all
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
+				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME) -fsanitize=address
 
 $(OBJDIR)%.o: %.c
 				@mkdir -p $(dir $@)

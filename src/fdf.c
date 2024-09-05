@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:57:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/04 18:06:58 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/05 12:53:00 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,16 @@ void	free_dp(char **arr)
 		i++;
 	}
 	free(arr);
+}
+
+void	free_all(t_data *data)
+{
+	if (data)
+	{
+		if (data->default_map)
+			free(data->default_map);
+		if (data->size)
+			free(data->size);
+		free(data);
+	}
 }

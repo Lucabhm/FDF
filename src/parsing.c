@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:11:12 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/04 15:34:56 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/05 12:40:09 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,22 @@ void	parsing(int argc, char **argv, t_data *data)
 		if (!ft_strnstr(argv[1], ".fdf", ft_strlen(argv[1])))
 			error(ERROR_5, data);
 		fill_map(argv, data);
-		data->window = \
-		mlx_init(data->size.width, data->size.height, "fdf", true);
-		data->img_map = \
-		mlx_new_image(data->window, data->size.width - 300, data->size.height);
-		data->img_menu = mlx_new_image(data->window, 300, data->size.height);
+		data->window = mlx_init(
+				data->size->width, data->size->height, "fdf", true);
+		data->img_map = mlx_new_image(
+				data->window, data->size->width - 300, data->size->height);
+		data->img_menu = mlx_new_image(data->window, 300, data->size->height);
 		mlx_image_to_window(data->window, data->img_map, 300, 0);
 		mlx_image_to_window(data->window, data->img_menu, 0, 0);
 		init_ortho(data);
-		data->size.center.red = (data->size.width - 300) / 2;
-		data->size.center.green = data->size.height / 2;
+		data->size->center.x = (data->size->width - 300) / 2;
+		data->size->center.y = data->size->height / 2;
+		if (((data->size->width - 300) / data->size->x_max)
+			< (data->size->height / data->size->y_max))
+			data->size->scale = (data->size->width - 300) / data->size->x_max;
+		else
+			data->size->scale = data->size->height / data->size->y_max;
+		data->size->zoom = data->size->scale;
 	}
 	else
 		error(ERROR_0, data);
@@ -44,14 +50,14 @@ void	fill_map(char **argv, t_data *data)
 	dots = NULL;
 	i = 0;
 	count_size(argv[1], data);
-	data->map = (t_map *)malloc (data->size.dots * sizeof(t_map));
-	data->default_map = (t_map *)malloc (data->size.dots * sizeof(t_map));
+	data->map = (t_map *)malloc (data->size->dots * sizeof(t_map));
+	data->default_map = (t_map *)malloc (data->size->dots * sizeof(t_map));
 	if (!data->map || !data->default_map)
 		error(ERROR_4, data);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		error(ERROR_1, data);
-	while (i < data->size.dots)
+	while (i < data->size->dots)
 	{
 		split = ft_split(get_next_line(fd), ' ');
 		while (*split)
@@ -85,12 +91,12 @@ void	count_size(char *file, t_data *data)
 		split = ft_split(line, ' ');
 		free(line);
 		dots += count_elements(split, data);
-		data->size.y_max++;
-		if (data->size.y_max == 1)
-			data->size.x_max = dots;
+		data->size->y_max++;
+		if (data->size->y_max == 1)
+			data->size->x_max = dots;
 		free_dp(split);
 	}
-	data->size.dots = dots;
+	data->size->dots = dots;
 	if (close(fd) == -1)
 		error(ERROR_3, data);
 }

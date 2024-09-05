@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/04 12:09:09 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/09/05 12:39:30 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	draw_loop(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->size.dots)
+	while (i < data->size->dots)
 	{
 		draw_dot(&data->map[i], data);
 		i++;
@@ -59,21 +59,33 @@ void	draw_pixel(int x, int y, t_pos info, t_data *data)
 	int		b;
 	float	fraction;
 
-	if (x > 0 && x < data->size.width - 300 && y > 0 && y < data->size.height)
+	if (x > 0 && x < data->size->width - 300 && y > 0 && y < data->size->height)
 	{
-		if (info.dx)
+		if (abs(info.dy) < abs(info.dx))
 			fraction = ((float)x - (float)info.startx) / (float)info.dx;
 		else
-			fraction = (float)x - (float)info.startx;
-		r = info.c1.red + (info.c2.red - info.c1.red) * fraction;
-		g = info.c1.green + (info.c2.green - info.c1.green) * fraction;
-		b = info.c1.blue + (info.c2.blue - info.c1.blue) * fraction;
+			fraction = ((float)y - (float)info.starty) / (float)info.dy;
+		r = info.c1.x + (info.c2.x - info.c1.x) * fraction;
+		g = info.c1.y + (info.c2.y - info.c1.y) * fraction;
+		b = info.c1.z + (info.c2.z - info.c1.z) * fraction;
 		mlx_put_pixel(data->img_map, x, y, get_color(r, g, b, 255));
 	}
 }
 
 int	get_color(int r, int g, int b, int a)
 {
+	if (r < 0)
+		r = 0;
+	else if (r > 255)
+		r = 255;
+	if (g < 0)
+		g = 0;
+	else if (g > 255)
+		g = 255;
+	if (b < 0)
+		b = 0;
+	else if (b > 255)
+		b = 255;
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
@@ -101,16 +113,4 @@ int	htoi(char	*hexa)
 	}
 	free(hexa);
 	return (nbr);
-}
-
-void	reset_check(t_data *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->size.dots)
-	{
-		data->map[i] = data->default_map[i];
-		i++;
-	}
 }
