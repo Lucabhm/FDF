@@ -1,6 +1,6 @@
 NAME = fdf
 CC = cc
-# CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 VPATH = src/
 SRCS = fdf.c \
 		draw_line.c \
@@ -33,7 +33,7 @@ all:			$(NAME)
 submodules:
 				git submodule update --init --recursive
 
-$(NAME):		submodules $(OBJS_PATH)
+$(NAME):		logo submodules $(OBJS_PATH)
 				@cd $(LIBFT) && $(MAKE) all
 				@cd $(LIBFT) && $(MAKE) bonus
 				@cd $(PRINTF) && $(MAKE) all
@@ -60,4 +60,15 @@ fclean:			clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+logo:
+	@echo "  ▄████████  ████████▄    ▄████████"
+	@echo "  ███    ███ ███   ▀███   ███    ███"
+	@echo "  ███    █▀  ███    ███   ███    █▀ "
+	@echo " ▄███▄▄▄     ███    ███  ▄███▄▄▄    "
+	@echo "▀▀███▀▀▀     ███    ███ ▀▀███▀▀▀    "
+	@echo "  ███        ███   ▄███   ███       "
+	@echo "  ███        ████████▀    ███       "
+
+.PHONY: all clean fclean re logo
+
+
