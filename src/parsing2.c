@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/05 15:06:32 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 16:29:31 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ t_data	*init_data(void)
 	data = (t_data *)malloc (sizeof(t_data));
 	if (!data)
 		error(ERROR_4, NULL);
-	data->map = NULL;
+	data->window = NULL;
+	data->img_map = NULL;
+	data->img_menu = NULL;
 	data->default_map = NULL;
+	data->map = NULL;
 	data->size = (t_size *)malloc (sizeof(t_size));
 	if (!data->size)
 		error(ERROR_4, data);
@@ -29,9 +32,6 @@ t_data	*init_data(void)
 	data->size->y_max = 0;
 	data->size->width = 1600;
 	data->size->height = 900;
-	data->window = NULL;
-	data->img_map = NULL;
-	data->img_menu = NULL;
 	data->size->angle_z = 45;
 	data->size->angle_y = 35;
 	data->size->angle_x = 0;

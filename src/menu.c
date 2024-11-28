@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:04:30 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/05 15:33:25 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 16:30:52 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	delete_img(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < 9)
+	while (i < 17)
 	{
 		mlx_delete_image(data->window, data->menu[i]);
 		i++;

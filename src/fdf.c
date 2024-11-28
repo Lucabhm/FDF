@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:57:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/05 12:53:00 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 14:27:17 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,18 @@ int	main(int argc, char **argv)
 void	error(char *msg, t_data *data)
 {
 	free_all(data);
+	if (data->window && (data->img_map || data->img_menu))
+	{
+		if (data->img_map)
+			mlx_delete_image(data->window, data->img_map);
+		if (data->img_menu)
+			mlx_delete_image(data->window, data->img_menu);
+	}
+	if (data->window)
+	{
+		mlx_close_window(data->window);
+		mlx_terminate(data->window);
+	}
 	ft_putstr_fd(msg, 2);
 	exit (1);
 }

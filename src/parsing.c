@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:11:12 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/05 12:40:09 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 16:27:09 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	parsing(int argc, char **argv, t_data *data)
 {
 	if (argc == 2)
 	{
-		if (!ft_strnstr(argv[1], ".fdf", ft_strlen(argv[1])))
+		if (ft_strncmp(argv[1] + (ft_strlen(argv[1]) - 4), ".fdf", 4))
 			error(ERROR_5, data);
 		fill_map(argv, data);
 		data->window = mlx_init(

@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/05 15:39:40 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 14:55:28 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_map
 
 typedef struct s_size
 {
+	int		ratio;
 	int		x_max;
 	int		y_max;
 	int		dots;
@@ -172,6 +173,7 @@ void	delete_img(t_data *data);
 void	change_mouse_img(t_data *data);
 void	change_projection_img(t_data *data);
 void	change_center_img(t_data *data);
+void	resize_menu(t_data *data);
 
 // draw_map
 
@@ -179,6 +181,7 @@ void	draw_map(t_data *data);
 void	draw_map_changed(t_data *data);
 void	add_zoom(t_data *data);
 void	reset_check(t_data *data);
+void	init_mlx(t_data *data);
 
 // rotate_ortho
 
@@ -197,5 +200,6 @@ void	key_ortho(mlx_key_data_t code, t_data *data);
 # define ERROR_5 "File ends not with .fdf\n"
 # define ERROR_6 "Conversion from hexa to int failed\n"
 # define ERROR_7 "Wrong Value inside map\n"
+# define ERROR_8 "Img creation failed\n"
 
 #endif

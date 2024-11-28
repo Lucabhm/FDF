@@ -7,7 +7,6 @@ SRCS = fdf.c \
 		parsing.c \
 		parsing2.c \
 		rotate.c \
-		rotate_2.c \
 		line_algo.c \
 		key_actions.c \
 		key_actions_2.c \
@@ -39,7 +38,7 @@ $(NAME):		logo submodules $(OBJS_PATH)
 				@cd $(PRINTF) && $(MAKE) all
 				@cd $(GET_NEXT) && $(MAKE) all
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME) -fsanitize=address
+				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
 
 $(OBJDIR)%.o: %.c
 				@mkdir -p $(dir $@)
@@ -69,6 +68,6 @@ logo:
 	@echo "  ███        ███   ▄███   ███       "
 	@echo "  ███        ████████▀    ███       "
 
-.PHONY: all clean fclean re logo
+.PHONY: all clean fclean re logo libft
 
 
