@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:33:02 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/05 15:04:55 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 19:03:57 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	reset(mlx_key_data_t code, t_data *data)
 		data->size->angle_y = 35;
 		data->size->angle_x = 0;
 		data->size->zoom = data->size->scale;
-		data->size->center.x = (data->size->width - 300) / 2;
-		data->size->center.y = data->size->height / 2;
+		data->size->center.x = (data->window->width - 300) / 2;
+		data->size->center.y = data->window->height / 2;
 		data->size->dpi = 40;
 		data->size->z_zoom = 1;
 		data->size->projection = false;

@@ -23,9 +23,9 @@ MLX = lib/mlx
 INLIBFT = -L $(LIBFT) -lft
 INPRINF = -L $(PRINTF) -lftprintf
 INGETNEXT = -L $(GET_NEXT) -l_get_next_line
-INMLX = -L $(MLX)/build -lmlx42 -ldl -L /usr/local/lib/ -lglfw -pthread -lm
+INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
+# /usr/local/lib/
 
-# /opt/homebrew/Cellar/glfw/3.3.8/lib/
 
 all:			$(NAME)
 
@@ -38,7 +38,7 @@ $(NAME):		logo submodules $(OBJS_PATH)
 				@cd $(PRINTF) && $(MAKE) all
 				@cd $(GET_NEXT) && $(MAKE) all
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
+				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME) -fsanitize=address
 
 $(OBJDIR)%.o: %.c
 				@mkdir -p $(dir $@)
@@ -69,5 +69,3 @@ logo:
 	@echo "  ███        ████████▀    ███       "
 
 .PHONY: all clean fclean re logo libft
-
-

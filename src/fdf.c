@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:57:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 14:27:17 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 20:53:24 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	free_all(t_data *data)
 			free(data->default_map);
 		if (data->size)
 			free(data->size);
+		if (data->menu[0])
+			delete_img(data);
 		free(data);
 	}
 }

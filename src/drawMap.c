@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawMap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:04:40 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/05 12:43:14 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 19:15:38 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ void	draw_map_changed(t_data *data)
 	reset_check(data);
 	mlx_delete_image(data->window, data->img_map);
 	data->img_map = \
-	mlx_new_image(data->window, data->size->width - 300, data->size->height);
+	mlx_new_image(data->window, data->window->width - data->size->ratio, data->window->height);
+	mlx_image_to_window(data->window, data->img_map, data->size->ratio, 0);
 	if (!data->size->projection)
 		draw_map(data);
 	else
 		draw_map_ortho(data);
-	mlx_image_to_window(data->window, data->img_map, 300, 0);
 	data->size->moved = false;
 }
 

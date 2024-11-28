@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/09/05 15:34:49 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 19:24:54 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,19 @@ void	resize(int width, int height, void *param)
 	t_data	*data;
 
 	data = param;
-	data->size->width = width;
-	data->size->height = height;
-	data->size->center.x = (data->size->width - 300) / 2;
-	data->size->center.y = data->size->height / 2;
+	if (width * 0.25 >= 300)
+	{
+		data->size->ratio = 300;
+		for (int i = 0; i < 17; i++)
+			data->menu[i]->enabled = true;
+	}
+	else
+	{
+		data->size->ratio = 0;
+		for (int i = 0; i < 17; i++)
+			data->menu[i]->enabled = false;
+	}
+	data->size->center.x = (width - data->size->ratio) / 2;
+	data->size->center.y = height / 2;
 	data->size->moved = true;
 }

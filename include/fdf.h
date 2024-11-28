@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 14:55:28 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 20:51:07 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ typedef struct s_size
 	int		x_max;
 	int		y_max;
 	int		dots;
-	int		width;
-	int		height;
 	int		scale;
 	t_vec	center;
 	int		zoom;
@@ -88,7 +86,7 @@ typedef struct s_data
 	mlx_t			*window;
 	mlx_image_t		*img_map;
 	mlx_image_t		*img_menu;
-	mlx_image_t		*menu[19];
+	mlx_image_t		*menu[17];
 }				t_data;
 
 typedef struct s_pos

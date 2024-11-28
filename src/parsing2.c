@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 16:29:31 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 19:09:49 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ t_data	*init_data(void)
 	data->size->dots = 0;
 	data->size->x_max = 0;
 	data->size->y_max = 0;
-	data->size->width = 1600;
-	data->size->height = 900;
 	data->size->angle_z = 45;
 	data->size->angle_y = 35;
 	data->size->angle_x = 0;
@@ -42,6 +40,7 @@ t_data	*init_data(void)
 	data->size->center.x = 0;
 	data->size->center.y = 0;
 	data->size->center.z = 0;
+	data->size->ratio = 300;
 	return (data);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:11:12 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 16:27:09 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/28 19:15:13 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,18 @@ void	parsing(int argc, char **argv, t_data *data)
 			error(ERROR_5, data);
 		fill_map(argv, data);
 		data->window = mlx_init(
-				data->size->width, data->size->height, "fdf", true);
+				1600, 900, "fdf", true);
 		data->img_map = mlx_new_image(
-				data->window, data->size->width - 300, data->size->height);
-		data->img_menu = mlx_new_image(data->window, 300, data->size->height);
-		mlx_image_to_window(data->window, data->img_map, 300, 0);
-		mlx_image_to_window(data->window, data->img_menu, 0, 0);
+				data->window, data->window->width - data->size->ratio, data->window->height);
+		mlx_image_to_window(data->window, data->img_map, data->size->ratio, 0);
 		init_ortho(data);
-		data->size->center.x = (data->size->width - 300) / 2;
-		data->size->center.y = data->size->height / 2;
-		if (((data->size->width - 300) / data->size->x_max)
-			< (data->size->height / data->size->y_max))
-			data->size->scale = (data->size->width - 300) / data->size->x_max;
+		data->size->center.x = (data->window->width - data->size->ratio) / 2;
+		data->size->center.y = data->window->height / 2;
+		if (((data->window->width - data->size->ratio) / data->size->x_max)
+			< (data->window->height / data->size->y_max))
+			data->size->scale = (data->window->width - data->size->ratio) / data->size->x_max;
 		else
-			data->size->scale = data->size->height / data->size->y_max;
+			data->size->scale = data->window->height / data->size->y_max;
 		data->size->zoom = data->size->scale;
 	}
 	else
