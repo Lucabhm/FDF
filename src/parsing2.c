@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 19:09:49 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:38:58 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ t_data	*init_data(void)
 		error(ERROR_4, NULL);
 	data->window = NULL;
 	data->img_map = NULL;
-	data->img_menu = NULL;
 	data->default_map = NULL;
 	data->map = NULL;
+	data->menu[0] = NULL;
 	data->size = (t_size *)malloc (sizeof(t_size));
 	if (!data->size)
 		error(ERROR_4, data);

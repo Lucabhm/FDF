@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:11:12 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 19:15:13 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:47:03 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parsing(int argc, char **argv, t_data *data)
 		data->window = mlx_init(
 				1600, 900, "fdf", true);
 		data->img_map = mlx_new_image(
-				data->window, data->window->width - data->size->ratio, data->window->height);
+			data->window, data->window->width - data->size->ratio, data->window->height);
 		mlx_image_to_window(data->window, data->img_map, data->size->ratio, 0);
 		init_ortho(data);
 		data->size->center.x = (data->window->width - data->size->ratio) / 2;

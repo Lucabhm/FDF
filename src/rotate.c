@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 12:55:40 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/11/29 11:28:04 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	rotate(t_data *data)
 	int	center_y;
 
 	i = 0;
-	center_x = (data->size->x_max * data->size->zoom) / 2;
-	center_y = (data->size->y_max * data->size->zoom) / 2;
+	center_x = ((data->size->x_max - 1) * data->size->zoom) / 2;
+	center_y = ((data->size->y_max - 1) * data->size->zoom) / 2;
 	while (i < data->size->dots)
 	{
 		data->map[i].x -= center_x;

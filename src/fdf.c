@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:57:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 20:53:24 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:36:41 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,8 @@ int	main(int argc, char **argv)
 void	error(char *msg, t_data *data)
 {
 	free_all(data);
-	if (data->window && (data->img_map || data->img_menu))
-	{
-		if (data->img_map)
-			mlx_delete_image(data->window, data->img_map);
-		if (data->img_menu)
-			mlx_delete_image(data->window, data->img_menu);
-	}
+	if (data->window && data->img_map)
+		mlx_delete_image(data->window, data->img_map);
 	if (data->window)
 	{
 		mlx_close_window(data->window);
@@ -65,6 +60,8 @@ void	free_all(t_data *data)
 	{
 		if (data->default_map)
 			free(data->default_map);
+		if (data->map)
+			free(data->map);
 		if (data->size)
 			free(data->size);
 		if (data->menu[0])

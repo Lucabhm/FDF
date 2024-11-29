@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotateOrtho.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:11:54 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 19:16:26 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:04:38 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ void	rotate_ortho(t_data *data)
 void	draw_map_ortho(t_data *data)
 {
 	reset_check(data);
-	mlx_delete_image(data->window, data->img_map);
-	data->img_map = mlx_new_image(
-			data->window, data->window->width - data->size->ratio, data->window->height);
-	mlx_image_to_window(data->window, data->img_map, data->size->ratio, 0);
 	add_zoom(data);
 	rotate(data);
 	rotate_ortho(data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 20:51:07 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/11/29 11:36:15 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ typedef struct s_data
 	t_ortho			ortho;
 	mlx_t			*window;
 	mlx_image_t		*img_map;
-	mlx_image_t		*img_menu;
 	mlx_image_t		*menu[17];
 }				t_data;
 
