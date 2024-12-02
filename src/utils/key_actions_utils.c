@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:33:02 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 12:45:22 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/02 20:44:22 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 void	wasdqe(mlx_key_data_t code, t_data *data)
 {

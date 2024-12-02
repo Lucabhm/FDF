@@ -1,18 +1,19 @@
 NAME = fdf
 CFLAGS = -Wall -Werror -Wextra
-SRC = src/fdf.c \
-		src/draw_line.c \
-		src/parsing.c \
-		src/parsing_utils.c \
-		src/parsing_utils_2.c \
-		src/rotate.c \
-		src/line_algo.c \
-		src/key_actions.c \
-		src/key_actions_utils.c \
-		src/menu.c \
-		src/menu_utils.c \
-		src/draw_map.c \
-		src/rotateOrtho.c
+VPATH = src/
+SRC = fdf.c \
+		drawing/draw_line.c \
+		parsing/parsing.c \
+		parsing/parsing_utils.c \
+		parsing/parsing_utils_2.c \
+		drawing/rotate.c \
+		drawing/line_algo.c \
+		utils/key_actions.c \
+		utils/key_actions_utils.c \
+		utils/menu.c \
+		utils/menu_utils.c \
+		drawing/draw_map.c \
+		drawing/rotateOrtho.c
 
 OBJDIR = objs/
 OBJ = $(SRC:.c=.o)
@@ -24,16 +25,18 @@ MLX = lib/mlx
 INLIBFT = -L $(LIBFT) -lft
 INPRINF = -L $(PRINTF) -lftprintf
 INGETNEXT = -L $(GET_NEXT) -l_get_next_line
-INMLX = -L $(MLX)/build -lmlx42 -ldl -L /usr/local/lib/ -lglfw -pthread -lm
+INMLX = -L $(MLX)/build -lmlx42 -ldl -L /opt/homebrew/Cellar/glfw/3.3.8/lib/ -lglfw -pthread -lm
+
+# /usr/local/lib/
+
+all:		submodules $(OBJDIR) $(NAME)
 
 $(NAME):	logo $(OBJS_PATH)
 				@cd $(LIBFT) && $(MAKE) bonus
 				@cd $(PRINTF) && $(MAKE) all
 				@cd $(GET_NEXT) && $(MAKE) all
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
-
-all:		submodules $(OBJDIR) $(NAME)
+				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT)  -L /Users/lucabohm/LeakSanitizer -llsan $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
 
 $(OBJDIR)%.o: %.c | $(OBJDIR)
 				@mkdir -p $(dir $@)

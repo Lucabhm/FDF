@@ -3,32 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/18 16:04:30 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 12:27:39 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/02 21:02:17 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 void	draw_menu(t_data *data)
 {
 	char	*str;
 	char	*tmp;
+	char	*tmp2;
 
 	draw_menu_2(data);
 	data->menu[12] = mlx_put_string(data->window, "Stats", 0, 325);
-	str = ft_strjoin("Mouse sensitivity: ", ft_itoa(data->size->dpi));
+	tmp = ft_itoa(data->size->dpi);
+	str = ft_strjoin("Mouse sensitivity: ", tmp);
+	free(tmp);
 	data->menu[13] = mlx_put_string(data->window, str, 10, 350);
 	free(str);
 	str = "Projection: Isometric";
 	data->menu[14] = mlx_put_string(data->window, str, 10, 375);
 	data->menu[15] = mlx_put_string(data->window, "Image center:", 10, 400);
-	str = ft_strjoin("x = ", ft_itoa(data->size->center.x));
+	tmp = ft_itoa(data->size->center.x);
+	str = ft_strjoin("x = ", tmp);
+	free(tmp);
 	tmp = ft_strjoin(str, ", y = ");
 	free(str);
-	str = ft_strjoin(tmp, ft_itoa(data->size->center.y));
+	tmp2 = ft_itoa(data->size->center.y);
+	str = ft_strjoin(tmp, tmp2);
+	free(tmp2);
 	free(tmp);
 	data->menu[16] = mlx_put_string(data->window, str, 10, 425);
 	free(str);

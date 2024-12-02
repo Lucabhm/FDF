@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   line_algo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:24:13 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 11:06:15 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/02 20:44:02 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/fdf.h"
+#include "../../include/fdf.h"
 
 void	draw_line(t_map dot1, t_map dot2, t_data *data)
 {
