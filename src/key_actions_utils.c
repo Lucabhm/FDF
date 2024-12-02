@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_actions_2.c                                    :+:      :+:    :+:   */
+/*   key_actions_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:33:02 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 19:03:57 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:45:22 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,17 @@ void	wasdqe(mlx_key_data_t code, t_data *data)
 		if (data->size->zoom - 1 > 0)
 			data->size->zoom--;
 	}
-	else if (code.key == MLX_KEY_A && (code.action == 1 || code.action == 2))
-	{
+	if (code.key == MLX_KEY_A && (code.action == 1 || code.action == 2))
 		data->size->center.x -= 10;
-		change_center_img(data);
-	}
 	else if (code.key == MLX_KEY_D && (code.action == 1 || code.action == 2))
-	{
 		data->size->center.x += 10;
-		change_center_img(data);
-	}
 	else if (code.key == MLX_KEY_Q && (code.action == 1 || code.action == 2))
-	{
 		data->size->center.y -= 10;
-		change_center_img(data);
-	}
 	else if (code.key == MLX_KEY_E && (code.action == 1 || code.action == 2))
-	{
 		data->size->center.y += 10;
-		change_center_img(data);
-	}
+	else
+		return ;
+	change_center_img(data);
 }
 
 void	reset(mlx_key_data_t code, t_data *data)

@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:11:54 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/29 11:04:38 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/02 14:30:35 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,20 @@ void	init_ortho(t_data *data)
 void	rotate_ortho(t_data *data)
 {
 	int		i;
-	float	rl;
-	float	rl2;
-	float	tb;
-	float	tb2;
-	float	fn;
-	float	fn2;
+	t_ortho	v;
 
 	i = 0;
-	rl = 2.0 / (data->ortho.r - data->ortho.l);
-	rl2 = (data->ortho.r + data->ortho.l) / (data->ortho.r - data->ortho.l);
-	tb = 2.0 / (data->ortho.t - data->ortho.b);
-	tb2 = (data->ortho.t + data->ortho.b) / (data->ortho.t - data->ortho.b);
-	fn = 2.0 / (data->ortho.f - data->ortho.n);
-	fn2 = (data->ortho.f + data->ortho.n) / (data->ortho.f - data->ortho.n);
+	v.r = 2.0 / (data->ortho.r - data->ortho.l);
+	v.l = (data->ortho.r + data->ortho.l) / (data->ortho.r - data->ortho.l);
+	v.t = 2.0 / (data->ortho.t - data->ortho.b);
+	v.b = (data->ortho.t + data->ortho.b) / (data->ortho.t - data->ortho.b);
+	v.f = 2.0 / (data->ortho.f - data->ortho.n);
+	v.n = (data->ortho.f + data->ortho.n) / (data->ortho.f - data->ortho.n);
 	while (i < data->size->dots)
 	{
-		data->map[i].x = (rl * data->map[i].x) - rl2;
-		data->map[i].y = (tb * data->map[i].y) - tb2;
-		data->map[i].z = -(fn * data->map[i].z) - fn2;
+		data->map[i].x = (v.r * data->map[i].x) - v.l;
+		data->map[i].y = (v.t * data->map[i].y) - v.b;
+		data->map[i].z = -(v.f * data->map[i].z) - v.n;
 		i++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 19:16:51 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:12:09 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ void	draw_pixel(int x, int y, t_pos info, t_data *data)
 	int		b;
 	float	fraction;
 
-	if (x > 0 && x < data->window->width - data->size->ratio && y > 0 && y < data->window->height)
+	if (x > 0 && x < (data->window->width - data->size->ratio)
+		&& y > 0 && y < data->window->height)
 	{
 		if (abs(info.dy) < abs(info.dx))
 			fraction = ((float)x - (float)info.startx) / (float)info.dx;

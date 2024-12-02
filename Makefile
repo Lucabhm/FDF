@@ -1,21 +1,22 @@
 NAME = fdf
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-VPATH = src/
-SRCS = fdf.c \
-		draw_line.c \
-		parsing.c \
-		parsing2.c \
-		rotate.c \
-		line_algo.c \
-		key_actions.c \
-		key_actions_2.c \
-		menu.c \
-		drawMap.c \
-		rotateOrtho.c
-OBJS = $(SRCS:.c=.o)
+CFLAGS = -Wall -Werror -Wextra
+SRC = src/fdf.c \
+		src/draw_line.c \
+		src/parsing.c \
+		src/parsing_utils.c \
+		src/parsing_utils_2.c \
+		src/rotate.c \
+		src/line_algo.c \
+		src/key_actions.c \
+		src/key_actions_utils.c \
+		src/menu.c \
+		src/menu_utils.c \
+		src/draw_map.c \
+		src/rotateOrtho.c
+
 OBJDIR = objs/
-OBJS_PATH = $(addprefix $(OBJDIR), $(OBJS))
+OBJ = $(SRC:.c=.o)
+OBJS_PATH = $(addprefix $(OBJDIR), $(OBJ))
 LIBFT = lib/ft_libft/
 PRINTF = lib/ft_printf/
 GET_NEXT = lib/ft_get_next_line/
@@ -25,24 +26,34 @@ INPRINF = -L $(PRINTF) -lftprintf
 INGETNEXT = -L $(GET_NEXT) -l_get_next_line
 INMLX = -L $(MLX)/build -lmlx42 -ldl -L /usr/local/lib/ -lglfw -pthread -lm
 
-# /opt/homebrew/Cellar/glfw/3.3.8/lib/
-
-all:			$(NAME)
-
-submodules:
-				git submodule update --init --recursive
-
-$(NAME):		logo submodules $(OBJS_PATH)
-				@cd $(LIBFT) && $(MAKE) all
+$(NAME):	logo $(OBJS_PATH)
 				@cd $(LIBFT) && $(MAKE) bonus
 				@cd $(PRINTF) && $(MAKE) all
 				@cd $(GET_NEXT) && $(MAKE) all
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
-				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME) -fsanitize=address
+				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
 
-$(OBJDIR)%.o: %.c
+all:		$(OBJDIR) submodules $(NAME)
+
+$(OBJDIR)%.o: %.c | $(OBJDIR)
 				@mkdir -p $(dir $@)
 				@cc -c $< -o $@ $(CFLAGS)
+				@if [ "$(filter $<,$(SRC))" ]; then $(MAKE) progress; fi
+
+$(OBJDIR):
+				@mkdir -p $(OBJDIR)
+
+submodules:
+				git submodule update --init --recursive
+
+progress:
+				@$(eval PROGRESS := $(shell echo $$(($(shell find $(SRC) -name '*.c' | wc -l) - $$(find $(OBJDIR) -name '*.o' | wc -l)))))
+				@$(eval TOTAL := $(shell find $(SRC) -name '*.c' | wc -l))
+				@$(eval PERCENT := $(shell echo "scale=2; (1 - $(PROGRESS) / $(TOTAL)) * 100" | bc))
+				@$(eval BAR := $(shell printf '=%.0s' {1..$(shell echo "scale=0; $(PERCENT) / 2" | bc)}))
+				@printf "\r[%-50s] %s%%" "$(BAR)" "$(PERCENT)"
+				@if [ "$(PERCENT)" = "100.00" ]; then printf "\n"; fi
+				@if [ "$(PERCENT)" = "100.00" ]; then printf "\033[0;32mfdf compiled\033[0m\n"; fi
 
 clean:
 				@rm -rf $(OBJDIR)
@@ -51,21 +62,22 @@ clean:
 				@cd $(GET_NEXT) && $(MAKE) clean
 				@rm -rf $(MLX)/build
 
-fclean:			clean
+fclean:		clean
 				@rm -f $(NAME)
 				@cd $(LIBFT) && $(MAKE) fclean
 				@cd $(PRINTF) && $(MAKE) fclean
 				@cd $(GET_NEXT) && $(MAKE) fclean
 
-re: fclean all
+re:			fclean all
 
 logo:
-	@echo "  ▄████████  ████████▄    ▄████████"
-	@echo "  ███    ███ ███   ▀███   ███    ███"
-	@echo "  ███    █▀  ███    ███   ███    █▀ "
-	@echo " ▄███▄▄▄     ███    ███  ▄███▄▄▄    "
-	@echo "▀▀███▀▀▀     ███    ███ ▀▀███▀▀▀    "
-	@echo "  ███        ███   ▄███   ███       "
-	@echo "  ███        ████████▀    ███       "
+				@echo "  ▄████████  ████████▄    ▄████████"
+				@echo "  ███    ███ ███   ▀███   ███    ███"
+				@echo "  ███    █▀  ███    ███   ███    █▀ "
+				@echo " ▄███▄▄▄     ███    ███  ▄███▄▄▄    "
+				@echo "▀▀███▀▀▀     ███    ███ ▀▀███▀▀▀    "
+				@echo "  ███        ███   ▄███   ███       "
+				@echo "  ███        ████████▀    ███       "
 
-.PHONY: all clean fclean re logo libft
+
+.PHONY: all clean fclean re bonus progress progressb logo submodules

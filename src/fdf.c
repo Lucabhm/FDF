@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 10:57:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/29 11:36:41 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/02 12:40:56 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	main(int argc, char **argv)
 	draw_map(data);
 	mlx_loop_hook(data->window, controll, data);
 	mlx_loop(data->window);
+	if (data->window && data->menu[0])
+		delete_img(data);
 	mlx_terminate(data->window);
 	free_all(data);
 	return (0);
@@ -29,7 +31,8 @@ int	main(int argc, char **argv)
 
 void	error(char *msg, t_data *data)
 {
-	free_all(data);
+	if (data->window && data->menu[0])
+		delete_img(data);
 	if (data->window && data->img_map)
 		mlx_delete_image(data->window, data->img_map);
 	if (data->window)
@@ -37,6 +40,7 @@ void	error(char *msg, t_data *data)
 		mlx_close_window(data->window);
 		mlx_terminate(data->window);
 	}
+	free_all(data);
 	ft_putstr_fd(msg, 2);
 	exit (1);
 }
@@ -64,8 +68,6 @@ void	free_all(t_data *data)
 			free(data->map);
 		if (data->size)
 			free(data->size);
-		if (data->menu[0])
-			delete_img(data);
 		free(data);
 	}
 }

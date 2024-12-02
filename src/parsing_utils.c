@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing2.c                                         :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/29 11:38:58 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/02 13:25:19 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ t_data	*init_data(void)
 	data->default_map = NULL;
 	data->map = NULL;
 	data->menu[0] = NULL;
+	init_size(data);
+	return (data);
+}
+
+void	init_size(t_data *data)
+{
 	data->size = (t_size *)malloc (sizeof(t_size));
 	if (!data->size)
 		error(ERROR_4, data);
@@ -41,7 +47,6 @@ t_data	*init_data(void)
 	data->size->center.y = 0;
 	data->size->center.z = 0;
 	data->size->ratio = 300;
-	return (data);
 }
 
 void	fill_dot(t_map *dot, char *z, t_size *size, int i)
@@ -65,55 +70,6 @@ void	fill_dot(t_map *dot, char *z, t_size *size, int i)
 	dot->down = NULL;
 	dot->left = NULL;
 	dot->right = NULL;
-}
-
-void	add_to_map(t_map *dot, t_map **map, t_size *size)
-{
-	t_map	*start;
-	t_map	*tmp;
-
-	start = *map;
-	if (!start)
-		*map = dot;
-	else
-	{
-		if (dot->y == 1)
-		{
-			while (start->right)
-				start = start->right;
-			dot->left = start;
-			start->right = dot;
-		}
-		else if (dot->y <= size->y_max)
-		{
-			if (dot->x == 1)
-			{
-				while (start->down)
-					start = start->down;
-				dot->up = start;
-				start->down = dot;
-			}
-			else
-			{
-				while (start->down)
-				{
-					if (!start->down->down)
-						tmp = start;
-					start = start->down;
-				}
-				while (start->right)
-				{
-					start = start->right;
-					tmp = tmp->right;
-				}
-				tmp = tmp->right;
-				dot->left = start;
-				dot->up = tmp;
-				tmp->down = dot;
-				start->right = dot;
-			}
-		}
-	}
 }
 
 void	pars_color(t_map *dot, char *z)

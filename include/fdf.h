@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/29 11:36:15 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/02 14:48:58 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,6 @@ typedef struct s_pos
 	int		starty;
 }				t_pos;
 
-// fdf
-
-int		main(int argc, char **argv);
-void	error(char *msg, t_data *data);
-void	free_dp(char **arr);
-void	free_all(t_data *data);
-
 // draw_line
 
 void	draw_loop(t_data *data);
@@ -113,40 +106,26 @@ void	draw_pixel(int x, int y, t_pos info, t_data *data);
 int		get_color(int r, int g, int b, int a);
 int		htoi(char	*hexa);
 
-// line_algo
+// draw_map
 
-void	draw_line(t_map dot1, t_map dot2, t_data *data);
-void	slope_s(t_map dot1, t_map dot2, t_pos info, t_data *data);
-void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data *data);
+void	draw_map(t_data *data);
+void	draw_map_changed(t_data *data);
+void	add_zoom(t_data *data);
+void	reset_check(t_data *data);
 
-// parsing
+// fdf
 
-void	parsing(int argc, char **argv, t_data *data);
-void	fill_map(char **argv, t_data *data);
-void	count_size(char *file, t_data *data);
-int		count_elements(char **split, t_data *data);
-void	check_value(char *value, t_data *data);
+int		main(int argc, char **argv);
+void	error(char *msg, t_data *data);
+void	free_dp(char **arr);
+void	free_all(t_data *data);
 
-// parsing2
+// key_actions_utils
 
-t_data	*init_data(void);
-void	fill_dot(t_map	*dot, char *z, t_size *size, int i);
-void	add_to_map(t_map *dot, t_map **map, t_size *size);
-void	pars_color(t_map *dot, char *z);
-void	pars_color_2(t_map *dot, char *color);
-
-// rotate
-
-void	rotate(t_data *data);
-void	rotate_x(t_map *dot, t_data *data);
-void	rotate_y(t_map *dot, t_data *data);
-void	rotate_z(t_map *dot, t_data *data);
-
-// rotate_2
-
-int		max(t_data *data, char coord);
-int		min(t_data *data, char coord);
-void	translate_to_center(t_data *data);
+void	wasdqe(mlx_key_data_t code, t_data *data);
+void	reset(mlx_key_data_t code, t_data *data);
+void	set_dpi(mlx_key_data_t code, t_data *data);
+void	z_altitude(mlx_key_data_t code, t_data *data);
 
 // key_actions
 
@@ -156,29 +135,55 @@ void	scroll(double xdelta, double ydelta, void *param);
 void	cursor(t_data *data);
 void	resize(int width, int height, void *param);
 
-// key_actions_2
+// line_algo
 
-void	wasdqe(mlx_key_data_t code, t_data *data);
-void	reset(mlx_key_data_t code, t_data *data);
-void	set_dpi(mlx_key_data_t code, t_data *data);
-void	z_altitude(mlx_key_data_t code, t_data *data);
+void	draw_line(t_map dot1, t_map dot2, t_data *data);
+void	slope_s(t_map dot1, t_map dot2, t_pos info, t_data *data);
+void	slope_b(t_map dot1, t_map dot2, t_pos info, t_data *data);
+
+// menu_utils
+
+void	change_mouse_img(t_data *data);
+void	change_projection_img(t_data *data);
+void	change_center_img(t_data *data);
 
 // menu
 
 void	draw_menu(t_data *data);
+void	draw_menu_2(t_data *data);
 void	delete_img(t_data *data);
-void	change_mouse_img(t_data *data);
-void	change_projection_img(t_data *data);
-void	change_center_img(t_data *data);
-void	resize_menu(t_data *data);
 
-// draw_map
+// parsing_utils_2
 
-void	draw_map(t_data *data);
-void	draw_map_changed(t_data *data);
-void	add_zoom(t_data *data);
-void	reset_check(t_data *data);
-void	init_mlx(t_data *data);
+void	add_to_map(t_map *dot, t_map **map, t_size *size);
+void	add_to_map_2(t_map *dot, t_map *start, t_map *tmp);
+void	add_to_map_3(t_map *dot, t_map *start, t_map *tmp);
+void	check_value(char *value, t_data *data);
+char	*clean_line(char *line);
+
+// parsing_utils
+
+t_data	*init_data(void);
+void	init_size(t_data *data);
+void	fill_dot(t_map	*dot, char *z, t_size *size, int i);
+void	pars_color(t_map *dot, char *z);
+void	pars_color_2(t_map *dot, char *color);
+
+// parsing
+
+void	parsing(int argc, char **argv, t_data *data);
+void	fill_map(char **argv, t_data *data);
+void	fill_dots(t_data *data, int fd);
+void	count_size(char *file, t_data *data);
+int		count_elements(char **split, t_data *data);
+
+// rotate
+
+void	rotate(t_data *data);
+void	rotate_x(t_map *dot, t_data *data);
+void	rotate_y(t_map *dot, t_data *data);
+void	rotate_z(t_map *dot, t_data *data);
+void	translate_to_center(t_data *data);
 
 // rotate_ortho
 
@@ -198,5 +203,6 @@ void	key_ortho(mlx_key_data_t code, t_data *data);
 # define ERROR_6 "Conversion from hexa to int failed\n"
 # define ERROR_7 "Wrong Value inside map\n"
 # define ERROR_8 "Img creation failed\n"
+# define ERROR_9 "Empty file\n"
 
 #endif

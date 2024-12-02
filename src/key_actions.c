@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/28 19:24:54 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:31:39 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	key(mlx_key_data_t code, void *param)
 
 	data = param;
 	if (code.key == MLX_KEY_ESCAPE && code.action == 1)
+	{
 		mlx_close_window(data->window);
+		return ;
+	}
 	else if (code.key == MLX_KEY_I && code.action == 1)
 	{
 		data->size->angle_z = 45;
@@ -97,19 +100,25 @@ void	cursor(t_data *data)
 void	resize(int width, int height, void *param)
 {
 	t_data	*data;
+	int		i;
+	bool	enable;
 
 	data = param;
+	i = 0;
 	if (width * 0.25 >= 300)
 	{
 		data->size->ratio = 300;
-		for (int i = 0; i < 17; i++)
-			data->menu[i]->enabled = true;
+		enable = true;
 	}
 	else
 	{
 		data->size->ratio = 0;
-		for (int i = 0; i < 17; i++)
-			data->menu[i]->enabled = false;
+		enable = false;
+	}
+	while (i < 17)
+	{
+		data->menu[i]->enabled = enable;
+		i++;
 	}
 	data->size->center.x = (width - data->size->ratio) / 2;
 	data->size->center.y = height / 2;

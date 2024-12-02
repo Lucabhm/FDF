@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   drawMap.c                                          :+:      :+:    :+:   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:04:40 by lbohm             #+#    #+#             */
-/*   Updated: 2024/11/29 11:24:26 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/02 13:09:28 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	draw_map_changed(t_data *data)
 {
 	reset_check(data);
 	mlx_delete_image(data->window, data->img_map);
-	data->img_map = \
-	mlx_new_image(data->window, data->window->width - data->size->ratio, data->window->height);
+	data->img_map = mlx_new_image(data->window,
+			(data->window->width - data->size->ratio), data->window->height);
 	mlx_image_to_window(data->window, data->img_map, data->size->ratio, 0);
 	if (!data->size->projection)
 		draw_map(data);
