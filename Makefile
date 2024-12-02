@@ -33,7 +33,7 @@ $(NAME):	logo $(OBJS_PATH)
 				@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
 				@cc $(OBJS_PATH) $(INLIBFT) $(INPRINF) $(INGETNEXT) $(INMLX) -framework Cocoa -framework OpenGL -framework IOKit -o $(NAME)
 
-all:		$(OBJDIR) submodules $(NAME)
+all:		submodules $(OBJDIR) $(NAME)
 
 $(OBJDIR)%.o: %.c | $(OBJDIR)
 				@mkdir -p $(dir $@)
