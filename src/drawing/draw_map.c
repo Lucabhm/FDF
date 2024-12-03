@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:04:40 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 20:44:07 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:09:45 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	add_zoom(t_data *data)
 		data->map[i].x = (data->map[i].x - 1) * data->size->zoom;
 		data->map[i].y = (data->map[i].y - 1) * data->size->zoom;
 		data->map[i].z *= data->size->zoom * data->size->z_zoom;
+		if (i == 41)
+			printf("z after zoom = %i\n", data->map[i].z);
 		i++;
 	}
 }

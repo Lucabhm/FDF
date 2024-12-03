@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 20:43:56 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:32:14 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	rotate(t_data *data)
 	i = 0;
 	while (i < data->size->dots)
 	{
-		rotate_z(&data->map[i], data);
 		rotate_x(&data->map[i], data);
 		rotate_y(&data->map[i], data);
+		rotate_z(&data->map[i], data);
 		i++;
 	}
 	translate_to_center(data);
@@ -67,9 +67,13 @@ void	rotate_y(t_map *dot, t_data *data)
 void	rotate_z(t_map *dot, t_data *data)
 {
 	double	rad;
+	// float	angle;
 	int		x;
 	int		y;
 
+	data->size->angle_z = ((data->size->angle_z % 360) + 360) % 360;
+	// angle = angle / 360;
+	// angle = ((angle * 2) - 1) * 180;
 	rad = data->size->angle_z * (M_PI / 180.0);
 	x = dot->x;
 	y = dot->y;

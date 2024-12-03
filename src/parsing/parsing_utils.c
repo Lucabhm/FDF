@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 20:43:44 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:31:10 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	init_size(t_data *data)
 	data->size->x_max = 0;
 	data->size->y_max = 0;
 	data->size->angle_z = 45;
-	data->size->angle_y = 35;
-	data->size->angle_x = 0;
+	data->size->angle_y = 30;
+	data->size->angle_x = 35;
 	data->size->dpi = 50;
 	data->size->moved = false;
 	data->size->projection = false;
