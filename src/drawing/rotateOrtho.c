@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:11:54 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 20:43:59 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:48:36 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	init_ortho(t_data *data)
 	data->ortho.f = 0.0;
 	while (i < data->size->dots)
 	{
-		if (data->map[i].z <= data->ortho.n)
-			data->ortho.n = data->map[i].z;
-		if (data->map[i].z >= data->ortho.f)
-			data->ortho.f = data->map[i].z;
+		if (data->map[i].coords.z <= data->ortho.n)
+			data->ortho.n = data->map[i].coords.z;
+		if (data->map[i].coords.z >= data->ortho.f)
+			data->ortho.f = data->map[i].coords.z;
 		i++;
 	}
 }
@@ -47,9 +47,9 @@ void	rotate_ortho(t_data *data)
 	v.n = (data->ortho.f + data->ortho.n) / (data->ortho.f - data->ortho.n);
 	while (i < data->size->dots)
 	{
-		data->map[i].x = (v.r * data->map[i].x) - v.l;
-		data->map[i].y = (v.t * data->map[i].y) - v.b;
-		data->map[i].z = -(v.f * data->map[i].z) - v.n;
+		data->map[i].coords.x = (v.r * data->map[i].coords.x) - v.l;
+		data->map[i].coords.y = (v.t * data->map[i].coords.y) - v.b;
+		data->map[i].coords.z = -(v.f * data->map[i].coords.z) - v.n;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 14:26:44 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 20:43:23 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:37:14 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,28 +90,27 @@ int	get_color(int r, int g, int b, int a)
 	return (r << 24 | g << 16 | b << 8 | a);
 }
 
-int	htoi(char	*hexa)
+int	ft_htoi(char *hexa)
 {
-	int		nbr;
 	char	*base;
+	int		result;
 	int		i;
-	int		j;
-	int		size;
+	int		pos;
 
-	base = "0123456789ABCDEF";
-	nbr = 0;
-	size = ft_strlen(hexa) - 1;
-	i = size;
-	while (hexa[i] != '#' && i >= 0)
+	base = "0123456789ABCDEFabcdef";
+	result = 0;
+	i = ft_strlen(hexa) - 1;
+	while (i >= 0)
 	{
-		j = 0;
-		while (base[j] != hexa[i])
-			j++;
-		if (j == 17)
-			error(ERROR_6, NULL);
-		nbr += j * pow(16, size - i);
+		pos = 0;
+		while (base[pos] && base[pos] != hexa[i])
+			pos++;
+		if (pos > 15 && pos < 22)
+			pos -= 6;
+		if (pos == 22)
+			return (printf("Hexa wrong input\n"), 0);
+		result += pos * pow(16, (ft_strlen(hexa) - 1) - i);
 		i--;
 	}
-	free(hexa);
-	return (nbr);
+	return (result);
 }

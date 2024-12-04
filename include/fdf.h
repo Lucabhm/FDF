@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 14:48:58 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/04 20:55:58 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ typedef struct s_ortho
 
 typedef struct s_map
 {
-	int				x;
-	int				y;
-	int				z;
+	t_vec			coords;
 	t_vec			color;
 	struct s_map	*up;
 	struct s_map	*down;
@@ -68,9 +66,9 @@ typedef struct s_size
 	int		scale;
 	t_vec	center;
 	int		zoom;
-	int		angle_z;
-	int		angle_y;
-	int		angle_x;
+	float		angle_z;
+	float		angle_y;
+	float		angle_x;
 	int		dpi;
 	float	z_zoom;
 	bool	projection;
@@ -104,7 +102,7 @@ void	draw_loop(t_data *data);
 void	draw_dot(t_map *dot, t_data *data);
 void	draw_pixel(int x, int y, t_pos info, t_data *data);
 int		get_color(int r, int g, int b, int a);
-int		htoi(char	*hexa);
+int		ft_htoi(char *hexa);
 
 // draw_map
 
@@ -180,10 +178,19 @@ int		count_elements(char **split, t_data *data);
 // rotate
 
 void	rotate(t_data *data);
-void	rotate_x(t_map *dot, t_data *data);
-void	rotate_y(t_map *dot, t_data *data);
-void	rotate_z(t_map *dot, t_data *data);
+// void	rotate_x(t_map *dot, t_data *data);
+// void	rotate_y(t_map *dot, t_data *data);
+// void	rotate_z(t_map *dot, t_data *data);
 void	translate_to_center(t_data *data);
+
+// rotate_test
+
+void	get_full_r(float result[3][3], float x, float y, float z);
+void	rotate_x(float m[3][3], float angle);
+void	rotate_y(float m[3][3], float angle);
+void	rotate_z(float m[3][3], float angle);
+void	multi_m(float result[3][3], float m1[3][3], float m2[3][3]);
+t_vec	r_vec(float m[3][3], t_vec v);
 
 // rotate_ortho
 

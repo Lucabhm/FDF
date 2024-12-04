@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/03 16:31:10 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/04 21:32:25 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	init_size(t_data *data)
 	data->size->x_max = 0;
 	data->size->y_max = 0;
 	data->size->angle_z = 45;
-	data->size->angle_y = 30;
-	data->size->angle_x = 35;
+	data->size->angle_y = 0;
+	data->size->angle_x = atan(sqrt(2));
 	data->size->dpi = 50;
 	data->size->moved = false;
 	data->size->projection = false;
@@ -59,8 +59,8 @@ void	fill_dot(t_map *dot, char *z, t_size *size, int i)
 		i -= size->x_max;
 		y++;
 	}
-	dot->x = i;
-	dot->y = y;
+	dot->coords.x = i;
+	dot->coords.y = y;
 	pars_color(dot, z);
 	dot->draw_up = false;
 	dot->draw_down = false;
@@ -82,7 +82,7 @@ void	pars_color(t_map *dot, char *z)
 	{
 		len = ft_strlen(ft_strnstr(z, ",", ft_strlen(z)));
 		tmp = ft_substr(z, 0, ft_strlen(z) - len);
-		dot->z = ft_atoi(tmp);
+		dot->coords.z = ft_atoi(tmp);
 		free(tmp);
 		tmp = ft_substr(z, ft_strlen(z) - len + 3, ft_strlen(z));
 		pars_color_2(dot, tmp);
@@ -90,8 +90,8 @@ void	pars_color(t_map *dot, char *z)
 	}
 	if (!len)
 	{
-		dot->z = ft_atoi(z);
-		if (dot->z == 0)
+		dot->coords.z = ft_atoi(z);
+		if (dot->coords.z == 0)
 			pars_color_2(dot, "08A2BD");
 		else
 			pars_color_2(dot, "F08811");
@@ -100,7 +100,15 @@ void	pars_color(t_map *dot, char *z)
 
 void	pars_color_2(t_map *dot, char *color)
 {
-	dot->color.x = htoi(ft_substr(color, 0, 2));
-	dot->color.y = htoi(ft_substr(color, 2, 2));
-	dot->color.z = htoi(ft_substr(color, 4, 2));
+	char	*tmp;
+
+	tmp = ft_substr(color, 0, 2);
+	dot->color.x = ft_htoi(tmp);
+	free(tmp);
+	tmp = ft_substr(color, 2, 2);
+	dot->color.y = ft_htoi(tmp);
+	free(tmp);
+	tmp = ft_substr(color, 4, 2);
+	dot->color.z = ft_htoi(tmp);
+	free(tmp);
 }

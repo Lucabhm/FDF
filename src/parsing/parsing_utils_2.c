@@ -6,7 +6,7 @@
 /*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:24:48 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 20:43:50 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/04 20:46:39 by lucabohn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,21 @@ void	add_to_map(t_map *dot, t_map **map, t_size *size)
 		*map = dot;
 	else
 	{
-		if (dot->y == 1)
+		if (dot->coords.y == 1)
 		{
 			while (start->right)
 				start = start->right;
 			dot->left = start;
 			start->right = dot;
 		}
-		else if (dot->y <= size->y_max)
+		else if (dot->coords.y <= size->y_max)
 			add_to_map_2(dot, start, tmp);
 	}
 }
 
 void	add_to_map_2(t_map *dot, t_map *start, t_map *tmp)
 {
-	if (dot->x == 1)
+	if (dot->coords.x == 1)
 	{
 		while (start->down)
 			start = start->down;
