@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/05 11:33:02 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/05 13:09:47 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/05 14:50:38 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	reset(mlx_key_data_t code, t_data *data)
 	{
 		data->size->angle_z = 45;
 		data->size->angle_y = 0;
-		data->size->angle_x = atan(sqrt(2));
+		data->size->angle_x = atan(sqrt(0.5));
 		data->size->zoom = data->size->scale;
 		data->size->center.x = (data->window->width - data->size->ratio) / 2;
 		data->size->center.y = data->window->height / 2;

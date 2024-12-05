@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:11:54 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/05 13:09:27 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/05 15:02:52 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,7 @@ void	draw_map_ortho(t_data *data)
 
 void	key_ortho(mlx_key_data_t code, t_data *data)
 {
-	if (code.key == MLX_KEY_P && code.action == 1)
-	{
-		data->size->angle_y = 45;
-		data->size->angle_x = 30;
-		data->size->angle_z = 0;
-		data->size->projection = true;
-		change_projection_img(data);
-	}
-	else if (code.key == MLX_KEY_T && code.action == 1)
+	if (code.key == MLX_KEY_T && code.action == 1)
 	{
 		data->size->angle_x = 0;
 		data->size->angle_y = 0;
@@ -82,7 +74,7 @@ void	key_ortho(mlx_key_data_t code, t_data *data)
 	}
 	else if (code.key == MLX_KEY_F && code.action == 1)
 	{
-		data->size->angle_x = 90;
+		data->size->angle_x = 90 * (M_PI / 180);
 		data->size->angle_y = 0;
 		data->size->angle_z = 0;
 		data->size->projection = true;

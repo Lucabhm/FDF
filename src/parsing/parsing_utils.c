@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 11:06:45 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/05 13:08:05 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/05 14:50:03 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ void	init_size(t_data *data)
 	data->size->dots = 0;
 	data->size->x_max = 0;
 	data->size->y_max = 0;
-	data->size->angle_z = 225;
+	data->size->angle_z = 45;
 	data->size->angle_y = 0;
-	data->size->angle_x = atan(sqrt(2));
+	data->size->angle_x = atan(sqrt(0.5));
 	data->size->dpi = 50;
 	data->size->moved = false;
 	data->size->projection = false;
