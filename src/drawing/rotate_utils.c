@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate_test.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 20:36:45 by lucabohn          #+#    #+#             */
-/*   Updated: 2024/12/04 21:33:26 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:08:57 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	get_full_r(float result[3][3], float x, float y, float z)
 	z = (((int)z % 360) + 360) % 360;
 	z = z / 360;
 	z = ((z * 2) - 1) * 180;
-	// x = x * (M_PI / 180);
 	y = y * (M_PI / 180);
 	z = z * (M_PI / 180);
 	rotate_x(mx, x);
@@ -90,14 +89,4 @@ void	multi_m(float result[3][3], float m1[3][3], float m2[3][3])
 		}
 		i++;
 	}
-}
-
-t_vec	r_vec(float m[3][3], t_vec v)
-{
-	t_vec	result;
-
-	result.x = m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z;
-	result.y = m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z;
-	result.z = m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z;
-	return (result);
 }

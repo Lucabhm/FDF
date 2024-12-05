@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 13:19:14 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 20:44:15 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:10:06 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	key(mlx_key_data_t code, void *param)
 	else if (code.key == MLX_KEY_I && code.action == 1)
 	{
 		data->size->angle_z = 45;
-		data->size->angle_y = 35;
-		data->size->angle_x = 0;
+		data->size->angle_y = 0;
+		data->size->angle_x = atan(sqrt(2));
 		data->size->projection = false;
 		change_projection_img(data);
 	}

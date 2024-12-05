@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:24:01 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/04 21:04:03 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:09:08 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	rotate(t_data *data)
 {
-	int	i;
-	int	center_x;
-	int	center_y;
+	int		i;
+	int		center_x;
+	int		center_y;
 	float	m[3][3];
 
 	i = 0;
@@ -29,7 +29,8 @@ void	rotate(t_data *data)
 		i++;
 	}
 	i = 0;
-	get_full_r(m, data->size->angle_x, data->size->angle_y, data->size->angle_z);
+	get_full_r(m, data->size->angle_x, \
+		data->size->angle_y, data->size->angle_z);
 	while (i < data->size->dots)
 	{
 		data->map[i].coords = r_vec(m, data->map[i].coords);
@@ -38,46 +39,15 @@ void	rotate(t_data *data)
 	translate_to_center(data);
 }
 
-// void	rotate_x(t_map *dot, t_data *data)
-// {
-// 	double	rad;
-// 	int		y;
-// 	int		z;
+t_vec	r_vec(float m[3][3], t_vec v)
+{
+	t_vec	result;
 
-// 	rad = data->size->angle_y * (M_PI / 180.0);
-// 	y = dot->y;
-// 	z = dot->z;
-// 	dot->y = y * cos(rad) - z * sin(rad);
-// 	dot->z = y * sin(rad) + z * cos(rad);
-// }
-
-// void	rotate_y(t_map *dot, t_data *data)
-// {
-// 	double	rad;
-// 	int		x;
-// 	int		z;
-
-// 	// rad = data->size->angle_x * (M_PI / 180.0);
-// 	rad = data->size->angle_x;
-// 	x = dot->x;
-// 	z = dot->z;
-// 	dot->x = x * cos(rad) - z * sin(rad);
-// 	dot->z = x * sin(rad) + z * cos(rad);
-// }
-
-// void	rotate_z(t_map *dot, t_data *data)
-// {
-// 	double	rad;
-// 	int		x;
-// 	int		y;
-
-// 	data->size->angle_z = ((data->size->angle_z % 360) + 360) % 360;
-// 	rad = data->size->angle_z * (M_PI / 180.0);
-// 	x = dot->x;
-// 	y = dot->y;
-// 	dot->x = x * cos(rad) - y * sin(rad);
-// 	dot->y = x * sin(rad) + y * cos(rad);
-// }
+	result.x = m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z;
+	result.y = m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z;
+	result.z = m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z;
+	return (result);
+}
 
 void	translate_to_center(t_data *data)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotateOrtho.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/04 12:11:54 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/04 20:48:36 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:09:27 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ void	key_ortho(mlx_key_data_t code, t_data *data)
 	}
 	else if (code.key == MLX_KEY_F && code.action == 1)
 	{
-		data->size->angle_y = 90;
+		data->size->angle_x = 90;
+		data->size->angle_y = 0;
+		data->size->angle_z = 0;
 		data->size->projection = true;
 		change_projection_img(data);
 	}

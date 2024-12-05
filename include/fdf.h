@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/04 20:55:58 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/05 13:12:08 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ typedef struct s_size
 	int		scale;
 	t_vec	center;
 	int		zoom;
-	float		angle_z;
-	float		angle_y;
-	float		angle_x;
+	float	angle_z;
+	float	angle_y;
+	float	angle_x;
 	int		dpi;
 	float	z_zoom;
 	bool	projection;
@@ -178,19 +178,16 @@ int		count_elements(char **split, t_data *data);
 // rotate
 
 void	rotate(t_data *data);
-// void	rotate_x(t_map *dot, t_data *data);
-// void	rotate_y(t_map *dot, t_data *data);
-// void	rotate_z(t_map *dot, t_data *data);
+t_vec	r_vec(float m[3][3], t_vec v);
 void	translate_to_center(t_data *data);
 
-// rotate_test
+// rotate_utils
 
 void	get_full_r(float result[3][3], float x, float y, float z);
 void	rotate_x(float m[3][3], float angle);
 void	rotate_y(float m[3][3], float angle);
 void	rotate_z(float m[3][3], float angle);
 void	multi_m(float result[3][3], float m1[3][3], float m2[3][3]);
-t_vec	r_vec(float m[3][3], t_vec v);
 
 // rotate_ortho
 
