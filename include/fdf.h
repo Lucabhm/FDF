@@ -6,7 +6,7 @@
 /*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 12:13:18 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/05 13:12:08 by lbohm            ###   ########.fr       */
+/*   Updated: 2024/12/06 10:22:52 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ typedef struct s_data
 	t_ortho			ortho;
 	mlx_t			*window;
 	mlx_image_t		*img_map;
-	mlx_image_t		*menu[17];
+	mlx_image_t		*menu[19];
 }				t_data;
 
 typedef struct s_pos

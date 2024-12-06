@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   menu_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucabohn <lucabohn@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lbohm <lbohm@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 12:25:34 by lbohm             #+#    #+#             */
-/*   Updated: 2024/12/02 21:07:28 by lucabohn         ###   ########.fr       */
+/*   Updated: 2024/12/06 10:45:07 by lbohm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	change_mouse_img(t_data *data)
 	char	*str;
 	char	*tmp;
 
-	mlx_delete_image(data->window, data->menu[13]);
+	mlx_delete_image(data->window, data->menu[15]);
 	tmp = ft_itoa(data->size->dpi);
 	str = ft_strjoin("Mouse sensitivity: ", tmp);
 	free(tmp);
-	data->menu[13] = mlx_put_string(data->window, str, 10, 350);
+	data->menu[15] = mlx_put_string(data->window, str, 10, 420);
 	free(str);
 }
 
@@ -29,12 +29,12 @@ void	change_projection_img(t_data *data)
 {
 	char	*str;
 
-	mlx_delete_image(data->window, data->menu[14]);
+	mlx_delete_image(data->window, data->menu[16]);
 	if (!data->size->projection)
 		str = "Projection: Isometric";
 	else
 		str = "Projection: Parallel";
-	data->menu[14] = mlx_put_string(data->window, str, 10, 375);
+	data->menu[16] = mlx_put_string(data->window, str, 10, 445);
 }
 
 void	change_center_img(t_data *data)
@@ -43,7 +43,7 @@ void	change_center_img(t_data *data)
 	char	*tmp;
 	char	*tmp2;
 
-	mlx_delete_image(data->window, data->menu[16]);
+	mlx_delete_image(data->window, data->menu[18]);
 	tmp = ft_itoa(data->size->center.x);
 	str = ft_strjoin("x = ", tmp);
 	free(tmp);
@@ -53,6 +53,6 @@ void	change_center_img(t_data *data)
 	str = ft_strjoin(tmp, tmp2);
 	free(tmp2);
 	free(tmp);
-	data->menu[16] = mlx_put_string(data->window, str, 10, 425);
+	data->menu[18] = mlx_put_string(data->window, str, 10, 495);
 	free(str);
 }
